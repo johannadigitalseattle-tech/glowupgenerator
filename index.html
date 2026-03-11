@@ -689,6 +689,61 @@ input:focus, textarea:focus { border-color: var(--rose); }
   position: relative;
   z-index: 1;
 }
+
+/* TIPS SECTION */
+.tips-section {
+  border-top: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+  padding: 60px 60px 50px;
+}
+.tips-inner { max-width: 1200px; margin: 0 auto; }
+.tips-header { text-align: center; margin-bottom: 40px; }
+.tips-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+.tips-sub { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.tip-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  transition: border-color 0.2s;
+}
+.tip-card:hover { border-color: var(--rose); }
+.tip-icon { font-size: 22px; margin-bottom: 10px; }
+.tip-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.tip-body {
+  font-size: 11.5px;
+  color: var(--muted);
+  line-height: 1.7;
+  font-weight: 300;
+}
+.tip-body em { color: var(--rose); font-style: normal; font-weight: 500; }
+@media(max-width: 940px) {
+  .tips-section { padding: 40px 24px; }
+  .tips-grid { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width: 600px) {
+  .tips-grid { grid-template-columns: 1fr; }
+}
+
 .footer {
   border-top: 1px solid var(--border);
   padding: 24px 60px;
@@ -856,15 +911,15 @@ input:focus, textarea:focus { border-color: var(--rose); }
         <div class="label" data-lbl="lbl_hair" data-lblopt="lbl_hair_opt">Hair <span class="opt">— pick or write yours</span></div>
         <div class="sel-wrap"><select id="hair">
           <option value="">— Select —</option>
-          <option value="long, voluminous black wavy hair cascading around her shoulders with striking blonde highlights weaving through the waves, styled with a perfect wet-look finish and meticulously sculpted baby hairs framing her fierce features">Long wavy · wet-look · baby hairs</option>
-          <option value="long flowing black hair styled in sleek waves">Long sleek waves · black</option>
-          <option value="long sleek straight black hair">Long straight · sleek black</option>
-          <option value="long wet-look glossy waves">Wet-look glossy waves</option>
-          <option value="voluminous big curly hair">Big voluminous curls</option>
-          <option value="sleek high ponytail">Sleek high ponytail</option>
-          <option value="short blunt bob">Short blunt bob</option>
-          <option value="natural afro textured hair">Natural afro · textured</option>
-          <option value="braided updo with loose tendrils">Braided updo</option>
+          <option value="long, voluminous black wavy hair cascading around her shoulders with striking blonde highlights weaving through the waves, styled with a perfect wet-look finish and meticulously sculpted baby hairs framing her fierce features" data-en="Long wavy · wet-look · baby hairs" data-es="Ondas largas · wet-look · baby hairs">Long wavy · wet-look · baby hairs</option>
+          <option value="long flowing black hair styled in sleek waves" data-en="Long sleek waves · black" data-es="Ondas lisas largas · negro">Long sleek waves · black</option>
+          <option value="long sleek straight black hair" data-en="Long straight · sleek black" data-es="Lacio largo · negro brillante">Long straight · sleek black</option>
+          <option value="long wet-look glossy waves" data-en="Wet-look glossy waves" data-es="Ondas húmedas brillantes">Wet-look glossy waves</option>
+          <option value="voluminous big curly hair" data-en="Big voluminous curls" data-es="Rizos grandes y voluminosos">Big voluminous curls</option>
+          <option value="sleek high ponytail" data-en="Sleek high ponytail" data-es="Cola alta lisa">Sleek high ponytail</option>
+          <option value="short blunt bob" data-en="Short blunt bob" data-es="Bob corto recto">Short blunt bob</option>
+          <option value="natural afro textured hair" data-en="Natural afro · textured" data-es="Afro natural · texturizado">Natural afro · textured</option>
+          <option value="braided updo with loose tendrils" data-en="Braided updo" data-es="Recogido trenzado">Braided updo</option>
         </select></div>
         <div class="or-divider">or write yours</div>
         <input type="text" id="hairCustom" placeholder='e.g. long auburn curls with honey highlights and sculpted baby hairs'>
@@ -874,13 +929,13 @@ input:focus, textarea:focus { border-color: var(--rose); }
         <div class="label" data-lbl="lbl_makeup" data-lblopt="lbl_makeup_opt">Makeup <span class="opt">— pick or write yours</span></div>
         <div class="sel-wrap"><select id="makeup">
           <option value="">— Select —</option>
-          <option value="bold smoky eyes with dramatic winged liner, voluminous false lashes, and razor-sharp sculpted brows. Her lips are sensually parted, full and glossy with a deep beige brown finish. Her cheekbones are drenched in metallic shimmer highlighting">Bold Smoky · Shay Signature</option>
-          <option value="bronzed glam makeup, glossy lips, shimmer on cheekbones, dramatic lashes">Bronzed Glam</option>
-          <option value="smoky eye makeup, matte nude lips, sharp sculpted contour">Smoky Eyes · Nude Lip</option>
-          <option value="glossy nude lips, dewy glass skin, natural feathered lashes">Glossy Nude · Glass Skin</option>
-          <option value="bold red lips, classic Hollywood winged liner, flawless base">Red Lips Classic</option>
-          <option value="bold graphic editorial eyeliner, avant-garde makeup">Bold Editorial</option>
-          <option value="fresh natural glow, tinted lips, barely-there makeup">Natural Glow</option>
+          <option value="bold smoky eyes with dramatic winged liner, voluminous false lashes, and razor-sharp sculpted brows. Her lips are sensually parted, full and glossy with a deep beige brown finish. Her cheekbones are drenched in metallic shimmer highlighting" data-en="Bold Smoky · Shay Signature" data-es="Ahumado intenso · Firma">Bold Smoky · Shay Signature</option>
+          <option value="bronzed glam makeup, glossy lips, shimmer on cheekbones, dramatic lashes" data-en="Bronzed Glam" data-es="Glam bronceado">Bronzed Glam</option>
+          <option value="smoky eye makeup, matte nude lips, sharp sculpted contour" data-en="Smoky Eyes · Nude Lip" data-es="Ojos ahumados · Labio nude">Smoky Eyes · Nude Lip</option>
+          <option value="glossy nude lips, dewy glass skin, natural feathered lashes" data-en="Glossy Nude · Glass Skin" data-es="Nude brilloso · Glass skin">Glossy Nude · Glass Skin</option>
+          <option value="bold red lips, classic Hollywood winged liner, flawless base" data-en="Red Lips Classic" data-es="Labios rojos clásico">Red Lips Classic</option>
+          <option value="bold graphic editorial eyeliner, avant-garde makeup" data-en="Bold Editorial" data-es="Editorial bold">Bold Editorial</option>
+          <option value="fresh natural glow, tinted lips, barely-there makeup" data-en="Natural Glow" data-es="Brillo natural">Natural Glow</option>
         </select></div>
         <div class="or-divider">or write yours</div>
         <input type="text" id="makeupCustom" placeholder='e.g. copper smoky eye, ombre berry lips, intense gold highlight'>
@@ -903,25 +958,25 @@ input:focus, textarea:focus { border-color: var(--rose); }
           <div class="label" data-lbl="lbl_nail_shape" data-lblopt="lbl_nail_shape_opt">Nail shape & style <span class="opt">— Beauty Editorial</span></div>
           <div class="sel-wrap"><select id="nailShape">
             <option value="">— Select —</option>
-            <option value="long almond-shaped acrylic nails">Long almond acrylic</option>
-            <option value="long coffin-shaped acrylic nails">Long coffin / ballerina</option>
-            <option value="long stiletto nails">Long stiletto</option>
-            <option value="medium oval nails">Medium oval</option>
-            <option value="short square nails">Short square</option>
+            <option value="long almond-shaped acrylic nails" data-en="Long almond acrylic" data-es="Almendra larga acrílica">Long almond acrylic</option>
+            <option value="long coffin-shaped acrylic nails" data-en="Long coffin / ballerina" data-es="Ataúd largo / bailarina">Long coffin / ballerina</option>
+            <option value="long stiletto nails" data-en="Long stiletto" data-es="Stiletto largo">Long stiletto</option>
+            <option value="medium oval nails" data-en="Medium oval" data-es="Oval mediano">Medium oval</option>
+            <option value="short square nails" data-en="Short square" data-es="Cuadrado corto">Short square</option>
           </select></div>
         </div>
         <div class="field">
           <div class="label" data-lbl="lbl_nail_color" data-lblopt="lbl_nail_color_opt">Nail color & finish <span class="opt">— pick or write</span></div>
           <div class="sel-wrap"><select id="nailColor">
             <option value="">— Select —</option>
-            <option value="in a soft blush pink ombré with subtle glitter accents">Blush pink ombré + glitter</option>
-            <option value="in a classic french tip with nude base">French tip · nude base</option>
-            <option value="in deep cherry red with high-gloss finish">Deep cherry red · glossy</option>
-            <option value="in all-black matte finish">All black matte</option>
-            <option value="in nude beige with gold foil details">Nude + gold foil</option>
-            <option value="in metallic chrome silver finish">Chrome silver</option>
-            <option value="in deep burgundy with velvet matte finish">Burgundy velvet matte</option>
-            <option value="in hot pink glossy finish">Hot pink glossy</option>
+            <option value="in a soft blush pink ombré with subtle glitter accents" data-en="Blush pink ombré + glitter" data-es="Rosa blush ombré + glitter">Blush pink ombré + glitter</option>
+            <option value="in a classic french tip with nude base" data-en="French tip · nude base" data-es="French tip · base nude">French tip · nude base</option>
+            <option value="in deep cherry red with high-gloss finish" data-en="Deep cherry red · glossy" data-es="Rojo cereza · brilloso">Deep cherry red · glossy</option>
+            <option value="in all-black matte finish" data-en="All black matte" data-es="Negro mate total">All black matte</option>
+            <option value="in nude beige with gold foil details" data-en="Nude + gold foil" data-es="Nude + lámina dorada">Nude + gold foil</option>
+            <option value="in metallic chrome silver finish" data-en="Chrome silver" data-es="Cromo plateado">Chrome silver</option>
+            <option value="in deep burgundy with velvet matte finish" data-en="Burgundy velvet matte" data-es="Borgoña terciopelo mate">Burgundy velvet matte</option>
+            <option value="in hot pink glossy finish" data-en="Hot pink glossy" data-es="Rosa intenso brilloso">Hot pink glossy</option>
           </select></div>
           <div class="or-divider">or write yours</div>
           <input type="text" id="nailCustom" placeholder='e.g. lavender ombré with diamond tips and pearl accents'>
@@ -943,15 +998,15 @@ input:focus, textarea:focus { border-color: var(--rose); }
           <div class="label" data-lbl="lbl_prop" data-lblopt="lbl_prop_opt">Central prop <span class="opt">— the star of the image</span></div>
           <div class="sel-wrap"><select id="conceptProp">
             <option value="">— Select —</option>
-            <option value="a large bar of chocolate up to her mouth, appearing to take a bite">🍫 Chocolate bar</option>
-            <option value="a glass of champagne raised elegantly">🥂 Champagne glass</option>
-            <option value="a bouquet of red roses covering half her face">🌹 Red roses</option>
-            <option value="a luxury perfume bottle held up near her face">🌸 Perfume bottle</option>
-            <option value="a large stack of cash fanned out in her hands">💵 Cash fanned out</option>
-            <option value="an ice cream cone she's about to lick">🍦 Ice cream cone</option>
-            <option value="a single red apple held up near her lips">🍎 Red apple</option>
-            <option value="a cup of coffee or espresso cupped in both hands">☕ Coffee cup</option>
-            <option value="a luxury designer bag held up in front of her">👜 Designer bag front</option>
+            <option value="a large bar of chocolate up to her mouth, appearing to take a bite" data-en="🍫 Chocolate bar" data-es="🍫 Barra de chocolate">🍫 Chocolate bar</option>
+            <option value="a glass of champagne raised elegantly" data-en="🥂 Champagne glass" data-es="🥂 Copa de champagne">🥂 Champagne glass</option>
+            <option value="a bouquet of red roses covering half her face" data-en="🌹 Red roses" data-es="🌹 Rosas rojas">🌹 Red roses</option>
+            <option value="a luxury perfume bottle held up near her face" data-en="🌸 Perfume bottle" data-es="🌸 Botella de perfume">🌸 Perfume bottle</option>
+            <option value="a large stack of cash fanned out in her hands" data-en="💵 Cash fanned out" data-es="💵 Efectivo abanicado">💵 Cash fanned out</option>
+            <option value="an ice cream cone she's about to lick" data-en="🍦 Ice cream cone" data-es="🍦 Cono de helado">🍦 Ice cream cone</option>
+            <option value="a single red apple held up near her lips" data-en="🍎 Red apple" data-es="🍎 Manzana roja">🍎 Red apple</option>
+            <option value="a cup of coffee or espresso cupped in both hands" data-en="☕ Coffee cup" data-es="☕ Taza de café">☕ Coffee cup</option>
+            <option value="a luxury designer bag held up in front of her" data-en="👜 Designer bag front" data-es="👜 Bolsa de diseñador">👜 Designer bag front</option>
           </select></div>
           <div class="or-divider">or write yours</div>
           <input type="text" id="conceptPropCustom" placeholder='e.g. a lit sparkler held near her face, a mirror reflecting her'>
@@ -974,16 +1029,82 @@ input:focus, textarea:focus { border-color: var(--rose); }
         <div class="label" data-lbl="lbl_outfit" data-lblopt="lbl_outfit_opt">Outfit <span class="opt">— pick or write</span></div>
         <div class="sel-wrap"><select id="outfit">
           <option value="">— Select —</option>
-          <option value="a barely-there luxurious black garment that hints at her décolletage">Barely-there black</option>
-          <option value="a neon green crop top with matching long nails">Neon green crop top</option>
-          <option value="an all-black luxury bodycon dress">All-black luxury bodycon</option>
-          <option value="an elegant gold satin dress">Gold satin dress</option>
-          <option value="a black power blazer">Black power blazer</option>
-          <option value="a white luxury power suit">White power suit</option>
-          <option value="a silver puffer jacket">Silver puffer jacket</option>
-          <option value="a hot pink mini dress">Hot pink mini dress</option>
-          <option value="a luxury oversized street jacket">Street luxury jacket</option>
-          <option value="a strapless corset gown">Strapless corset gown</option>
+
+          <optgroup label="✨ Glam / Red Carpet" data-en="✨ Glam / Red Carpet" data-es="✨ Glam / Alfombra Roja">
+            <option value="an elegant black evening gown with a dramatic silhouette" data-en="Elegant black gown" data-es="Vestido de gala negro elegante">Elegant black gown</option>
+            <option value="a red carpet red dress with a stunning floor-length silhouette" data-en="Red carpet red dress" data-es="Vestido rojo estilo alfombra roja">Red carpet red dress</option>
+            <option value="an elegant gold satin evening dress" data-en="Gold satin evening dress" data-es="Vestido satén dorado">Gold satin evening dress</option>
+            <option value="an elegant emerald green gown" data-en="Emerald green gown" data-es="Vestido esmeralda elegante">Emerald green gown</option>
+            <option value="a barely-there luxurious black garment that hints at her décolletage" data-en="Barely-there black (signature)" data-es="Negro apenas visible (signature)">Barely-there black (signature)</option>
+            <option value="a strapless corset gown with dramatic volume" data-en="Strapless corset gown" data-es="Vestido corsé sin tirantes">Strapless corset gown</option>
+          </optgroup>
+
+          <optgroup label="💎 Luxury / High Fashion" data-en="💎 Luxury / High Fashion" data-es="💎 Lujo / Alta Moda">
+            <option value="a sleek minimalist luxury dress in monochrome" data-en="Minimalist luxury dress" data-es="Vestido minimalista de lujo">Minimalist luxury dress</option>
+            <option value="a structured elegant blazer as a dress" data-en="Structured blazer dress" data-es="Blazer elegante estructurado">Structured blazer dress</option>
+            <option value="a sophisticated satin co-ord set" data-en="Satin co-ord set" data-es="Conjunto satén sofisticado">Satin co-ord set</option>
+            <option value="a premium deep burgundy velvet dress" data-en="Velvet premium dress" data-es="Vestido terciopelo premium">Velvet premium dress</option>
+          </optgroup>
+
+          <optgroup label="👑 Power Woman / CEO" data-en="👑 Power Woman / CEO" data-es="👑 Mujer de Poder / CEO">
+            <option value="a crisp white tailored power suit" data-en="White power suit" data-es="Traje sastre blanco">White power suit</option>
+            <option value="a sharp structured black blazer with matching trousers" data-en="Black structured blazer + trousers" data-es="Blazer negro estructurado">Black structured blazer + trousers</option>
+            <option value="a sharp executive grey suit" data-en="Executive grey suit" data-es="Traje gris ejecutivo">Executive grey suit</option>
+            <option value="an elegant cream blazer co-ord set" data-en="Cream blazer co-ord" data-es="Conjunto blazer crema">Cream blazer co-ord</option>
+          </optgroup>
+
+          <optgroup label="🏙️ Streetwear Fashion" data-en="🏙️ Streetwear Fashion" data-es="🏙️ Moda Urbana">
+            <option value="a premium oversized streetwear hoodie with sleek joggers" data-en="Premium streetwear hoodie" data-es="Hoodie streetwear premium">Premium streetwear hoodie</option>
+            <option value="a sleek urban bomber jacket with fitted pants" data-en="Urban bomber jacket" data-es="Chaqueta bomber urbana">Urban bomber jacket</option>
+            <option value="an oversized denim jacket with street style outfit" data-en="Oversized denim jacket" data-es="Chaqueta denim oversized">Oversized denim jacket</option>
+            <option value="cargo street style pants with a cropped fitted top" data-en="Cargo street style" data-es="Pantalón cargo street style">Cargo street style</option>
+            <option value="a neon green crop top with matching fitted pants" data-en="Neon green crop top" data-es="Crop top verde neón">Neon green crop top</option>
+            <option value="a silver metallic puffer jacket with sleek pants" data-en="Silver puffer jacket" data-es="Jacket puffer plateado">Silver puffer jacket</option>
+          </optgroup>
+
+          <optgroup label="☀️ Casual Lifestyle" data-en="☀️ Casual Lifestyle" data-es="☀️ Casual Lifestyle">
+            <option value="high-waist jeans with a fitted white t-shirt" data-en="High-waist jeans + white tee" data-es="Jeans tiro alto con camiseta blanca">High-waist jeans + white tee</option>
+            <option value="a crisp white button-up shirt with fitted jeans" data-en="White shirt + jeans" data-es="Camisa blanca con jeans">White shirt + jeans</option>
+            <option value="a cozy knit sweater with fitted jeans" data-en="Knit sweater + jeans" data-es="Suéter tejido con jeans">Knit sweater + jeans</option>
+            <option value="a basic fitted top with tailored casual trousers" data-en="Basic top + casual trousers" data-es="Top básico con pantalón casual">Basic top + casual trousers</option>
+          </optgroup>
+
+          <optgroup label="🌴 Summer / Vacation" data-en="🌴 Summer / Vacation" data-es="🌴 Verano / Vacaciones">
+            <option value="a flowy white linen summer dress" data-en="White linen summer dress" data-es="Vestido lino blanco verano">White linen summer dress</option>
+            <option value="a light floral print summer dress" data-en="Floral summer dress" data-es="Vestido floral ligero">Floral summer dress</option>
+            <option value="an elegant resort wear dress" data-en="Resort wear dress" data-es="Vestido resort elegante">Resort wear dress</option>
+            <option value="a bohemian summer dress with light fabric" data-en="Boho summer dress" data-es="Vestido boho verano">Boho summer dress</option>
+          </optgroup>
+
+          <optgroup label="🤍 Minimalist Fashion" data-en="🤍 Minimalist Fashion" data-es="🤍 Moda Minimalista">
+            <option value="a sleek minimalist black dress" data-en="Minimalist black dress" data-es="Vestido negro minimalista">Minimalist black dress</option>
+            <option value="an elegant beige tonal co-ord set" data-en="Beige tonal set" data-es="Conjunto beige elegante">Beige tonal set</option>
+            <option value="a simple clean white dress" data-en="Clean white dress" data-es="Vestido blanco simple">Clean white dress</option>
+            <option value="a modern minimalist suit" data-en="Modern minimalist suit" data-es="Traje minimalista moderno">Modern minimalist suit</option>
+          </optgroup>
+
+          <optgroup label="🌙 Elegant Evening" data-en="🌙 Elegant Evening" data-es="🌙 Noche Elegante">
+            <option value="an elegant satin evening slip dress" data-en="Satin evening dress" data-es="Vestido satén elegante">Satin evening dress</option>
+            <option value="a deep midnight blue evening dress" data-en="Midnight blue dress" data-es="Vestido azul noche">Midnight blue dress</option>
+            <option value="a dark velvet sophisticated evening dress" data-en="Dark velvet evening dress" data-es="Vestido terciopelo oscuro">Dark velvet evening dress</option>
+            <option value="an elegant champagne-colored evening gown" data-en="Champagne evening gown" data-es="Vestido champagne elegante">Champagne evening gown</option>
+            <option value="an all-black luxury bodycon dress" data-en="All-black luxury bodycon" data-es="Bodycon negro de lujo">All-black luxury bodycon</option>
+          </optgroup>
+
+          <optgroup label="❄️ Winter Fashion" data-en="❄️ Winter Fashion" data-es="❄️ Moda Invernal">
+            <option value="a long elegant wool coat" data-en="Long elegant coat" data-es="Abrigo largo elegante">Long elegant coat</option>
+            <option value="a premium thick wool overcoat" data-en="Premium wool overcoat" data-es="Abrigo lana premium">Premium wool overcoat</option>
+            <option value="an elegant ribbed turtleneck sweater" data-en="Elegant turtleneck" data-es="Suéter cuello alto elegante">Elegant turtleneck</option>
+            <option value="a sophisticated camel-colored long coat" data-en="Camel coat" data-es="Abrigo camel sofisticado">Camel coat</option>
+          </optgroup>
+
+          <optgroup label="✳️ Modern Chic" data-en="✳️ Modern Chic" data-es="✳️ Moderno Chic">
+            <option value="a modern blazer paired with well-fitted jeans" data-en="Modern blazer + jeans" data-es="Blazer moderno con jeans">Modern blazer + jeans</option>
+            <option value="a stylish modern midi dress" data-en="Modern midi dress" data-es="Vestido midi moderno">Modern midi dress</option>
+            <option value="an elegant casual co-ord set" data-en="Elegant casual set" data-es="Conjunto elegante casual">Elegant casual set</option>
+            <option value="a minimalist top with a flowing skirt" data-en="Minimalist top + skirt" data-es="Top minimalista con falda">Minimalist top + skirt</option>
+          </optgroup>
+
         </select></div>
         <div class="or-divider">or write yours</div>
         <input type="text" id="outfitCustom" placeholder='e.g. emerald velvet corset with high-waist wide-leg trousers'>
@@ -1032,23 +1153,23 @@ input:focus, textarea:focus { border-color: var(--rose); }
           <div class="label" data-lbl="lbl_pose" data-lblopt="lbl_pose_opt">Pose / Action <span class="opt">— pick or write</span></div>
           <div class="sel-wrap"><select id="pose">
             <option value="">— Select —</option>
-            <optgroup label="— Power Poses —">
-              <option value="rests her powerfully intertwined arms on a mirror-black reflective surface that perfectly reflects her commanding beauty">Arms on mirror surface</option>
-              <option value="arms crossed powerfully, smoldering gaze into the camera">Arms crossed · fierce</option>
-              <option value="standing tall, one hand adjusting her jewelry, owning the room">Standing boss pose</option>
-              <option value="leaning forward slightly with a commanding, magnetic presence">Leaning forward</option>
+            <optgroup label="— Power Poses —" data-en="— Power Poses —" data-es="— Poses de poder —">
+              <option value="rests her powerfully intertwined arms on a mirror-black reflective surface that perfectly reflects her commanding beauty" data-en="Arms on mirror surface" data-es="Brazos sobre superficie espejo">Arms on mirror surface</option>
+              <option value="arms crossed powerfully, smoldering gaze into the camera" data-en="Arms crossed · fierce" data-es="Brazos cruzados · feroz">Arms crossed · fierce</option>
+              <option value="standing tall, one hand adjusting her jewelry, owning the room" data-en="Standing boss pose" data-es="De pie · pose de jefa">Standing boss pose</option>
+              <option value="leaning forward slightly with a commanding, magnetic presence" data-en="Leaning forward" data-es="Inclinada hacia adelante">Leaning forward</option>
             </optgroup>
-            <optgroup label="— Money Boss —">
-              <option value="holding stacks of cash to her ear like a phone, laughing confidently">Cash as a phone 💸</option>
+            <optgroup label="— Money Boss —" data-en="— Money Boss —" data-es="— Money Boss —">
+              <option value="holding stacks of cash to her ear like a phone, laughing confidently" data-en="Cash as a phone 💸" data-es="Efectivo como teléfono 💸">Cash as a phone 💸</option>
             </optgroup>
-            <optgroup label="— Beauty / Elegance —">
-              <option value="hands gently framing her face, gazing directly into the camera">Hands framing face</option>
-              <option value="sitting gracefully on a stool, exuding class, power, and femininity">On a stool · graceful</option>
-              <option value="seated on a sleek chair, legs crossed, one hand resting on her knee">Chair · legs crossed</option>
-              <option value="seated with legs crossed, impeccable editorial posture">Seated editorial</option>
+            <optgroup label="— Beauty / Elegance —" data-en="— Beauty / Elegance —" data-es="— Belleza / Elegancia —">
+              <option value="hands gently framing her face, gazing directly into the camera" data-en="Hands framing face" data-es="Manos enmarcando la cara">Hands framing face</option>
+              <option value="sitting gracefully on a stool, exuding class, power, and femininity" data-en="On a stool · graceful" data-es="En un banquillo · elegante">On a stool · graceful</option>
+              <option value="seated on a sleek chair, legs crossed, one hand resting on her knee" data-en="Chair · legs crossed" data-es="Silla · piernas cruzadas">Chair · legs crossed</option>
+              <option value="seated with legs crossed, impeccable editorial posture" data-en="Seated editorial" data-es="Sentada editorial">Seated editorial</option>
             </optgroup>
-            <optgroup label="— Dynamic —">
-              <option value="tossing her hair back dynamically, mid-movement">Tossing hair</option>
+            <optgroup label="— Dynamic —" data-en="— Dynamic —" data-es="— Dinámica —">
+              <option value="tossing her hair back dynamically, mid-movement" data-en="Tossing hair" data-es="Tirando el cabello">Tossing hair</option>
             </optgroup>
           </select></div>
           <div class="or-divider">or write</div>
@@ -1058,34 +1179,34 @@ input:focus, textarea:focus { border-color: var(--rose); }
           <div class="label" data-lbl="lbl_bg" data-lblopt="lbl_bg_opt">Background <span class="opt">— pick or write</span></div>
           <div class="sel-wrap"><select id="bg">
             <option value="">— Select —</option>
-            <optgroup label="— Dark / Dramatic —">
-              <option value="against an abyss-dark background, the composition intensely focused and hypnotic">Abyss dark · hypnotic</option>
-              <option value="a dark luxury studio backdrop">Dark luxury studio</option>
-              <option value="a pitch-black abyss backdrop">All black abyss</option>
-              <option value="a deep velvet backdrop">Deep velvet</option>
+            <optgroup label="— Dark / Dramatic —" data-en="— Dark / Dramatic —" data-es="— Oscuro / Dramático —">
+              <option value="against an abyss-dark background, the composition intensely focused and hypnotic" data-en="Abyss dark · hypnotic" data-es="Oscuridad abismal · hipnótica">Abyss dark · hypnotic</option>
+              <option value="a dark luxury studio backdrop" data-en="Dark luxury studio" data-es="Estudio oscuro de lujo">Dark luxury studio</option>
+              <option value="a pitch-black abyss backdrop" data-en="All black abyss" data-es="Abismo todo negro">All black abyss</option>
+              <option value="a deep velvet backdrop" data-en="Deep velvet" data-es="Terciopelo profundo">Deep velvet</option>
             </optgroup>
-            <optgroup label="— Warm / Beauty —">
-              <option value="a warm terracotta and orange studio backdrop">Terracotta / orange</option>
-              <option value="a soft dusty rose studio backdrop">Dusty rose</option>
-              <option value="a warm cream and ivory studio backdrop">Cream / ivory</option>
-              <option value="a golden warm gradient backdrop">Golden gradient</option>
+            <optgroup label="— Warm / Beauty —" data-en="— Warm / Beauty —" data-es="— Cálido / Belleza —">
+              <option value="a warm terracotta and orange studio backdrop" data-en="Terracotta / orange" data-es="Terracota / naranja">Terracotta / orange</option>
+              <option value="a soft dusty rose studio backdrop" data-en="Dusty rose" data-es="Rosa empolvado">Dusty rose</option>
+              <option value="a warm cream and ivory studio backdrop" data-en="Cream / ivory" data-es="Crema / marfil">Cream / ivory</option>
+              <option value="a golden warm gradient backdrop" data-en="Golden gradient" data-es="Gradiente dorado">Golden gradient</option>
             </optgroup>
-            <optgroup label="— Clean / Neutral —">
-              <option value="a neutral gray background with soft studio light">Neutral gray · soft light</option>
-              <option value="a white seamless studio backdrop with dramatic shadows">White studio</option>
-              <option value="a warm beige backdrop">Warm beige</option>
-              <option value="a muted sage green backdrop">Sage green</option>
+            <optgroup label="— Clean / Neutral —" data-en="— Clean / Neutral —" data-es="— Limpio / Neutral —">
+              <option value="a neutral gray background with soft studio light" data-en="Neutral gray · soft light" data-es="Gris neutral · luz suave">Neutral gray · soft light</option>
+              <option value="a white seamless studio backdrop with dramatic shadows" data-en="White studio" data-es="Estudio blanco">White studio</option>
+              <option value="a warm beige backdrop" data-en="Warm beige" data-es="Beige cálido">Warm beige</option>
+              <option value="a muted sage green backdrop" data-en="Sage green" data-es="Verde salvia">Sage green</option>
             </optgroup>
-            <optgroup label="— Concept / Mono —">
-              <option value="a solid, dark brown color, creating a monochrome effect with her outfit and skin tone">Dark brown mono</option>
-              <option value="a solid all-black background, creating a sleek monochrome effect">All black mono</option>
-              <option value="a solid deep red background, creating a bold monochrome effect">Deep red mono</option>
-              <option value="a solid ivory white background, creating a clean monochrome effect">Ivory white mono</option>
+            <optgroup label="— Concept / Mono —" data-en="— Concept / Mono —" data-es="— Concepto / Mono —">
+              <option value="a solid, dark brown color, creating a monochrome effect with her outfit and skin tone" data-en="Dark brown mono" data-es="Marrón oscuro mono">Dark brown mono</option>
+              <option value="a solid all-black background, creating a sleek monochrome effect" data-en="All black mono" data-es="Negro total mono">All black mono</option>
+              <option value="a solid deep red background, creating a bold monochrome effect" data-en="Deep red mono" data-es="Rojo profundo mono">Deep red mono</option>
+              <option value="a solid ivory white background, creating a clean monochrome effect" data-en="Ivory white mono" data-es="Blanco marfil mono">Ivory white mono</option>
             </optgroup>
-            <optgroup label="— Fun / Neon —">
-              <option value="neon green lightning and a glowing sign">Neon green + sign</option>
-              <option value="a neon-lit urban night background with bokeh city lights">Neon city night</option>
-              <option value="floating money and luxury handbags all around her">Floating money scene 💸</option>
+            <optgroup label="— Fun / Neon —" data-en="— Fun / Neon —" data-es="— Fun / Neón —">
+              <option value="neon green lightning and a glowing sign" data-en="Neon green + sign" data-es="Verde neón + letrero">Neon green + sign</option>
+              <option value="a neon-lit urban night background with bokeh city lights" data-en="Neon city night" data-es="Noche ciudad neón">Neon city night</option>
+              <option value="floating money and luxury handbags all around her" data-en="Floating money scene 💸" data-es="Escena dinero flotante 💸">Floating money scene 💸</option>
             </optgroup>
           </select></div>
           <div class="or-divider">or write</div>
@@ -1133,13 +1254,13 @@ input:focus, textarea:focus { border-color: var(--rose); }
         <div class="label" data-lbl="lbl_vibe" data-lblopt="lbl_vibe_opt">Vibe <span class="opt">— pick or write yours</span></div>
         <div class="sel-wrap"><select id="vibe">
           <option value="">— Select —</option>
-          <option value="editorial fashion photography meets fierce goddess energy, exuding raw sexuality, unapologetic confidence, and magnetic allure">Fierce Goddess </option>
-          <option value="exuding confidence and luxury like she makes money in her sleep">Money Boss </option>
-          <option value="exuding fierce boss goddess energy and undeniable confidence">Fierce Boss</option>
-          <option value="exuding soft luxury glamour and aspirational feminine power">Soft Glam Luxury</option>
-          <option value="exuding CEO queen energy, polished authority — she runs the room">CEO Queen</option>
-          <option value="exuding the energy of a self-made millionaire who built her empire from nothing">Self-Made Millionaire</option>
-          <option value="exuding magnetic dark feminine energy, mysterious and utterly untouchable">Dark Feminine</option>
+          <option value="editorial fashion photography meets fierce goddess energy, exuding raw sexuality, unapologetic confidence, and magnetic allure" data-en="Fierce Goddess " data-es="Fierce Goddess">Fierce Goddess </option>
+          <option value="exuding confidence and luxury like she makes money in her sleep" data-en="Money Boss " data-es="Money Boss">Money Boss </option>
+          <option value="exuding fierce boss goddess energy and undeniable confidence" data-en="Fierce Boss" data-es="Fierce Boss">Fierce Boss</option>
+          <option value="exuding soft luxury glamour and aspirational feminine power" data-en="Soft Glam Luxury" data-es="Glam suave de lujo">Soft Glam Luxury</option>
+          <option value="exuding CEO queen energy, polished authority — she runs the room" data-en="CEO Queen" data-es="CEO Queen">CEO Queen</option>
+          <option value="exuding the energy of a self-made millionaire who built her empire from nothing" data-en="Self-Made Millionaire" data-es="Millonaria hecha a sí misma">Self-Made Millionaire</option>
+          <option value="exuding magnetic dark feminine energy, mysterious and utterly untouchable" data-en="Dark Feminine" data-es="Femenino oscuro">Dark Feminine</option>
         </select></div>
         <div class="or-divider">or write yours</div>
         <input type="text" id="vibeCustom" placeholder='e.g. "exuding the energy of a woman who never settles for less"'>
@@ -1177,7 +1298,7 @@ input:focus, textarea:focus { border-color: var(--rose); }
         <div class="pb-empty-text">Your prompt will appear here<br>after you press Generate</div>
       </div>
     </div>
-    <div class="pb-tip"><span data-i18n="tip_gemini">💡 Upload <em>1 close-up frontal photo</em> in Gemini before pasting</span></div>
+    <div class="pb-tip"><span data-i18n="tip_gemini">💡 <em>1 photo only</em> in Gemini · close-up frontal · if error appears, try again with a clearer photo</span></div>
   </div>
 
   <!-- CHATGPT -->
@@ -1204,6 +1325,69 @@ input:focus, textarea:focus { border-color: var(--rose); }
 
 </div>
 </div><!-- /main -->
+
+<!-- TIPS SECTION -->
+<div class="tips-section">
+  <div class="tips-inner">
+
+    <div class="tips-header">
+      <div class="tips-title" data-i18n="tips_title">✦ How to Get Viral AI Photos</div>
+      <div class="tips-sub" data-i18n="tips_sub">Understanding how your choices affect the final image</div>
+    </div>
+
+    <div class="tips-grid">
+
+      <div class="tip-card">
+        <div class="tip-icon">🎨</div>
+        <div class="tip-title" data-i18n="tip1_title">What the Outfit Does in the Prompt</div>
+        <div class="tip-body" data-i18n="tip1_body">The outfit text gets inserted <em>literally</em> into the prompt. When you pick "Gold satin evening dress", the AI reads <em>"She wears an elegant gold satin evening dress"</em> and generates exactly that. The more specific the description, the better the image.</div>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">🔥</div>
+        <div class="tip-title" data-i18n="tip2_title">Fierce Goddess — Outfit Role</div>
+        <div class="tip-body" data-i18n="tip2_body">Here the outfit is a <em>supporting detail</em>. The stars are the lighting, hair, and skin. Any outfit works — but dark, barely-there, or dramatic pieces amplify the chiaroscuro effect.</div>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">💸</div>
+        <div class="tip-title" data-i18n="tip3_title">Money Boss — Outfit Role</div>
+        <div class="tip-body" data-i18n="tip3_body">The outfit feeds the <em>abundance scene</em>. It combines with the cash, neon signs and floating money. Power suits, blazers and bold colors work best here — they scream CEO energy.</div>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">💅</div>
+        <div class="tip-title" data-i18n="tip4_title">Beauty Editorial — Outfit Role</div>
+        <div class="tip-body" data-i18n="tip4_body">The outfit is <em>secondary</em> — the nails and hands are the stars. Choose something elegant but simple so it doesn't compete. Minimalist or satin works best.</div>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">🎀</div>
+        <div class="tip-title" data-i18n="tip5_title">Chic Editorial — Outfit is the Star</div>
+        <div class="tip-body" data-i18n="tip5_body">In this style the outfit <em>IS the main subject</em>. It gets described with more detail. High Fashion, Power Woman and Modern Chic categories work best here — they're designed for editorial fashion photography.</div>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">🎭</div>
+        <div class="tip-title" data-i18n="tip6_title">Concept / Themed — Match the Mono</div>
+        <div class="tip-body" data-i18n="tip6_body">The outfit should <em>match the monochromatic background color</em>. If your background is dark brown, choose a brown or chocolate outfit. The whole point is a seamless color story between skin tone, outfit and background.</div>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">✨</div>
+        <div class="tip-title" data-i18n="tip7_title">Why These 10 Categories Go Viral</div>
+        <div class="tip-body" data-i18n="tip7_body"><em>Glam/Red Carpet</em> → luxury editorial scenes · <em>CEO/Power</em> → authority and confidence · <em>Summer/Vacation</em> → bright colors and light · <em>Minimalist</em> → Pinterest aesthetic · <em>Evening</em> → cinematic lighting · <em>Streetwear</em> → urban attitude</div>
+      </div>
+
+      <div class="tip-card">
+        <div class="tip-icon">💡</div>
+        <div class="tip-title" data-i18n="tip8_title">Pro Tip: Build a Color Story</div>
+        <div class="tip-body" data-i18n="tip8_body">The most viral photos have a <em>unified color story</em>: pick an outfit, then match the Dominant Color swatch and Background to it. Example: Champagne gown + Golden gradient background + Black Gold palette = editorial magazine shot.</div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <footer class="footer">
   <div class="footer-brand">Boss<em>Glow</em> AI Generator</div>
@@ -1315,7 +1499,7 @@ function buildFierce(d, forChatGPT) {
   if (forChatGPT) {
     parts.push(`Using the uploaded photos as face reference, please create this scene:`);
   } else {
-    parts.push(`Using the uploaded image, create this scene:`);
+    parts.push(`Using the uploaded image, please create this scene:`);
   }
 
   // PHYSICAL PRESENCE
@@ -1387,13 +1571,17 @@ function buildFierce(d, forChatGPT) {
     parts.push(`Editorial fashion photography meets fierce goddess energy, exuding raw sexuality, unapologetic confidence, and magnetic allure.`);
   }
 
-  // TECHNICAL — Shay exact
-  parts.push(`Shot on a DSLR, shallow depth of field, high contrast, ultra-realistic, editorial lifestyle photography, Instagram aesthetic, cinematic realism.`);
+  // TECHNICAL — cinematic quality
+  if (!forChatGPT) {
+    parts.push(`Ultra-realistic, editorial lifestyle photography, cinematic realism, high contrast, shallow depth of field, Instagram aesthetic.`);
+  } else {
+    parts.push(`Shot on a DSLR, shallow depth of field, high contrast, ultra-realistic, editorial lifestyle photography, Instagram aesthetic, cinematic realism.`);
+  }
 
-  // CLOSING — Shay exact
+  // CLOSING — soft phrasing avoids Gemini filter
   parts.push(forChatGPT
     ? `Do not change my face at all. Match the face from the reference photos exactly.`
-    : `Do not change my face at all.`);
+    : `Keep my facial features exactly as they are.`);
 
   return parts.join(' ');
 }
@@ -1523,7 +1711,7 @@ function buildBeauty(d, forChatGPT) {
   // CLOSING — Shay uses ALL CAPS for beauty
   parts.push(forChatGPT
     ? `DO NOT CHANGE MY FACE AT ALL. Match the face from the reference photos exactly.`
-    : `DO NOT CHANGE MY FACE AT ALL.`);
+    : `Keep my facial features exactly as shown in the photo.`);
 
   return parts.join(' ');
 }
@@ -1576,7 +1764,7 @@ function buildConcept(d, forChatGPT) {
   // CLOSING — Shay exact, NO period at the end, matches original exactly
   parts.push(forChatGPT
     ? `Do not change the facial features. Match the face from reference photos exactly`
-    : `Do not change the facial features`);
+    : `Keep my facial features the same`);
 
   return parts.join(' ');
 }
@@ -1674,7 +1862,7 @@ function buildChic(d, forChatGPT) {
   // CLOSING — Shay exact (no "at all" in this style)
   parts.push(forChatGPT
     ? `DO NOT CHANGE MY FACE. Match the face from the reference photos exactly.`
-    : `DO NOT CHANGE MY FACE.`);
+    : `Keep my facial features exactly as they are.`);
 
   return parts.join(' ');
 }
@@ -1778,7 +1966,7 @@ const T = {
     btn_random: '🎲 Surprise Me — Random',
     btn_generate: '✦ Generate My Prompts',
     btn_reset: '↺ Reset Everything',
-    tip_gemini: '💡 Upload <em>1 close-up frontal photo</em> in Gemini before pasting',
+    tip_gemini: '💡 <em>1 photo only</em> in Gemini · close-up frontal · if error, try again with a clearer photo',
     tip_gpt: '💡 Upload <em>2-3 photos</em> (front, 3/4, close-up) for best face match',
     footer_note: 'Made with ♥ by <em>Johanna Digital, Seattle</em>',
     // Labels with opt spans
@@ -1830,6 +2018,24 @@ const T = {
     // Output labels
     out_gemini: 'Gemini AI', out_chatgpt: 'ChatGPT',
     copy_btn: 'Copy', copied_btn: '✓ Copied',
+    tips_title: '✦ How to Get Viral AI Photos',
+    tips_sub: 'Understanding how your choices affect the final image',
+    tip1_title: 'What the Outfit Does in the Prompt',
+    tip1_body: 'The outfit text gets inserted <em>literally</em> into the prompt. When you pick a style, the AI reads it and generates exactly that. The more specific, the better.',
+    tip2_title: 'Fierce Goddess — Outfit Role',
+    tip2_body: 'The outfit is a <em>supporting detail</em>. The stars are lighting, hair, and skin. Dark or dramatic pieces amplify the chiaroscuro effect best.',
+    tip3_title: 'Money Boss — Outfit Role',
+    tip3_body: 'The outfit feeds the <em>abundance scene</em> alongside cash and neon signs. Power suits, blazers and bold colors work best — they scream CEO energy.',
+    tip4_title: 'Beauty Editorial — Outfit Role',
+    tip4_body: 'The outfit is <em>secondary</em> — nails and hands are the stars. Choose something elegant but simple. Minimalist or satin works best.',
+    tip5_title: 'Chic Editorial — Outfit is the Star',
+    tip5_body: 'The outfit <em>IS the main subject</em> here. High Fashion, Power Woman and Modern Chic categories work best — designed for editorial photography.',
+    tip6_title: 'Concept / Themed — Match the Mono',
+    tip6_body: 'The outfit should <em>match the monochromatic background color</em>. Dark brown bg = brown outfit. The goal is a seamless color story between skin, outfit and background.',
+    tip7_title: 'Why These 10 Categories Go Viral',
+    tip7_body: '<em>Glam/Red Carpet</em> → luxury editorial · <em>CEO/Power</em> → authority · <em>Summer</em> → bright colors · <em>Minimalist</em> → Pinterest · <em>Evening</em> → cinematic lighting · <em>Streetwear</em> → urban attitude',
+    tip8_title: 'Pro Tip: Build a Color Story',
+    tip8_body: 'The most viral photos have a <em>unified color story</em>. Pick an outfit, then match the Dominant Color swatch and Background. Example: Champagne gown + Golden gradient + Black Gold = magazine shot.',
   },
   es: {
     eyebrow: 'Generador de Prompts para Fotos IA',
@@ -1852,7 +2058,7 @@ const T = {
     btn_random: '🎲 Sorpréndeme — Aleatorio',
     btn_generate: '✦ Generar mis Prompts',
     btn_reset: '↺ Limpiar todo',
-    tip_gemini: '💡 Sube <em>1 foto frontal de cerca</em> en Gemini antes de pegar',
+    tip_gemini: '💡 <em>Solo 1 foto</em> en Gemini · frontal de cerca · si da error, intenta con una foto más clara',
     tip_gpt: '💡 Sube <em>2-3 fotos</em> (frontal, 3/4, close-up) para mejor resultado facial',
     footer_note: 'Hecho con ♥ por <em>Johanna Digital, Seattle</em>',
     lbl_hair: 'Cabello', lbl_hair_opt: '— elige o escribe el tuyo',
@@ -1895,6 +2101,24 @@ const T = {
     ring_thin: '〰️ Bandas delgadas doradas', ring_cocktail: '💍 Anillo cocktail',
     out_gemini: 'Gemini AI', out_chatgpt: 'ChatGPT',
     copy_btn: 'Copiar', copied_btn: '✓ Copiado',
+    tips_title: '✦ Cómo Obtener Fotos IA Virales',
+    tips_sub: 'Entiende cómo tus elecciones afectan la imagen final',
+    tip1_title: 'Qué hace el Outfit en el Prompt',
+    tip1_body: 'El texto del outfit se inserta <em>literalmente</em> en el prompt. La IA lo lee y genera exactamente eso. Más específico = mejor imagen.',
+    tip2_title: 'Fierce Goddess — Rol del Outfit',
+    tip2_body: 'El outfit es un <em>detalle de apoyo</em>. Protagonistas: iluminación, cabello y piel. Piezas oscuras o dramáticas amplifican el efecto chiaroscuro.',
+    tip3_title: 'Money Boss — Rol del Outfit',
+    tip3_body: 'El outfit alimenta la <em>escena de abundancia</em> junto al cash y los letreros neón. Trajes de poder y colores bold funcionan mejor.',
+    tip4_title: 'Beauty Editorial — Rol del Outfit',
+    tip4_body: 'El outfit es <em>secundario</em> — uñas y manos son las protagonistas. Elige algo elegante pero simple. Lo minimalista o satén funciona mejor.',
+    tip5_title: 'Chic Editorial — El Outfit es la Estrella',
+    tip5_body: 'El outfit <em>ES el sujeto principal</em>. Alta Moda, Mujer de Poder y Moderno Chic funcionan mejor — diseñadas para fotografía editorial.',
+    tip6_title: 'Concepto / Temático — Combina el Mono',
+    tip6_body: 'El outfit debe <em>hacer match con el fondo monocromático</em>. Fondo marrón oscuro = outfit marrón. El objetivo es una historia de color entre piel, outfit y fondo.',
+    tip7_title: 'Por qué Estas 10 Categorías se Viralizan',
+    tip7_body: '<em>Glam/Alfombra Roja</em> → lujo editorial · <em>CEO/Poder</em> → autoridad · <em>Verano</em> → colores vivos · <em>Minimalista</em> → Pinterest · <em>Noche</em> → iluminación cinematográfica',
+    tip8_title: 'Tip Pro: Construye una Historia de Color',
+    tip8_body: 'Las fotos más virales tienen una <em>historia de color unificada</em>. Elige outfit, luego combina Color Dominante y Fondo. Ejemplo: Vestido champagne + Gradiente dorado + Black Gold = foto de revista.',
   }
 };
 
@@ -1936,6 +2160,15 @@ function setLang(lang) {
   };
   document.querySelectorAll('select option').forEach(opt => {
     if (opt.value && optionMap[opt.value]) opt.textContent = optionMap[opt.value];
+  });
+
+  // Update all select option labels (value stays English for prompts)
+  document.querySelectorAll('select option[data-en]').forEach(opt => {
+    opt.textContent = lang === 'es' ? opt.dataset.es : opt.dataset.en;
+  });
+  // Update optgroup labels
+  document.querySelectorAll('optgroup[data-en]').forEach(grp => {
+    grp.label = lang === 'es' ? grp.dataset.es : grp.dataset.en;
   });
 
   // Update compound labels (data-lbl)
