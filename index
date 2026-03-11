@@ -1,0 +1,2093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boss Glow AI Generator – Fierce Headshots</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink: #0a0808;
+  --ink2: #1a1515;
+  --ink3: #241e1e;
+  --rose: #ff00a8;
+  --rose2: #ff40c0;
+  --rose-dim: rgba(255,0,168,0.08);
+  --rose-glow: rgba(255,0,168,0.30);
+  --gold: #c9a94b;
+  --gold-dim: rgba(201,169,75,0.12);
+  --terracotta: #c4622d;
+  --terracotta-dim: rgba(196,98,45,0.1);
+  --steel: #7a9cb8;
+  --steel-dim: rgba(122,156,184,0.1);
+  --amber: #d4832a;
+  --amber-dim: rgba(212,131,42,0.1);
+  --muted: #6b6060;
+  --muted2: #3d3535;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.1);
+  --text: #f0ece5;
+  --text2: #bab4ac;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* GRAIN OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* ═══════════ HERO HEADER ═══════════ */
+.hero {
+  position: relative;
+  padding: 56px 60px 44px;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(240,20,60,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: 'BOSS GLOW';
+  position: absolute;
+  right: 50px; top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 160px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.02);
+  letter-spacing: -0.03em;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.hero-inner {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.brand-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+.brand-eyebrow::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--rose);
+}
+
+.brand-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.brand-title .glow {
+  color: var(--rose);
+  font-style: italic;
+}
+
+.brand-sub {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+.brand-sub em { color: var(--text2); font-style: normal; }
+
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.price-badge {
+  background: var(--rose);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  display: inline-block;
+}
+
+.hero-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.hero-tag {
+  border: 1px solid var(--border2);
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+/* INSTRUCTIONS BAR */
+.instr {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.instr-step {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 24px;
+  border-right: 1px solid var(--border);
+}
+.instr-step:last-child { border-right: none; }
+.instr-n {
+  width: 24px; height: 24px;
+  border: 1px solid var(--rose);
+  color: var(--rose);
+  font-size: 11px;
+  font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+.instr-text { font-size: 11px; color: var(--text2); line-height: 1.4; }
+.instr-text strong { color: var(--text); font-weight: 500; display: block; }
+
+/* ═══════════ MAIN LAYOUT ═══════════ */
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 60px;
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  gap: 40px;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════ SECTIONS ═══════════ */
+.form { display: flex; flex-direction: column; gap: 2px; }
+
+.section {
+  border: 1px solid var(--border);
+  border-radius: 0;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.section:first-child { border-radius: 12px 12px 0 0; }
+.section:last-child { border-radius: 0 0 12px 12px; }
+.section + .section { border-top: none; }
+
+.section-hdr {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 22px;
+  background: var(--ink2);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+.section-hdr:hover { background: var(--ink3); }
+.section-hdr.active { background: var(--ink3); border-bottom: 1px solid var(--border); }
+
+.sec-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--rose);
+  width: 30px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.sec-info { flex: 1; }
+.sec-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+.sec-desc { font-size: 10px; color: var(--muted); margin-top: 1px; font-weight: 300; }
+.sec-arrow {
+  font-size: 12px; color: var(--muted);
+  transition: transform 0.2s;
+}
+.section-hdr.active .sec-arrow { transform: rotate(180deg); }
+
+.section-body {
+  display: none;
+  padding: 22px;
+  background: rgba(255,255,255,0.01);
+  flex-direction: column;
+  gap: 16px;
+}
+.section-body.open { display: flex; }
+
+/* ═══════════ STYLE CARDS ═══════════ */
+.style-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.style-card {
+  border: 1.5px solid var(--border2);
+  border-radius: 10px;
+  padding: 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.style-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.style-card.fierce::before { background: radial-gradient(circle at top right, rgba(240,20,60,0.08), transparent); }
+.style-card.money::before { background: radial-gradient(circle at top right, rgba(201,169,75,0.08), transparent); }
+.style-card:hover { border-color: var(--border2); }
+.style-card:hover::before { opacity: 1; }
+.style-card.on.fierce { border-color: var(--rose); background: var(--rose-dim); }
+.style-card.on.fierce::before { opacity: 1; }
+.style-card.on.money { border-color: var(--gold); background: var(--gold-dim); }
+.style-card.on.money::before { opacity: 1; }
+.style-card.beauty::before { background: radial-gradient(circle at top right, rgba(196,98,45,0.1), transparent); }
+.style-card.on.beauty { border-color: var(--terracotta); background: var(--terracotta-dim); }
+.style-card.on.beauty::before { opacity: 1; }
+.sc-pill.beauty { background: rgba(196,98,45,0.15); color: var(--terracotta); }
+.style-card.chic::before { background: radial-gradient(circle at top right, rgba(122,156,184,0.1), transparent); }
+.style-card.on.chic { border-color: var(--steel); background: var(--steel-dim); }
+.style-card.on.chic::before { opacity: 1; }
+.sc-pill.chic { background: rgba(122,156,184,0.15); color: var(--steel); }
+.style-card.concept::before { background: radial-gradient(circle at top right, rgba(212,131,42,0.1), transparent); }
+.style-card.on.concept { border-color: var(--amber); background: var(--amber-dim); }
+.style-card.on.concept::before { opacity: 1; }
+.sc-pill.concept { background: rgba(212,131,42,0.15); color: var(--amber); }
+
+.sc-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+.sc-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.sc-desc { font-size: 10px; color: var(--muted); line-height: 1.5; font-weight: 300; }
+.sc-pill {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+.sc-pill.fierce { background: rgba(240,20,60,0.15); color: var(--rose); }
+.sc-pill.money { background: rgba(201,169,75,0.15); color: var(--gold); }
+
+/* ═══════════ FORM ELEMENTS ═══════════ */
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.label .opt { color: var(--muted2); font-weight: 400; text-transform: none; letter-spacing: 0; }
+
+.sel-wrap { position: relative; }
+.sel-wrap::after {
+  content: '▾';
+  position: absolute;
+  right: 12px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px; color: var(--muted2);
+  pointer-events: none;
+}
+select {
+  width: 100%;
+  padding: 10px 30px 10px 12px;
+  background: var(--ink2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+select option { background: var(--ink2); }
+select:focus { border-color: var(--rose); }
+
+input[type="text"], textarea {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--ink2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.15s;
+  resize: none;
+}
+input::placeholder, textarea::placeholder { color: var(--muted2); font-size: 11px; }
+input:focus, textarea:focus { border-color: var(--rose); }
+
+.or-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 9px;
+  color: var(--muted2);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.or-divider::before, .or-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* CHECKBOX TAGS */
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 11px;
+  color: var(--muted);
+  transition: all 0.15s;
+  user-select: none;
+  background: var(--ink2);
+}
+.tag:hover { border-color: var(--border2); color: var(--text2); }
+.tag.on { border-color: var(--rose); background: var(--rose-dim); color: var(--text); }
+.tag.on.gold-tag { border-color: var(--gold); background: var(--gold-dim); color: var(--text); }
+
+/* COLOR PALETTE */
+.palette { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.pal-item {
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+  position: relative;
+}
+.pal-item:hover { border-color: var(--border2); }
+.pal-item.on { border-color: var(--rose); }
+.pal-swatch { height: 36px; width: 100%; }
+.pal-name {
+  background: var(--ink2);
+  font-size: 9px;
+  text-align: center;
+  padding: 5px 4px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+.pal-item.on .pal-name { color: var(--text2); }
+
+/* SIGN INPUT */
+.sign-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--ink2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+.sign-wrap:focus-within { border-color: var(--rose); }
+.sign-prefix {
+  padding: 10px 12px;
+  font-size: 10px;
+  color: var(--muted);
+  border-right: 1px solid var(--border);
+  white-space: nowrap;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.sign-wrap input {
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  flex: 1;
+}
+.sign-wrap input:focus { border-color: transparent; }
+
+/* ═══════════ OUTPUT PANEL ═══════════ */
+.output-panel {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gen-btn {
+  width: 100%;
+  background: var(--rose);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 18px 24px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.gen-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.gen-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 36px var(--rose-glow); }
+.gen-btn:hover::before { opacity: 1; }
+.gen-btn:active { transform: translateY(0); }
+
+/* PROMPT BLOCK */
+.prompt-block {
+  background: var(--ink2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.pb-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+  background: var(--ink3);
+}
+.pb-tool {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pb-indicator {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+.pb-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.pb-actions {
+  display: flex;
+  gap: 6px;
+}
+.pb-btn {
+  background: transparent;
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.pb-btn:hover { border-color: var(--rose); color: var(--rose); }
+.pb-btn.copied { border-color: #10b981; color: #10b981; }
+
+.pb-body { padding: 18px; min-height: 80px; }
+.pb-prompt {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--text2);
+  font-style: italic;
+}
+.pb-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 70px;
+}
+.pb-empty-icon { font-size: 24px; opacity: 0.25; }
+.pb-empty-text { font-size: 11px; color: var(--muted2); text-align: center; line-height: 1.6; }
+.pb-tip {
+  font-size: 10px;
+  color: var(--muted2);
+  padding: 10px 18px;
+  border-top: 1px solid var(--border);
+  line-height: 1.5;
+  font-weight: 300;
+}
+.pb-tip em { color: var(--rose); font-style: normal; }
+
+/* SHAY CREDIT */
+.shay-credit {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, rgba(240,20,60,0.04), transparent);
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.shay-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+.shay-text { }
+.shay-name { font-size: 11px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+.shay-desc { font-size: 10px; color: var(--muted); line-height: 1.5; font-weight: 300; }
+.shay-desc em { color: var(--rose); font-style: normal; }
+
+/* RESET BTN */
+.reset-btn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  color: var(--muted2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.reset-btn:hover { border-color: var(--border2); color: var(--muted); }
+
+.rand-btn {
+  width: 100%;
+  background: transparent;
+  border: 1.5px solid var(--border2);
+  border-radius: 10px;
+  padding: 13px;
+  color: var(--text2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+.rand-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: var(--gold-dim);
+}
+
+/* LANG TOGGLE */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1.5px solid var(--border2);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.lang-btn {
+  padding: 7px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  transition: all 0.15s;
+}
+.lang-btn.active {
+  background: var(--rose);
+  color: #fff;
+}
+.lang-btn:hover:not(.active) { color: var(--text2); }
+  border-top: 1px solid var(--border);
+  padding: 20px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--muted2);
+  position: relative;
+  z-index: 1;
+}
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--muted2);
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--muted); }
+.footer-brand em { color: var(--rose); font-style: italic; }
+.footer-note { text-align: center; line-height: 1.5; font-size: 11px; color: var(--muted); }
+.footer-note em { color: var(--rose); font-style: normal; font-weight: 600; }
+
+@media(max-width: 940px) {
+  .hero { padding: 32px 24px 28px; }
+  .hero::after { display: none; }
+  .main { grid-template-columns: 1fr; padding: 24px; }
+  .instr { flex-wrap: wrap; }
+  .instr-step { min-width: 50%; }
+  .output-panel { position: relative; top: 0; }
+  .footer { padding: 20px 24px; }
+  .row2 { grid-template-columns: 1fr; }
+  .palette { grid-template-columns: repeat(5, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="brand">
+      <div class="brand-eyebrow" data-i18n="eyebrow">AI Headshot Prompt Generator</div>
+      <div class="brand-title">Boss<span class="glow">Glow</span></div>
+      <div class="brand-sub">Johanna Digital, Seattle</div>
+    </div>
+    <div class="hero-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" id="btn-es" onclick="setLang('es')">ES</button>
+      </div>
+      <div class="price-badge">✦ Gemini · ChatGPT</div>
+      <div class="hero-tags">
+        <span class="hero-tag" data-i18n="tag_styles">3 Prompt Styles</span>
+        <span class="hero-tag" data-i18n="tag_copy">Copy & Paste Ready</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- INSTRUCTIONS -->
+<div class="instr">
+  <div class="instr-step">
+    <div class="instr-n">1</div>
+    <div class="instr-text"><strong data-i18n="step1_title">Fill the form</strong><span data-i18n="step1_desc">Choose your style, vibe & look</span></div>
+  </div>
+  <div class="instr-step">
+    <div class="instr-n">2</div>
+    <div class="instr-text"><strong data-i18n="step2_title">Generate</strong><span data-i18n="step2_desc">Get 2 prompts instantly</span></div>
+  </div>
+  <div class="instr-step">
+    <div class="instr-n">3</div>
+    <div class="instr-text"><strong data-i18n="step3_title">Copy & paste</strong><span data-i18n="step3_desc">Into Gemini or ChatGPT</span></div>
+  </div>
+  <div class="instr-step">
+    <div class="instr-n">💡</div>
+    <div class="instr-text"><strong data-i18n="tip_title">Pro tip</strong><span data-i18n="tip_desc">Use a close-up frontal photo for best results</span></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+<div class="form">
+
+  <!-- SECTION 1: PROMPT STYLE -->
+  <div class="section">
+    <div class="section-hdr active" onclick="toggleSection(this)">
+      <div class="sec-num">01</div>
+      <div class="sec-info">
+        <div class="sec-title" data-i18n="s1_title">Choose Your Prompt Style</div>
+        <div class="sec-desc" data-i18n="s1_desc">5 formulas — each opens and closes differently</div>
+      </div>
+      <div class="sec-arrow">▾</div>
+    </div>
+    <div class="section-body open" id="sec-style">
+      <div class="style-row" style="grid-template-columns:1fr 1fr;gap:10px">
+        <div class="style-card fierce on" id="sc-fierce" onclick="setStyle('fierce')">
+          <span class="sc-icon">🔥</span>
+          <div class="sc-name" data-i18n="fierce_name">Fierce Goddess</div>
+          <div class="sc-desc" data-i18n="fierce_desc">Poetic & cinematic. Wet-look hair, water droplets, chiaroscuro lighting.</div>
+          <span class="sc-pill fierce" data-i18n="fierce_pill">Detailed · Editorial</span>
+        </div>
+        <div class="style-card money" id="sc-money" onclick="setStyle('money')">
+          <span class="sc-icon">💸</span>
+          <div class="sc-name" data-i18n="money_name">Money Boss</div>
+          <div class="sc-desc" data-i18n="money_desc">Direct & fun. Cash, neon signs, floating money. Abundance energy.</div>
+          <span class="sc-pill money" data-i18n="money_pill">Fun · Abundance</span>
+        </div>
+        <div class="style-card beauty" id="sc-beauty" onclick="setStyle('beauty')">
+          <span class="sc-icon">💅</span>
+          <div class="sc-name" data-i18n="beauty_name">Beauty Editorial</div>
+          <div class="sc-desc" data-i18n="beauty_desc">Luxury beauty portrait. Nails, hands framing face, warm backdrop.</div>
+          <span class="sc-pill beauty" data-i18n="beauty_pill">Beauty · Nails · Warm</span>
+        </div>
+        <div class="style-card chic" id="sc-chic" onclick="setStyle('chic')">
+          <span class="sc-icon">🎀</span>
+          <div class="sc-name" data-i18n="chic_name">Chic Editorial</div>
+          <div class="sc-desc" data-i18n="chic_desc">Fashion editorial. Outfit-forward, seated pose, soft studio light.</div>
+          <span class="sc-pill chic" data-i18n="chic_pill">Fashion · Elegant · Clean</span>
+        </div>
+        <div class="style-card concept" id="sc-concept" onclick="setStyle('concept')" style="grid-column:1/-1">
+          <span class="sc-icon">🎭</span>
+          <div class="sc-name" data-i18n="concept_name">Concept / Themed</div>
+          <div class="sc-desc" data-i18n="concept_desc">Short & direct. One central prop (food, object, element) defines the whole image. Monochromatic effect. No poetry — just a clean, specific scene.</div>
+          <span class="sc-pill concept" data-i18n="concept_pill">Short · Prop · Mono</span>
+        </div>
+      </div>
+    </div>
+
+  <!-- SECTION 2: YOUR LOOK -->
+  <div class="section">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <div class="sec-num">02</div>
+      <div class="sec-info">
+        <div class="sec-title" data-i18n="s2_title">Your Look</div>
+        <div class="sec-desc" data-i18n="s2_desc">Skin, eyes, hair, makeup — this anchors your identity in the image</div>
+      </div>
+      <div class="sec-arrow">▾</div>
+    </div>
+    <div class="section-body" id="sec-look">
+      <div class="row2">
+        <div class="field">
+          <div class="label" data-i18n="lbl_skin">Skin tone</div>
+          <div class="sel-wrap"><select id="skin">
+            <option value="">— Select —</option>
+            <option value="smooth glowing fair skin">Fair · luminous glow</option>
+            <option value="smooth glowing light tan skin">Light tan · warm glow</option>
+            <option value="smooth glowing brown skin">Brown · bronzed glow</option>
+            <option value="smooth glowing warm brown skin">Warm brown · rich glow</option>
+            <option value="smooth glowing deep brown skin">Deep brown · luminous</option>
+            <option value="smooth glowing rich dark skin">Rich dark · fierce glow</option>
+          </select></div>
+        </div>
+        <div class="field">
+          <div class="label" data-i18n="lbl_eyes">Eyes</div>
+          <div class="sel-wrap"><select id="eyes">
+            <option value="">— Select —</option>
+            <option value="big sparkling eyes">Big sparkling</option>
+            <option value="a smoldering, hypnotic stare that holds secrets and undeniable power">Smoldering hypnotic</option>
+            <option value="an intensely commanding gaze">Intensely commanding</option>
+            <option value="deep hypnotic almond-shaped eyes">Deep hypnotic almond</option>
+            <option value="fierce confident eyes">Fierce confident</option>
+            <option value="soft dreamy eyes">Soft dreamy</option>
+          </select></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="label" data-lbl="lbl_hair" data-lblopt="lbl_hair_opt">Hair <span class="opt">— pick or write yours</span></div>
+        <div class="sel-wrap"><select id="hair">
+          <option value="">— Select —</option>
+          <option value="long, voluminous black wavy hair cascading around her shoulders with striking blonde highlights weaving through the waves, styled with a perfect wet-look finish and meticulously sculpted baby hairs framing her fierce features">Long wavy · wet-look · baby hairs</option>
+          <option value="long flowing black hair styled in sleek waves">Long sleek waves · black</option>
+          <option value="long sleek straight black hair">Long straight · sleek black</option>
+          <option value="long wet-look glossy waves">Wet-look glossy waves</option>
+          <option value="voluminous big curly hair">Big voluminous curls</option>
+          <option value="sleek high ponytail">Sleek high ponytail</option>
+          <option value="short blunt bob">Short blunt bob</option>
+          <option value="natural afro textured hair">Natural afro · textured</option>
+          <option value="braided updo with loose tendrils">Braided updo</option>
+        </select></div>
+        <div class="or-divider">or write yours</div>
+        <input type="text" id="hairCustom" placeholder='e.g. long auburn curls with honey highlights and sculpted baby hairs'>
+      </div>
+
+      <div class="field">
+        <div class="label" data-lbl="lbl_makeup" data-lblopt="lbl_makeup_opt">Makeup <span class="opt">— pick or write yours</span></div>
+        <div class="sel-wrap"><select id="makeup">
+          <option value="">— Select —</option>
+          <option value="bold smoky eyes with dramatic winged liner, voluminous false lashes, and razor-sharp sculpted brows. Her lips are sensually parted, full and glossy with a deep beige brown finish. Her cheekbones are drenched in metallic shimmer highlighting">Bold Smoky · Shay Signature</option>
+          <option value="bronzed glam makeup, glossy lips, shimmer on cheekbones, dramatic lashes">Bronzed Glam</option>
+          <option value="smoky eye makeup, matte nude lips, sharp sculpted contour">Smoky Eyes · Nude Lip</option>
+          <option value="glossy nude lips, dewy glass skin, natural feathered lashes">Glossy Nude · Glass Skin</option>
+          <option value="bold red lips, classic Hollywood winged liner, flawless base">Red Lips Classic</option>
+          <option value="bold graphic editorial eyeliner, avant-garde makeup">Bold Editorial</option>
+          <option value="fresh natural glow, tinted lips, barely-there makeup">Natural Glow</option>
+        </select></div>
+        <div class="or-divider">or write yours</div>
+        <input type="text" id="makeupCustom" placeholder='e.g. copper smoky eye, ombre berry lips, intense gold highlight'>
+      </div>
+
+      <div class="field" id="skin-extras-field">
+        <div class="label" data-lbl="lbl_skin_extras" data-lblopt="lbl_skin_extras_opt">Skin extras <span class="opt">— Fierce Goddess only</span></div>
+        <div class="tags" id="skinExtras">
+          <span class="tag" data-val="with water droplets glistening on her luminous skin">💧 Water droplets</span>
+          <span class="tag" data-val="metallic shimmer radiating from her cheekbones">✨ Metallic shimmer</span>
+          <span class="tag" data-val="skin looks luminous and airbrushed">🌟 Airbrushed glow</span>
+          <span class="tag" data-val="meticulously sculpted baby hairs framing her face">〰️ Baby hairs</span>
+          <span class="tag" data-val="wet-look glistening skin">🪞 Wet-look skin</span>
+        </div>
+      </div>
+
+      <!-- BEAUTY EDITORIAL FIELDS — shown only when beauty style selected -->
+      <div id="beauty-fields" style="display:none; flex-direction:column; gap:16px;">
+        <div class="field">
+          <div class="label" data-lbl="lbl_nail_shape" data-lblopt="lbl_nail_shape_opt">Nail shape & style <span class="opt">— Beauty Editorial</span></div>
+          <div class="sel-wrap"><select id="nailShape">
+            <option value="">— Select —</option>
+            <option value="long almond-shaped acrylic nails">Long almond acrylic</option>
+            <option value="long coffin-shaped acrylic nails">Long coffin / ballerina</option>
+            <option value="long stiletto nails">Long stiletto</option>
+            <option value="medium oval nails">Medium oval</option>
+            <option value="short square nails">Short square</option>
+          </select></div>
+        </div>
+        <div class="field">
+          <div class="label" data-lbl="lbl_nail_color" data-lblopt="lbl_nail_color_opt">Nail color & finish <span class="opt">— pick or write</span></div>
+          <div class="sel-wrap"><select id="nailColor">
+            <option value="">— Select —</option>
+            <option value="in a soft blush pink ombré with subtle glitter accents">Blush pink ombré + glitter</option>
+            <option value="in a classic french tip with nude base">French tip · nude base</option>
+            <option value="in deep cherry red with high-gloss finish">Deep cherry red · glossy</option>
+            <option value="in all-black matte finish">All black matte</option>
+            <option value="in nude beige with gold foil details">Nude + gold foil</option>
+            <option value="in metallic chrome silver finish">Chrome silver</option>
+            <option value="in deep burgundy with velvet matte finish">Burgundy velvet matte</option>
+            <option value="in hot pink glossy finish">Hot pink glossy</option>
+          </select></div>
+          <div class="or-divider">or write yours</div>
+          <input type="text" id="nailCustom" placeholder='e.g. lavender ombré with diamond tips and pearl accents'>
+        </div>
+        <div class="field">
+          <div class="label" data-lbl="lbl_rings" data-lblopt="lbl_rings_opt">Hand rings <span class="opt">— optional</span></div>
+          <div class="tags" id="ringsExtras">
+            <span class="tag" data-val="chunky silver rings on multiple fingers">🔘 Chunky silver</span>
+            <span class="tag" data-val="gold statement rings stacked on multiple fingers">🟡 Gold stacked</span>
+            <span class="tag" data-val="diamond rings catching the light">💎 Diamond rings</span>
+            <span class="tag" data-val="minimalist thin gold bands">〰️ Thin gold bands</span>
+            <span class="tag" data-val="bold oversized cocktail ring">💍 Cocktail ring</span>
+          </div>
+        </div>
+      </div>
+      <!-- CONCEPT / THEMED FIELDS — only prop matters here, bg/lighting move to section 04 -->
+      <div id="concept-fields" style="display:none; flex-direction:column; gap:16px;">
+        <div class="field">
+          <div class="label" data-lbl="lbl_prop" data-lblopt="lbl_prop_opt">Central prop <span class="opt">— the star of the image</span></div>
+          <div class="sel-wrap"><select id="conceptProp">
+            <option value="">— Select —</option>
+            <option value="a large bar of chocolate up to her mouth, appearing to take a bite">🍫 Chocolate bar</option>
+            <option value="a glass of champagne raised elegantly">🥂 Champagne glass</option>
+            <option value="a bouquet of red roses covering half her face">🌹 Red roses</option>
+            <option value="a luxury perfume bottle held up near her face">🌸 Perfume bottle</option>
+            <option value="a large stack of cash fanned out in her hands">💵 Cash fanned out</option>
+            <option value="an ice cream cone she's about to lick">🍦 Ice cream cone</option>
+            <option value="a single red apple held up near her lips">🍎 Red apple</option>
+            <option value="a cup of coffee or espresso cupped in both hands">☕ Coffee cup</option>
+            <option value="a luxury designer bag held up in front of her">👜 Designer bag front</option>
+          </select></div>
+          <div class="or-divider">or write yours</div>
+          <input type="text" id="conceptPropCustom" placeholder='e.g. a lit sparkler held near her face, a mirror reflecting her'>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <div class="sec-num">03</div>
+      <div class="sec-info">
+        <div class="sec-title" data-i18n="s3_title">Outfit & Accessories</div>
+        <div class="sec-desc" data-i18n="s3_desc">Clothing, chains, props — the luxury details</div>
+      </div>
+      <div class="sec-arrow">▾</div>
+    </div>
+    <div class="section-body" id="sec-outfit">
+      <div class="field">
+        <div class="label" data-lbl="lbl_outfit" data-lblopt="lbl_outfit_opt">Outfit <span class="opt">— pick or write</span></div>
+        <div class="sel-wrap"><select id="outfit">
+          <option value="">— Select —</option>
+          <option value="a barely-there luxurious black garment that hints at her décolletage">Barely-there black</option>
+          <option value="a neon green crop top with matching long nails">Neon green crop top</option>
+          <option value="an all-black luxury bodycon dress">All-black luxury bodycon</option>
+          <option value="an elegant gold satin dress">Gold satin dress</option>
+          <option value="a black power blazer">Black power blazer</option>
+          <option value="a white luxury power suit">White power suit</option>
+          <option value="a silver puffer jacket">Silver puffer jacket</option>
+          <option value="a hot pink mini dress">Hot pink mini dress</option>
+          <option value="a luxury oversized street jacket">Street luxury jacket</option>
+          <option value="a strapless corset gown">Strapless corset gown</option>
+        </select></div>
+        <div class="or-divider">or write yours</div>
+        <input type="text" id="outfitCustom" placeholder='e.g. emerald velvet corset with high-waist wide-leg trousers'>
+      </div>
+
+      <div class="field">
+        <div class="label" data-lbl="lbl_accs" data-lblopt="lbl_accs_opt">Accessories <span class="opt">— multi-select</span></div>
+        <div class="tags" id="accs">
+          <span class="tag" data-val="layered diamond chains">💎 Diamond chains</span>
+          <span class="tag" data-val="gold hoop earrings">🔮 Gold hoops</span>
+          <span class="tag" data-val="stacks of cash">💵 Stacks of cash</span>
+          <span class="tag" data-val="luxury designer handbag">👜 Designer bag</span>
+          <span class="tag" data-val="oversized designer sunglasses">🕶️ Oversized shades</span>
+          <span class="tag" data-val="diamond tennis bracelet">💍 Tennis bracelet</span>
+          <span class="tag" data-val="luxury watch">⌚ Luxury watch</span>
+          <span class="tag" data-val="floating money around her">🤑 Floating money</span>
+          <span class="tag" data-val="bold statement rings">💫 Statement rings</span>
+          <span class="tag" data-val="pearl necklace">🤍 Pearl necklace</span>
+        </div>
+        <input type="text" id="accsCustom" placeholder='Custom accessory: e.g. diamond tiara, crystal arm cuff...' style="margin-top:8px">
+      </div>
+
+      <div class="field">
+        <div class="label" data-i18n="lbl_sign">Chain / sign text</div>
+        <div class="sign-wrap">
+          <span class="sign-prefix">✦ READS</span>
+          <input type="text" id="signText" placeholder='THE BOSS · RICH TALK ONLY · BOSS MOVES · CEO · QUEEN'>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: SCENE -->
+  <div class="section">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <div class="sec-num">04</div>
+      <div class="sec-info">
+        <div class="sec-title" data-i18n="s4_title">Scene & Background</div>
+        <div class="sec-desc" data-i18n="s4_desc">Pose, backdrop, color, scene extras</div>
+      </div>
+      <div class="sec-arrow">▾</div>
+    </div>
+    <div class="section-body" id="sec-scene">
+      <div class="row2">
+        <div class="field">
+          <div class="label" data-lbl="lbl_pose" data-lblopt="lbl_pose_opt">Pose / Action <span class="opt">— pick or write</span></div>
+          <div class="sel-wrap"><select id="pose">
+            <option value="">— Select —</option>
+            <optgroup label="— Power Poses —">
+              <option value="rests her powerfully intertwined arms on a mirror-black reflective surface that perfectly reflects her commanding beauty">Arms on mirror surface</option>
+              <option value="arms crossed powerfully, smoldering gaze into the camera">Arms crossed · fierce</option>
+              <option value="standing tall, one hand adjusting her jewelry, owning the room">Standing boss pose</option>
+              <option value="leaning forward slightly with a commanding, magnetic presence">Leaning forward</option>
+            </optgroup>
+            <optgroup label="— Money Boss —">
+              <option value="holding stacks of cash to her ear like a phone, laughing confidently">Cash as a phone 💸</option>
+            </optgroup>
+            <optgroup label="— Beauty / Elegance —">
+              <option value="hands gently framing her face, gazing directly into the camera">Hands framing face</option>
+              <option value="sitting gracefully on a stool, exuding class, power, and femininity">On a stool · graceful</option>
+              <option value="seated on a sleek chair, legs crossed, one hand resting on her knee">Chair · legs crossed</option>
+              <option value="seated with legs crossed, impeccable editorial posture">Seated editorial</option>
+            </optgroup>
+            <optgroup label="— Dynamic —">
+              <option value="tossing her hair back dynamically, mid-movement">Tossing hair</option>
+            </optgroup>
+          </select></div>
+          <div class="or-divider">or write</div>
+          <input type="text" id="poseCustom" placeholder='e.g. lying on a pile of cash, looking up at camera'>
+        </div>
+        <div class="field">
+          <div class="label" data-lbl="lbl_bg" data-lblopt="lbl_bg_opt">Background <span class="opt">— pick or write</span></div>
+          <div class="sel-wrap"><select id="bg">
+            <option value="">— Select —</option>
+            <optgroup label="— Dark / Dramatic —">
+              <option value="against an abyss-dark background, the composition intensely focused and hypnotic">Abyss dark · hypnotic</option>
+              <option value="a dark luxury studio backdrop">Dark luxury studio</option>
+              <option value="a pitch-black abyss backdrop">All black abyss</option>
+              <option value="a deep velvet backdrop">Deep velvet</option>
+            </optgroup>
+            <optgroup label="— Warm / Beauty —">
+              <option value="a warm terracotta and orange studio backdrop">Terracotta / orange</option>
+              <option value="a soft dusty rose studio backdrop">Dusty rose</option>
+              <option value="a warm cream and ivory studio backdrop">Cream / ivory</option>
+              <option value="a golden warm gradient backdrop">Golden gradient</option>
+            </optgroup>
+            <optgroup label="— Clean / Neutral —">
+              <option value="a neutral gray background with soft studio light">Neutral gray · soft light</option>
+              <option value="a white seamless studio backdrop with dramatic shadows">White studio</option>
+              <option value="a warm beige backdrop">Warm beige</option>
+              <option value="a muted sage green backdrop">Sage green</option>
+            </optgroup>
+            <optgroup label="— Concept / Mono —">
+              <option value="a solid, dark brown color, creating a monochrome effect with her outfit and skin tone">Dark brown mono</option>
+              <option value="a solid all-black background, creating a sleek monochrome effect">All black mono</option>
+              <option value="a solid deep red background, creating a bold monochrome effect">Deep red mono</option>
+              <option value="a solid ivory white background, creating a clean monochrome effect">Ivory white mono</option>
+            </optgroup>
+            <optgroup label="— Fun / Neon —">
+              <option value="neon green lightning and a glowing sign">Neon green + sign</option>
+              <option value="a neon-lit urban night background with bokeh city lights">Neon city night</option>
+              <option value="floating money and luxury handbags all around her">Floating money scene 💸</option>
+            </optgroup>
+          </select></div>
+          <div class="or-divider">or write</div>
+          <input type="text" id="bgCustom" placeholder='e.g. golden hour rooftop pool, city skyline behind her'>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="label" data-i18n="lbl_color">Dominant color</div>
+        <div class="palette" id="colorPalette">
+          <div class="pal-item" data-val="neon green" onclick="toggleColor(this)"><div class="pal-swatch" style="background:linear-gradient(135deg,#39ff14,#00cc44)"></div><div class="pal-name">Neon Green</div></div>
+          <div class="pal-item" data-val="black and gold" onclick="toggleColor(this)"><div class="pal-swatch" style="background:linear-gradient(135deg,#1a1a1a,#c9a94b)"></div><div class="pal-name">Black Gold</div></div>
+          <div class="pal-item" data-val="hot pink and black" onclick="toggleColor(this)"><div class="pal-swatch" style="background:linear-gradient(135deg,#ff00a8,#1a1a1a)"></div><div class="pal-name">Hot Pink</div></div>
+          <div class="pal-item" data-val="all black with high contrast" onclick="toggleColor(this)"><div class="pal-swatch" style="background:linear-gradient(135deg,#111,#333)"></div><div class="pal-name">All Black</div></div>
+          <div class="pal-item" data-val="deep red and black" onclick="toggleColor(this)"><div class="pal-swatch" style="background:linear-gradient(135deg,#cc1f1f,#1a1a1a)"></div><div class="pal-name">Deep Red</div></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="label" data-lbl="lbl_scene_extras" data-lblopt="lbl_scene_extras_opt">Scene extras <span class="opt">— multi-select</span></div>
+        <div class="tags" id="sceneExtras">
+          <span class="tag" data-val="floating money raining around her">💸 Floating money</span>
+          <span class="tag" data-val="luxury handbags floating in the background">👜 Floating handbags</span>
+          <span class="tag" data-val="neon glow accents illuminating the scene">💡 Neon glow</span>
+          <span class="tag" data-val="mirror-black reflective floor beneath her">🪞 Mirror floor</span>
+          <span class="tag" data-val="dramatic atmospheric smoke and fog">🌫️ Smoke / fog</span>
+          <span class="tag" data-val="golden light rays streaming through">✨ Gold light rays</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: VIBE -->
+  <div class="section">
+    <div class="section-hdr" onclick="toggleSection(this)">
+      <div class="sec-num">05</div>
+      <div class="sec-info">
+        <div class="sec-title" data-i18n="s5_title">Vibe & Energy</div>
+        <div class="sec-desc" data-i18n="s5_desc">The emotional core of the image</div>
+      </div>
+      <div class="sec-arrow">▾</div>
+    </div>
+    <div class="section-body" id="sec-vibe">
+      <div class="field">
+        <div class="label" data-lbl="lbl_vibe" data-lblopt="lbl_vibe_opt">Vibe <span class="opt">— pick or write yours</span></div>
+        <div class="sel-wrap"><select id="vibe">
+          <option value="">— Select —</option>
+          <option value="editorial fashion photography meets fierce goddess energy, exuding raw sexuality, unapologetic confidence, and magnetic allure">Fierce Goddess </option>
+          <option value="exuding confidence and luxury like she makes money in her sleep">Money Boss </option>
+          <option value="exuding fierce boss goddess energy and undeniable confidence">Fierce Boss</option>
+          <option value="exuding soft luxury glamour and aspirational feminine power">Soft Glam Luxury</option>
+          <option value="exuding CEO queen energy, polished authority — she runs the room">CEO Queen</option>
+          <option value="exuding the energy of a self-made millionaire who built her empire from nothing">Self-Made Millionaire</option>
+          <option value="exuding magnetic dark feminine energy, mysterious and utterly untouchable">Dark Feminine</option>
+        </select></div>
+        <div class="or-divider">or write yours</div>
+        <input type="text" id="vibeCustom" placeholder='e.g. "exuding the energy of a woman who never settles for less"'>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /form -->
+
+<!-- OUTPUT PANEL -->
+<div class="output-panel">
+
+  <button class="rand-btn" onclick="randomize()">
+    <span data-i18n="btn_random">🎲 Sorpréndeme — Aleatorio</span>
+  </button>
+
+  <button class="gen-btn" onclick="generateAll()">
+    <span data-i18n="btn_generate">✦ Generate My Prompts</span>
+  </button>
+
+  <!-- GEMINI -->
+  <div class="prompt-block">
+    <div class="pb-header">
+      <div class="pb-tool">
+        <div class="pb-indicator" style="background:#4285f4"></div>
+        <div class="pb-label" style="color:#4285f4">Gemini AI</div>
+      </div>
+      <div class="pb-actions">
+        <button class="pb-btn" onclick="copyPrompt('gem-out', this)">Copy</button>
+      </div>
+    </div>
+    <div class="pb-body">
+      <div id="gem-out" class="pb-empty">
+        <div class="pb-empty-icon">✨</div>
+        <div class="pb-empty-text">Your prompt will appear here<br>after you press Generate</div>
+      </div>
+    </div>
+    <div class="pb-tip"><span data-i18n="tip_gemini">💡 Upload <em>1 close-up frontal photo</em> in Gemini before pasting</span></div>
+  </div>
+
+  <!-- CHATGPT -->
+  <div class="prompt-block">
+    <div class="pb-header">
+      <div class="pb-tool">
+        <div class="pb-indicator" style="background:#10b981"></div>
+        <div class="pb-label" style="color:#10b981">ChatGPT</div>
+      </div>
+      <div class="pb-actions">
+        <button class="pb-btn" onclick="copyPrompt('gpt-out', this)">Copy</button>
+      </div>
+    </div>
+    <div class="pb-body">
+      <div id="gpt-out" class="pb-empty">
+        <div class="pb-empty-icon">✨</div>
+        <div class="pb-empty-text">Your prompt will appear here<br>after you press Generate</div>
+      </div>
+    </div>
+    <div class="pb-tip"><span data-i18n="tip_gpt">💡 Upload <em>2-3 photos</em> (front, 3/4, close-up) for best face match</span></div>
+  </div>
+
+  <button class="reset-btn" onclick="resetAll()"><span data-i18n="btn_reset">↺ Reset Everything</span></button>
+
+</div>
+</div><!-- /main -->
+
+<footer class="footer">
+  <div class="footer-brand">Boss<em>Glow</em> AI Generator</div>
+  <div class="footer-note" data-i18n="footer_note">Made with ♥ by <em>Johanna Digital, Seattle</em></div>
+</footer>
+
+<script>
+// ══════════════════════════
+// STATE
+// ══════════════════════════
+let promptStyle = 'fierce';
+let selectedColor = null;
+
+function getTagValues(containerId) {
+  return Array.from(document.querySelectorAll(`#${containerId} .tag.on`))
+    .map(t => t.dataset.val);
+}
+
+// ══════════════════════════
+// UI INTERACTIONS
+// ══════════════════════════
+function toggleSection(hdr) {
+  const body = hdr.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  hdr.classList.toggle('active', !isOpen);
+  if (!isOpen) body.style.display = 'flex';
+  else body.style.display = 'none';
+}
+
+// Init: open first section
+document.querySelectorAll('.section-body.open').forEach(b => b.style.display = 'flex');
+
+function setStyle(s) {
+  promptStyle = s;
+  ['fierce','money','beauty','chic','concept'].forEach(id => {
+    const el = document.getElementById('sc-' + id);
+    if (el) el.classList.toggle('on', s === id);
+  });
+  const extras = document.getElementById('skin-extras-field');
+  if (extras) extras.style.opacity = s === 'fierce' ? '1' : '0.35';
+  const beautyFields = document.getElementById('beauty-fields');
+  if (beautyFields) beautyFields.style.display = s === 'beauty' ? 'flex' : 'none';
+  const chicFields = document.getElementById('chic-fields');
+  if (chicFields) chicFields.style.display = s === 'chic' ? 'flex' : 'none';
+  const conceptFields = document.getElementById('concept-fields');
+  if (conceptFields) conceptFields.style.display = s === 'concept' ? 'flex' : 'none';
+}
+
+function toggleColor(el) {
+  const val = el.dataset.val;
+  document.querySelectorAll('.pal-item').forEach(p => p.classList.remove('on'));
+  if (selectedColor === val) { selectedColor = null; }
+  else { selectedColor = val; el.classList.add('on'); }
+}
+
+// Tag toggles — event delegation for all current and future tags
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('tag')) {
+    e.target.classList.toggle('on');
+  }
+});
+
+function g(id) { return (document.getElementById(id)?.value || '').trim(); }
+function pick(s, c) { return g(c) || g(s); }
+function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; }
+
+function getData() {
+  const accsCustom = g('accsCustom');
+  const nailCustom = g('nailCustom');
+  return {
+    skin: g('skin'),
+    eyes: g('eyes'),
+    hair: pick('hair', 'hairCustom'),
+    makeup: pick('makeup', 'makeupCustom'),
+    outfit: pick('outfit', 'outfitCustom'),
+    pose: pick('pose', 'poseCustom'),
+    bg: pick('bg', 'bgCustom'),
+    sign: g('signText'),
+    vibe: pick('vibe', 'vibeCustom'),
+    color: selectedColor,
+    accs: [...getTagValues('accs'), ...(accsCustom ? [accsCustom] : [])],
+    skinExtras: getTagValues('skinExtras'),
+    sceneExtras: getTagValues('sceneExtras'),
+    // beauty
+    nailShape: g('nailShape'),
+    nailColor: nailCustom || g('nailColor'),
+    rings: getTagValues('ringsExtras'),
+    beautyBg: g('beautyBg'),
+    // chic
+    chicPose: g('chicPoseCustom') || g('chicPose') || pick('pose','poseCustom'),
+    chicBg: pick('bg','bgCustom'),
+    // concept
+    conceptProp: g('conceptPropCustom') || g('conceptProp'),
+    conceptBg: pick('bg','bgCustom'),
+    conceptLight: g('conceptLight'),
+  };
+}
+
+// ══════════════════════════
+// PROMPT BUILDERS
+// ══════════════════════════
+
+// FIERCE GODDESS — poetic, detailed, Shay exact structure
+function buildFierce(d, forChatGPT) {
+  const parts = [];
+
+  // OPENING — Shay uses "create this scene" for fierce
+  if (forChatGPT) {
+    parts.push(`Using the uploaded photos as face reference, please create this scene:`);
+  } else {
+    parts.push(`Using the uploaded image, create this scene:`);
+  }
+
+  // PHYSICAL PRESENCE
+  let presence = [];
+  if (d.skin) presence.push(`a woman with flawless ${d.skin}`);
+  else presence.push(`a woman with flawless glowing skin`);
+  presence.push(`and an intensely commanding presence`);
+  parts.push(cap(presence.join(' ')) + '.');
+
+  // HAIR — full Shay description
+  if (d.hair) {
+    parts.push(`Her ${d.hair}.`);
+  }
+
+  // GAZE — Shay always has this
+  if (d.eyes && d.eyes !== 'big sparkling eyes') {
+    parts.push(`She gazes directly into the camera with ${d.eyes}.`);
+  } else {
+    parts.push(`She gazes directly into the camera with a smoldering, hypnotic stare that holds secrets and undeniable power.`);
+  }
+
+  // MAKEUP — Shay breaks this into sentences
+  if (d.makeup) {
+    parts.push(cap(d.makeup) + '.');
+  }
+
+  // SKIN EXTRAS
+  if (d.skinExtras.length > 0) {
+    parts.push(cap(d.skinExtras.join('. ')) + '.');
+  }
+
+  // POSE
+  if (d.pose) {
+    parts.push(`She ${d.pose}.`);
+  }
+
+  // OUTFIT + ACCESSORIES + SIGN
+  let outfit = [];
+  if (d.outfit) outfit.push(`Wearing ${d.outfit}`);
+  if (d.accs.length) outfit.push(`adorned with ${d.accs.join(', ')}`);
+  if (d.sign) outfit.push(`and a chain that reads "${d.sign.toUpperCase()}"`);
+  if (outfit.length) parts.push(outfit.join(', ') + '.');
+
+  // LIGHTING — Shay exact
+  let lighting = `Dramatic chiaroscuro studio lighting creates high contrast shadows and highlights`;
+  if (d.skinExtras.some(e => e.includes('water droplets'))) {
+    lighting += `, emphasizing every water droplet and shimmer`;
+  } else {
+    lighting += `, sculpting every feature with cinematic depth`;
+  }
+  parts.push(lighting + '.');
+
+  // BACKGROUND + COLOR + SIGN
+  let bg = '';
+  if (d.bg) {
+    bg = cap(d.bg);
+    if (d.sign && d.bg.includes('sign')) bg += ` that reads "${d.sign.toUpperCase()}"`;
+  }
+  if (d.sceneExtras.length) {
+    bg += (bg ? ', with ' : '') + d.sceneExtras.join(', ');
+  }
+  if (d.color) bg += (bg ? '. ' : '') + `${cap(d.color)} tones dominate the palette`;
+  if (bg) parts.push(cap(bg) + '.');
+
+  // VIBE — Shay puts this near the end
+  if (d.vibe) {
+    parts.push(cap(d.vibe) + '.');
+  } else {
+    parts.push(`Editorial fashion photography meets fierce goddess energy, exuding raw sexuality, unapologetic confidence, and magnetic allure.`);
+  }
+
+  // TECHNICAL — Shay exact
+  parts.push(`Shot on a DSLR, shallow depth of field, high contrast, ultra-realistic, editorial lifestyle photography, Instagram aesthetic, cinematic realism.`);
+
+  // CLOSING — Shay exact
+  parts.push(forChatGPT
+    ? `Do not change my face at all. Match the face from the reference photos exactly.`
+    : `Do not change my face at all.`);
+
+  return parts.join(' ');
+}
+
+// MONEY BOSS — short, direct, fun, Shay exact structure
+function buildMoney(d, forChatGPT) {
+  const parts = [];
+
+  // OPENING — Shay exact
+  if (forChatGPT) {
+    parts.push(`Using the uploaded photos as face reference, please create this photo --`);
+  } else {
+    parts.push(`Using the uploaded image, please create this photo --`);
+  }
+
+  // PHYSICAL — Shay's money prompt is one sentence for looks
+  let phys = [];
+  if (d.skin) phys.push(`a glamorous woman with ${d.skin}`);
+  else phys.push(`a glamorous woman`);
+  if (d.eyes) phys.push(d.eyes);
+  if (d.hair) phys.push(`and ${d.hair}`);
+  if (d.makeup) phys.push(`with ${d.makeup}`);
+  if (phys.length) parts.push(phys.join(', ') + '.');
+
+  // POSE + VIBE — Shay combines these
+  let action = d.pose ? `She's ${d.pose}` : `She's posing with fierce boss energy`;
+  if (d.vibe) action += `, ${d.vibe}`;
+  else action += `, exuding confidence and luxury like she makes money in her sleep`;
+  parts.push(action + '.');
+
+  // OUTFIT + ACCESSORIES + SIGN
+  let outfit = [];
+  if (d.outfit) outfit.push(`She wears ${d.outfit}`);
+  if (d.accs.length) outfit.push(`with ${d.accs.join(', ')}`);
+  if (d.sign) outfit.push(`including a chain that reads "${d.sign.toUpperCase()}"`);
+  if (outfit.length) parts.push(outfit.join(' ') + '.');
+
+  // BACKGROUND + SIGN + EXTRAS — Shay's money prompt is very specific
+  let scene = [];
+  if (d.bg) scene.push(`The background features ${d.bg}`);
+  if (d.sign) scene.push(`and a glowing sign that reads "${d.sign.toUpperCase()}"`);
+  if (d.sceneExtras.length) scene.push(`with ${d.sceneExtras.join(', ')}`);
+  if (scene.length) parts.push(scene.join(', ') + '.');
+
+  // COLOR
+  if (d.color) parts.push(`${cap(d.color)} tones throughout.`);
+
+  // TECHNICAL
+  parts.push(`Dramatic studio lighting, high contrast, ultra-realistic, editorial fashion photography, cinematic realism, Instagram aesthetic.`);
+
+  // CLOSING — Shay exact
+  parts.push(forChatGPT
+    ? `Keep my facial features the same. Match the face from the reference photos exactly.`
+    : `Keep my facial features the same.`);
+
+  return parts.join(' ');
+}
+
+// BEAUTY EDITORIAL — Shay's luxury beauty portrait structure
+function buildBeauty(d, forChatGPT) {
+  const parts = [];
+
+  // OPENING — Shay uses "Using my photo, create this image:" for beauty
+  if (forChatGPT) {
+    parts.push(`Using my uploaded photos, create this image:`);
+  } else {
+    parts.push(`Using my photo, create this image:`);
+  }
+
+  // TYPE — Shay names the genre first
+  let intro = `a luxury beauty editorial portrait of a glamorous woman`;
+  if (d.skin) intro += ` with ${d.skin}`;
+  if (d.makeup && !d.makeup.includes('smoky')) intro += `, soft matte-glow complexion, and sculpted makeup`;
+  else intro += ` and sculpted makeup`;
+  parts.push(intro + '.');
+
+  // MAKEUP — Shay is very specific in beauty style
+  if (d.makeup) {
+    parts.push(`${cap(d.makeup)}.`);
+  } else {
+    parts.push(`Full glossy nude-brown lips, softly contoured cheeks with peachy blush, and luminous highlights on the high points of the face.`);
+  }
+
+  // EYES — part of makeup description in beauty style
+  if (d.eyes) {
+    parts.push(`Her eyes feature ${d.eyes}, long voluminous lashes, and softly defined brows.`);
+  } else {
+    parts.push(`Long voluminous lashes and softly defined brows.`);
+  }
+
+  // HAIR
+  if (d.hair) {
+    parts.push(`Hair is ${d.hair}.`);
+  }
+
+  // HANDS + NAILS + RINGS — the signature of this Shay style
+  let nailLine = `Her hands frame her face in elegant poses`;
+  if (d.nailShape || d.nailColor) {
+    nailLine += `, showcasing ${d.nailShape || 'long almond-shaped acrylic nails'}${d.nailColor ? ' ' + d.nailColor : ''}`;
+  }
+  if (d.rings.length) nailLine += `. She wears ${d.rings.join(', ')}`;
+  parts.push(nailLine + '.');
+
+  // OUTFIT
+  if (d.outfit) {
+    parts.push(`She wears ${d.outfit}.`);
+  }
+
+  // ACCESSORIES (non-nail)
+  if (d.accs.length) {
+    parts.push(`Adorned with ${d.accs.join(', ')}.`);
+  }
+
+  // SETTING — warm backdrop is the signature
+  const backdrop = d.beautyBg || (d.bg ? d.bg : 'a warm terracotta and orange studio backdrop');
+  parts.push(`The setting is ${backdrop} with soft diffused lighting, shallow depth of field, and a high-end editorial feel.`);
+
+  // COLOR
+  if (d.color) parts.push(`${cap(d.color)} tones accent the scene.`);
+
+  // SCENE EXTRAS
+  if (d.sceneExtras.length) parts.push(`${cap(d.sceneExtras.join(', '))}.`);
+
+  // TECHNICAL — Shay's beauty prompt is very specific here
+  parts.push(`Shot in ultra-high resolution, beauty photography, magazine cover quality, clean skin texture, polished yet natural glam aesthetic.`);
+
+  // CLOSING — Shay uses ALL CAPS for beauty
+  parts.push(forChatGPT
+    ? `DO NOT CHANGE MY FACE AT ALL. Match the face from the reference photos exactly.`
+    : `DO NOT CHANGE MY FACE AT ALL.`);
+
+  return parts.join(' ');
+}
+
+// CONCEPT / THEMED — short direct, prop-centered, Shay exact structure
+function buildConcept(d, forChatGPT) {
+  const parts = [];
+
+  // OPENING — Shay exact: no dash, no colon, straight into description
+  if (forChatGPT) {
+    parts.push(`Using the uploaded photos as face reference, create`);
+  } else {
+    parts.push(`Using the uploaded image, create`);
+  }
+
+  // PHYSICAL — concise, one sentence
+  let phys = `a`;
+  if (d.skin) phys += ` ${d.skin}`;
+  phys += ` woman`;
+  if (d.hair) phys += ` with ${d.hair}`;
+
+  // PROP ACTION — central to this style
+  const prop = d.conceptProp || 'a prop';
+  // Extract clean prop name for lighting reference
+  const propShort = prop.split(' ').slice(0,4).join(' ');
+  phys += ` holding ${prop}`;
+  parts.push(phys + '.');
+
+  // MAKEUP + NAILS — Shay lists these together in concept style
+  let beauty = [];
+  if (d.makeup) beauty.push(`She has ${d.makeup}`);
+  const nails = d.nailShape ? `${d.nailShape}${d.nailColor ? ' ' + d.nailColor : ''}` : null;
+  if (nails) beauty.push(`and ${nails}`);
+  if (beauty.length) parts.push(beauty.join(' ') + '.');
+
+  // OUTFIT — short, just the item
+  if (d.outfit) parts.push(`She is wearing ${d.outfit}.`);
+
+  // ACCESSORIES
+  if (d.accs.length) parts.push(`${cap(d.accs.join(', '))}.`);
+
+  // BACKGROUND — monochromatic is the key element
+  const bg = d.conceptBg || 'a solid dark background, creating a monochrome effect with her outfit and skin tone';
+  parts.push(`The background is ${bg}.`);
+
+  // LIGHTING — Shay's concept lighting note is always short
+  const lightFocus = `her features and the ${propShort}`;
+  parts.push(`The lighting highlights ${lightFocus}.`);
+
+  // CLOSING — Shay exact, NO period at the end, matches original exactly
+  parts.push(forChatGPT
+    ? `Do not change the facial features. Match the face from reference photos exactly`
+    : `Do not change the facial features`);
+
+  return parts.join(' ');
+}
+
+// ══════════════════════════
+// GENERATE
+// ══════════════════════════
+function generateAll() {
+  const d = getData();
+
+  let gemPrompt, gptPrompt;
+  if (promptStyle === 'fierce') {
+    gemPrompt = buildFierce(d, false);
+    gptPrompt = buildFierce(d, true);
+  } else if (promptStyle === 'money') {
+    gemPrompt = buildMoney(d, false);
+    gptPrompt = buildMoney(d, true);
+  } else if (promptStyle === 'beauty') {
+    gemPrompt = buildBeauty(d, false);
+    gptPrompt = buildBeauty(d, true);
+  } else if (promptStyle === 'chic') {
+    gemPrompt = buildChic(d, false);
+    gptPrompt = buildChic(d, true);
+  } else {
+    gemPrompt = buildConcept(d, false);
+    gptPrompt = buildConcept(d, true);
+  }
+
+  setPromptOutput('gem-out', gemPrompt);
+  setPromptOutput('gpt-out', gptPrompt);
+
+  if (window.innerWidth < 940) {
+    document.querySelector('.output-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+function buildChic(d, forChatGPT) {
+  const parts = [];
+
+  // OPENING — Shay exact for this style
+  if (forChatGPT) {
+    parts.push(`Using the uploaded photos as face reference, create a photo with this scene —`);
+  } else {
+    parts.push(`Using the uploaded image, create a photo with this scene —`);
+  }
+
+  // TYPE + VIBE INTRO — Shay names the energy upfront in this style
+  let intro = `A glamorous and confident woman posing stylishly in a chic, editorial photoshoot`;
+  parts.push(intro + '.');
+
+  // PHYSICAL
+  let phys = [];
+  if (d.skin) phys.push(`She has ${d.skin}`);
+  if (d.hair) phys.push(`and ${d.hair} that frames her face beautifully`);
+  if (phys.length) parts.push(phys.join(' ') + '.');
+
+  // MAKEUP — Shay describes it as flawless first
+  if (d.makeup) {
+    parts.push(`Her makeup is flawless and elegant with ${d.makeup}.`);
+  } else {
+    parts.push(`Her makeup is flawless and elegant with soft contouring, glossy lips, and long, dramatic lashes.`);
+  }
+
+  // OUTFIT — the star of this style, described very specifically
+  if (d.outfit) {
+    parts.push(`She wears ${d.outfit}.`);
+  }
+
+  // ACCESSORIES
+  const watchAcc = d.accs.find(a => a.includes('watch'));
+  const otherAccs = d.accs.filter(a => !a.includes('watch'));
+  if (watchAcc) parts.push(`A ${watchAcc} adorns her wrist.`);
+  if (otherAccs.length) parts.push(`${cap(otherAccs.join(', '))}.`);
+
+  // POSE — in chic style the pose includes the emotional quality
+  const pose = d.chicPose || d.pose;
+  if (pose) {
+    parts.push(`She's ${pose}.`);
+  }
+
+  // VIBE — Shay adds energy keywords in chic style
+  if (d.vibe) {
+    parts.push(cap(d.vibe) + '.');
+  }
+
+  // SETTING + LIGHTING — soft, clean, editorial
+  const bg = d.chicBg || d.bg || 'a neutral gray background';
+  parts.push(`The lighting is soft studio light against ${bg}, highlighting her confident, poised expression.`);
+
+  // COLOR
+  if (d.color) parts.push(`${cap(d.color)} tones throughout the scene.`);
+
+  // TECHNICAL — Shay's chic style ends with magazine quality notes
+  parts.push(`High-end fashion editorial photography, realistic lighting, glossy skin tones, sharp focus, soft depth of field, magazine-quality aesthetic.`);
+
+  // CLOSING — Shay exact (no "at all" in this style)
+  parts.push(forChatGPT
+    ? `DO NOT CHANGE MY FACE. Match the face from the reference photos exactly.`
+    : `DO NOT CHANGE MY FACE.`);
+
+  return parts.join(' ');
+}
+
+// ══════════════════════════
+// GENERATE
+// ══════════════════════════
+function generateAll() {
+  const d = getData();
+
+  let gemPrompt, gptPrompt;
+  if (promptStyle === 'fierce') {
+    gemPrompt = buildFierce(d, false);
+    gptPrompt = buildFierce(d, true);
+  } else if (promptStyle === 'money') {
+    gemPrompt = buildMoney(d, false);
+    gptPrompt = buildMoney(d, true);
+  } else if (promptStyle === 'beauty') {
+    gemPrompt = buildBeauty(d, false);
+    gptPrompt = buildBeauty(d, true);
+  } else if (promptStyle === 'chic') {
+    gemPrompt = buildChic(d, false);
+    gptPrompt = buildChic(d, true);
+  } else {
+    gemPrompt = buildConcept(d, false);
+    gptPrompt = buildConcept(d, true);
+  }
+
+  setPromptOutput('gem-out', gemPrompt);
+  setPromptOutput('gpt-out', gptPrompt);
+
+  if (window.innerWidth < 940) {
+    document.querySelector('.output-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function setPromptOutput(id, text) {
+  const el = document.getElementById(id);
+  el.className = 'pb-prompt';
+  el.textContent = text;
+}
+
+function copyPrompt(id, btn) {
+  const el = document.getElementById(id);
+  if (!el || el.classList.contains('pb-empty')) return;
+  navigator.clipboard.writeText(el.textContent).then(() => {
+    btn.textContent = '✓ Copied';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+
+function resetAll() {
+  promptStyle = 'fierce';
+  selectedColor = null;
+
+  document.querySelectorAll('.tag').forEach(t => t.classList.remove('on'));
+  document.querySelectorAll('.pal-item').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('select').forEach(s => s.value = '');
+  document.querySelectorAll('input[type="text"]').forEach(i => i.value = '');
+
+  setStyle('fierce');
+  const bf = document.getElementById('beauty-fields');
+  if (bf) bf.style.display = 'none';
+  const cf = document.getElementById('chic-fields');
+  if (cf) cf.style.display = 'none';
+  const xf = document.getElementById('concept-fields');
+  if (xf) xf.style.display = 'none';
+
+  ['gem-out', 'gpt-out'].forEach(id => {
+    const el = document.getElementById(id);
+    el.className = 'pb-empty';
+    el.innerHTML = `<div class="pb-empty-icon">✨</div><div class="pb-empty-text">Your prompt will appear here<br>after you press Generate</div>`;
+  });
+}
+
+// ══════════════════════════
+// i18n — BILINGUAL SYSTEM
+// ══════════════════════════
+let currentLang = 'en';
+
+const T = {
+  en: {
+    eyebrow: 'AI Headshot Prompt Generator',
+    tag_styles: '5 Prompt Styles', tag_copy: 'Copy & Paste Ready',
+    step1_title: 'Fill the form', step1_desc: 'Choose your style, vibe & look',
+    step2_title: 'Generate', step2_desc: 'Get 2 prompts instantly',
+    step3_title: 'Copy & paste', step3_desc: 'Into Gemini or ChatGPT',
+    tip_title: 'Pro tip', tip_desc: 'Use a close-up frontal photo for best results',
+    s1_title: 'Choose Your Prompt Style', s1_desc: '5 formulas — each opens and closes differently',
+    fierce_name: 'Fierce Goddess', fierce_desc: 'Poetic & cinematic. Wet-look hair, water droplets, chiaroscuro lighting.', fierce_pill: 'Detailed · Editorial',
+    money_name: 'Money Boss', money_desc: 'Direct & fun. Cash, neon signs, floating money. Abundance energy.', money_pill: 'Fun · Abundance',
+    beauty_name: 'Beauty Editorial', beauty_desc: 'Luxury beauty portrait. Nails, hands framing face, warm backdrop.', beauty_pill: 'Beauty · Nails · Warm',
+    chic_name: 'Chic Editorial', chic_desc: 'Fashion editorial. Outfit-forward, seated pose, soft studio light.', chic_pill: 'Fashion · Elegant · Clean',
+    concept_name: 'Concept / Themed', concept_desc: 'Short & direct. One central prop (food, object, element) defines the whole image. Monochromatic effect.', concept_pill: 'Short · Prop · Mono',
+    s2_title: 'Your Look', s2_desc: 'Skin, eyes, hair, makeup — this anchors your identity in the image',
+    lbl_skin: 'Skin tone', lbl_eyes: 'Eyes', lbl_color: 'Dominant color', lbl_sign: 'Chain / sign text',
+    s3_title: 'Outfit & Accessories', s3_desc: 'Clothing, chains, props — the luxury details',
+    s4_title: 'Scene & Background', s4_desc: 'Pose, backdrop, color, scene extras',
+    s5_title: 'Vibe & Energy', s5_desc: 'The emotional core of the image',
+    btn_random: '🎲 Surprise Me — Random',
+    btn_generate: '✦ Generate My Prompts',
+    btn_reset: '↺ Reset Everything',
+    tip_gemini: '💡 Upload <em>1 close-up frontal photo</em> in Gemini before pasting',
+    tip_gpt: '💡 Upload <em>2-3 photos</em> (front, 3/4, close-up) for best face match',
+    footer_note: 'Made with ♥ by <em>Johanna Digital, Seattle</em>',
+    // Labels with opt spans
+    lbl_hair: 'Hair', lbl_hair_opt: '— pick or write yours',
+    lbl_makeup: 'Makeup', lbl_makeup_opt: '— pick or write yours',
+    lbl_skin_extras: 'Skin extras', lbl_skin_extras_opt: '— Fierce Goddess only',
+    lbl_nail_shape: 'Nail shape & style', lbl_nail_shape_opt: '— Beauty Editorial',
+    lbl_nail_color: 'Nail color & finish', lbl_nail_color_opt: '— pick or write',
+    lbl_rings: 'Hand rings', lbl_rings_opt: '— optional',
+    lbl_prop: 'Central prop', lbl_prop_opt: '— the star of the image',
+    lbl_outfit: 'Outfit', lbl_outfit_opt: '— pick or write',
+    lbl_accs: 'Accessories', lbl_accs_opt: '— multi-select',
+    lbl_pose: 'Pose / Action', lbl_pose_opt: '— pick or write',
+    lbl_bg: 'Background', lbl_bg_opt: '— pick or write',
+    lbl_scene_extras: 'Scene extras', lbl_scene_extras_opt: '— multi-select',
+    lbl_vibe: 'Vibe', lbl_vibe_opt: '— pick or write yours',
+    or_write: 'or write yours',
+    ph_hair: 'e.g. long auburn curls with honey highlights and sculpted baby hairs',
+    ph_makeup: 'e.g. copper smoky eye, ombre berry lips, intense gold highlight',
+    ph_nail: 'e.g. lavender ombré with diamond tips and pearl accents',
+    ph_prop: 'e.g. a lit sparkler held near her face, a mirror reflecting her',
+    ph_outfit: 'e.g. emerald velvet corset with high-waist wide-leg trousers',
+    ph_accs: 'Custom accessory: e.g. diamond tiara, crystal arm cuff...',
+    ph_sign: 'THE BOSS · RICH TALK ONLY · BOSS MOVES · CEO · QUEEN',
+    ph_pose: 'e.g. lying on a pile of cash, looking up at camera',
+    ph_bg: 'e.g. golden hour rooftop pool, city skyline behind her',
+    ph_vibe: 'e.g. "exuding the energy of a woman who never settles for less"',
+    // Select placeholders
+    sel_default: '— Select —',
+    // Skin options
+    skin_fair: 'Fair · luminous glow', skin_tan: 'Light tan · warm glow', skin_brown: 'Brown · bronzed glow',
+    skin_warm: 'Warm brown · rich glow', skin_deep: 'Deep brown · luminous', skin_dark: 'Rich dark · fierce glow',
+    // Eyes
+    eyes_spark: 'Big sparkling', eyes_smolder: 'Smoldering hypnotic', eyes_command: 'Intensely commanding',
+    eyes_almond: 'Deep hypnotic almond', eyes_fierce: 'Fierce confident', eyes_dreamy: 'Soft dreamy',
+    // Accessories tags
+    tag_chains: '💎 Diamond chains', tag_hoops: '🔮 Gold hoops', tag_cash: '💵 Stacks of cash',
+    tag_bag: '👜 Designer bag', tag_shades: '🕶️ Oversized shades', tag_bracelet: '💍 Tennis bracelet',
+    tag_watch: '⌚ Luxury watch', tag_money: '🤑 Floating money', tag_rings: '💫 Statement rings', tag_pearl: '🤍 Pearl necklace',
+    // Skin extras tags
+    se_drops: '💧 Water droplets', se_shimmer: '✨ Metallic shimmer', se_glow: '🌟 Airbrushed glow',
+    se_baby: '〰️ Baby hairs', se_wet: '🪞 Wet-look skin',
+    // Scene extras tags
+    sc_money: '💸 Floating money', sc_bags: '👜 Floating handbags', sc_neon: '💡 Neon glow',
+    sc_mirror: '🪞 Mirror floor', sc_fog: '🌫️ Smoke / fog', sc_gold: '✨ Gold light rays',
+    // Rings tags
+    ring_silver: '🔘 Chunky silver', ring_gold: '🟡 Gold stacked', ring_diamond: '💎 Diamond rings',
+    ring_thin: '〰️ Thin gold bands', ring_cocktail: '💍 Cocktail ring',
+    // Output labels
+    out_gemini: 'Gemini AI', out_chatgpt: 'ChatGPT',
+    copy_btn: 'Copy', copied_btn: '✓ Copied',
+  },
+  es: {
+    eyebrow: 'Generador de Prompts para Fotos IA',
+    tag_styles: '5 Estilos de Prompt', tag_copy: 'Listo para Copiar y Pegar',
+    step1_title: 'Llena el formulario', step1_desc: 'Elige tu estilo, vibe y look',
+    step2_title: 'Genera', step2_desc: 'Obtén 2 prompts al instante',
+    step3_title: 'Copia y pega', step3_desc: 'En Gemini o ChatGPT',
+    tip_title: 'Tip pro', tip_desc: 'Usa una foto frontal de cerca para mejor resultado',
+    s1_title: 'Elige tu Estilo de Prompt', s1_desc: '5 fórmulas — cada una abre y cierra diferente',
+    fierce_name: 'Fierce Goddess', fierce_desc: 'Poético y cinematográfico. Cabello wet-look, gotas de agua, iluminación chiaroscuro.', fierce_pill: 'Detallado · Editorial',
+    money_name: 'Money Boss', money_desc: 'Directo y fun. Cash, letreros neón, dinero flotante. Energía de abundancia.', money_pill: 'Fun · Abundancia',
+    beauty_name: 'Beauty Editorial', beauty_desc: 'Retrato de belleza de lujo. Uñas, manos enmarcando la cara, fondo cálido.', beauty_pill: 'Belleza · Uñas · Cálido',
+    chic_name: 'Chic Editorial', chic_desc: 'Editorial de moda. Outfit protagonista, pose sentada, luz suave de estudio.', chic_pill: 'Moda · Elegante · Clean',
+    concept_name: 'Concepto / Temático', concept_desc: 'Corto y directo. Un prop central (comida, objeto) define toda la imagen. Efecto monocromático.', concept_pill: 'Corto · Prop · Mono',
+    s2_title: 'Tu Apariencia', s2_desc: 'Piel, ojos, cabello, maquillaje — esto ancla tu identidad en la imagen',
+    lbl_skin: 'Tono de piel', lbl_eyes: 'Ojos', lbl_color: 'Color dominante', lbl_sign: 'Texto en cadena o letrero',
+    s3_title: 'Outfit & Accesorios', s3_desc: 'Ropa, cadenas, props — los detalles de lujo',
+    s4_title: 'Escena & Fondo', s4_desc: 'Pose, fondo, color, extras de escena',
+    s5_title: 'Vibe & Energía', s5_desc: 'El núcleo emocional de la imagen',
+    btn_random: '🎲 Sorpréndeme — Aleatorio',
+    btn_generate: '✦ Generar mis Prompts',
+    btn_reset: '↺ Limpiar todo',
+    tip_gemini: '💡 Sube <em>1 foto frontal de cerca</em> en Gemini antes de pegar',
+    tip_gpt: '💡 Sube <em>2-3 fotos</em> (frontal, 3/4, close-up) para mejor resultado facial',
+    footer_note: 'Hecho con ♥ por <em>Johanna Digital, Seattle</em>',
+    lbl_hair: 'Cabello', lbl_hair_opt: '— elige o escribe el tuyo',
+    lbl_makeup: 'Maquillaje', lbl_makeup_opt: '— elige o personaliza',
+    lbl_skin_extras: 'Extras de piel', lbl_skin_extras_opt: '— solo Fierce Goddess',
+    lbl_nail_shape: 'Forma de uñas', lbl_nail_shape_opt: '— Beauty Editorial',
+    lbl_nail_color: 'Color y finish de uñas', lbl_nail_color_opt: '— elige o escribe',
+    lbl_rings: 'Anillos', lbl_rings_opt: '— opcional',
+    lbl_prop: 'Prop central', lbl_prop_opt: '— la estrella de la imagen',
+    lbl_outfit: 'Outfit', lbl_outfit_opt: '— elige o escribe',
+    lbl_accs: 'Accesorios', lbl_accs_opt: '— selección múltiple',
+    lbl_pose: 'Pose / Acción', lbl_pose_opt: '— elige o escribe',
+    lbl_bg: 'Fondo', lbl_bg_opt: '— elige o escribe',
+    lbl_scene_extras: 'Extras de escena', lbl_scene_extras_opt: '— selección múltiple',
+    lbl_vibe: 'Vibe', lbl_vibe_opt: '— elige o escribe el tuyo',
+    or_write: 'o escribe el tuyo',
+    ph_hair: 'Ej: rizos largos cobrizos con reflejos dorados y baby hairs',
+    ph_makeup: 'Ej: ahumado cobre, labios ombré berry, iluminador dorado intenso',
+    ph_nail: 'Ej: ombré lavanda con puntas de diamante y detalles de perla',
+    ph_prop: 'Ej: una chispa encendida cerca de su cara, un espejo reflejándola',
+    ph_outfit: 'Ej: corsé de terciopelo esmeralda con pantalón palazzo',
+    ph_accs: 'Accesorio personalizado: Ej: tiara de diamantes...',
+    ph_sign: '"THE BOSS" · "RICH TALK ONLY" · "CEO" · "QUEEN"',
+    ph_pose: 'Ej: acostada sobre una pila de efectivo, mirando a la cámara',
+    ph_bg: 'Ej: azotea con piscina al atardecer, skyline de la ciudad detrás',
+    ph_vibe: 'Ej: "irradiando la energía de una mujer que nunca acepta menos"',
+    sel_default: '— Elige —',
+    skin_fair: 'Clara · brillo luminoso', skin_tan: 'Beige / trigueña · brillo cálido', skin_brown: 'Morena bronceada',
+    skin_warm: 'Morena cálida · rica', skin_deep: 'Morena oscura · luminosa', skin_dark: 'Piel negra rica · feroz',
+    eyes_spark: 'Grandes y brillantes', eyes_smolder: 'Mirada hipnótica y sensual', eyes_command: 'Intensamente dominante',
+    eyes_almond: 'Almendra hipnótica profunda', eyes_fierce: 'Feroz y confiada', eyes_dreamy: 'Suave y soñadora',
+    tag_chains: '💎 Cadenas de diamante', tag_hoops: '🔮 Aretes de aro dorados', tag_cash: '💵 Fajos de efectivo',
+    tag_bag: '👜 Bolsa de diseñador', tag_shades: '🕶️ Lentes oversized', tag_bracelet: '💍 Brazalete de diamantes',
+    tag_watch: '⌚ Reloj de lujo', tag_money: '🤑 Dinero flotante', tag_rings: '💫 Anillos statement', tag_pearl: '🤍 Collar de perlas',
+    se_drops: '💧 Gotas de agua', se_shimmer: '✨ Shimmer metálico', se_glow: '🌟 Piel airbrushed',
+    se_baby: '〰️ Baby hairs', se_wet: '🪞 Piel wet-look',
+    sc_money: '💸 Dinero flotante', sc_bags: '👜 Bolsas flotantes', sc_neon: '💡 Luces neón',
+    sc_mirror: '🪞 Piso espejo', sc_fog: '🌫️ Humo / niebla', sc_gold: '✨ Rayos de luz dorada',
+    ring_silver: '🔘 Plata chunky', ring_gold: '🟡 Oro apilados', ring_diamond: '💎 Anillos diamante',
+    ring_thin: '〰️ Bandas delgadas doradas', ring_cocktail: '💍 Anillo cocktail',
+    out_gemini: 'Gemini AI', out_chatgpt: 'ChatGPT',
+    copy_btn: 'Copiar', copied_btn: '✓ Copiado',
+  }
+};
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+
+  const t = T[lang];
+
+  // Update all data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+
+  // Update select placeholders (first option)
+  document.querySelectorAll('select').forEach(sel => {
+    const first = sel.querySelector('option[value=""]');
+    if (first) first.textContent = t.sel_default;
+  });
+
+  // Update specific select option labels
+  const optionMap = {
+    // skin
+    'smooth glowing fair skin': t.skin_fair,
+    'smooth glowing light tan skin': t.skin_tan,
+    'smooth glowing brown skin': t.skin_brown,
+    'smooth glowing warm brown skin': t.skin_warm,
+    'smooth glowing deep brown skin': t.skin_deep,
+    'smooth glowing rich dark skin': t.skin_dark,
+    // eyes
+    'big sparkling eyes': t.eyes_spark,
+    'a smoldering, hypnotic stare that holds secrets and undeniable power': t.eyes_smolder,
+    'an intensely commanding gaze': t.eyes_command,
+    'deep hypnotic almond-shaped eyes': t.eyes_almond,
+    'fierce confident eyes': t.eyes_fierce,
+    'soft dreamy eyes': t.eyes_dreamy,
+  };
+  document.querySelectorAll('select option').forEach(opt => {
+    if (opt.value && optionMap[opt.value]) opt.textContent = optionMap[opt.value];
+  });
+
+  // Update compound labels (data-lbl)
+  document.querySelectorAll('[data-lbl]').forEach(el => {
+    const key = el.dataset.lbl;
+    const optKey = el.dataset.lblopt;
+    const optSpan = el.querySelector('.opt');
+    if (t[key]) {
+      for (let node of el.childNodes) {
+        if (node.nodeType === 3) { node.textContent = t[key] + ' '; break; }
+      }
+    }
+    if (optSpan && t[optKey]) optSpan.textContent = t[optKey];
+  });
+
+  // Update placeholders
+  const phMap = {
+    'hairCustom': t.ph_hair, 'makeupCustom': t.ph_makeup,
+    'nailCustom': t.ph_nail, 'conceptPropCustom': t.ph_prop,
+    'outfitCustom': t.ph_outfit, 'accsCustom': t.ph_accs,
+    'signText': t.ph_sign, 'poseCustom': t.ph_pose,
+    'bgCustom': t.ph_bg, 'vibeCustom': t.ph_vibe,
+  };
+  Object.entries(phMap).forEach(([id, ph]) => {
+    const el = document.getElementById(id);
+    if (el) el.placeholder = ph;
+  });
+
+  // Update tags
+  const tagMap = {
+    'layered diamond chains': t.tag_chains,
+    'gold hoop earrings': t.tag_hoops,
+    'stacks of cash': t.tag_cash,
+    'luxury designer handbag': t.tag_bag,
+    'oversized designer sunglasses': t.tag_shades,
+    'diamond tennis bracelet': t.tag_bracelet,
+    'luxury watch': t.tag_watch,
+    'floating money around her': t.tag_money,
+    'bold statement rings': t.tag_rings,
+    'pearl necklace': t.tag_pearl,
+    'with water droplets glistening on her luminous skin': t.se_drops,
+    'metallic shimmer radiating from her cheekbones': t.se_shimmer,
+    'skin looks luminous and airbrushed': t.se_glow,
+    'meticulously sculpted baby hairs framing her face': t.se_baby,
+    'wet-look glistening skin': t.se_wet,
+    'floating money raining around her': t.sc_money,
+    'luxury handbags floating in the background': t.sc_bags,
+    'neon glow accents illuminating the scene': t.sc_neon,
+    'mirror-black reflective floor beneath her': t.sc_mirror,
+    'dramatic atmospheric smoke and fog': t.sc_fog,
+    'golden light rays streaming through': t.sc_gold,
+    'chunky silver rings on multiple fingers': t.ring_silver,
+    'gold statement rings stacked on multiple fingers': t.ring_gold,
+    'diamond rings catching the light': t.ring_diamond,
+    'minimalist thin gold bands': t.ring_thin,
+    'bold oversized cocktail ring': t.ring_cocktail,
+  };
+  document.querySelectorAll('.tag').forEach(tag => {
+    const val = tag.dataset.val;
+    if (val && tagMap[val]) tag.textContent = tagMap[val];
+  });
+
+  // or-divider text
+  document.querySelectorAll('.or-divider').forEach(el => {
+    el.textContent = t.or_write;
+  });
+}
+
+// ══════════════════════════
+// RANDOMIZE
+// ══════════════════════════
+function randomize() {
+  // Reset first
+  resetAll();
+
+  function rnd(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  function setSelect(id, val) {
+    const el = document.getElementById(id);
+    if (el) el.value = val;
+  }
+
+  function pickRandom(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const opts = Array.from(el.options).filter(o => o.value !== '');
+    if (opts.length) el.value = rnd(opts).value;
+  }
+
+  function randomTags(containerId, count) {
+    const tags = document.querySelectorAll(`#${containerId} .tag`);
+    const shuffled = Array.from(tags).sort(() => Math.random() - 0.5);
+    shuffled.slice(0, count).forEach(t => t.classList.add('on'));
+  }
+
+  // 1. Pick a random style
+  const styles = ['fierce','money','beauty','chic','concept'];
+  const chosenStyle = rnd(styles);
+  setStyle(chosenStyle);
+
+  // 2. Your Look
+  pickRandom('skin');
+  pickRandom('eyes');
+  pickRandom('hair');
+  pickRandom('makeup');
+
+  // Style-specific
+  if (chosenStyle === 'fierce') {
+    randomTags('skinExtras', rnd([1,2]));
+  }
+  if (chosenStyle === 'beauty') {
+    pickRandom('nailShape');
+    pickRandom('nailColor');
+    randomTags('ringsExtras', rnd([1,2]));
+  }
+  if (chosenStyle === 'concept') {
+    pickRandom('conceptProp');
+  }
+
+  // 3. Outfit & Accessories
+  pickRandom('outfit');
+  randomTags('accs', rnd([2,3,4]));
+
+  // Sign text — random pool
+  const signs = ['THE BOSS','RICH TALK ONLY','BOSS MOVES','CEO','QUEEN','SHE WINS','THAT GIRL','MAIN CHARACTER'];
+  if (Math.random() > 0.3) {
+    document.getElementById('signText').value = rnd(signs);
+  }
+
+  // 4. Scene
+  pickRandom('pose');
+  pickRandom('bg');
+
+  // Random color swatch
+  const swatches = document.querySelectorAll('.pal-item');
+  if (swatches.length && Math.random() > 0.4) {
+    const picked = rnd(Array.from(swatches));
+    toggleColor(picked);
+  }
+
+  // Scene extras — 0-2 random
+  randomTags('sceneExtras', rnd([0,1,2]));
+
+  // 5. Vibe
+  pickRandom('vibe');
+
+  // Auto-generate after randomizing
+  setTimeout(() => generateAll(), 80);
+}
+
+// INIT
+setStyle('fierce');
+</script>
+</body>
+</html>
