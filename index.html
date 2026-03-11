@@ -692,11 +692,14 @@ input:focus, textarea:focus { border-color: var(--rose); }
 
 /* TIPS SECTION */
 .tips-section {
+  width: 100%;
+  clear: both;
   border-top: 1px solid var(--border);
   background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
   padding: 60px 60px 50px;
   position: relative;
   overflow: hidden;
+  display: block;
 }
 .tips-section::before {
   content: '';
@@ -720,36 +723,42 @@ input:focus, textarea:focus { border-color: var(--rose); }
 .tips-sub { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
 .tips-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 .tip-card {
   background: var(--bg2);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
+  border-radius: 14px;
+  padding: 24px 26px;
   transition: border-color 0.2s;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
 }
 .tip-card:hover { border-color: var(--rose); }
-.tip-icon { font-size: 22px; margin-bottom: 10px; }
+.tip-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+.tip-content { flex: 1; }
 .tip-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: var(--text);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   line-height: 1.3;
 }
 .tip-body {
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--muted);
-  line-height: 1.7;
+  line-height: 1.75;
   font-weight: 300;
 }
 .tip-body em { color: var(--rose); font-style: normal; font-weight: 500; }
 @media(max-width: 940px) {
   .tips-section { padding: 40px 24px; }
-  .tips-grid { grid-template-columns: 1fr 1fr; }
+  .tips-grid { grid-template-columns: 1fr; max-width: 100%; }
 }
 @media(max-width: 600px) {
   .tips-grid { grid-template-columns: 1fr; }
@@ -1357,50 +1366,66 @@ input:focus, textarea:focus { border-color: var(--rose); }
 
       <div class="tip-card">
         <div class="tip-icon">🎨</div>
+        <div class="tip-content">
         <div class="tip-title" data-i18n="tip1_title">What the Outfit Does in the Prompt</div>
-        <div class="tip-body" data-i18n="tip1_body">The outfit text gets inserted <em>literally</em> into the prompt. When you pick "Gold satin evening dress", the AI reads <em>"She wears an elegant gold satin evening dress"</em> and generates exactly that. The more specific the description, the better the image.</div>
+        <div class="tip-body" data-i18n="tip1_body">The outfit text gets inserted <em>literally</em> into the prompt. When you pick "Gold satin evening dress", the AI reads <em>"She wears an elegant gold satin evening dress"</em> and generates exactly that. The more specific the description, the better the image.
+        </div></div>
       </div>
 
       <div class="tip-card">
         <div class="tip-icon">🔥</div>
+        <div class="tip-content">
         <div class="tip-title" data-i18n="tip2_title">Fierce Goddess — Outfit Role</div>
-        <div class="tip-body" data-i18n="tip2_body">Here the outfit is a <em>supporting detail</em>. The stars are the lighting, hair, and skin. Any outfit works — but dark, barely-there, or dramatic pieces amplify the chiaroscuro effect.</div>
+        <div class="tip-body" data-i18n="tip2_body">Here the outfit is a <em>supporting detail</em>. The stars are the lighting, hair, and skin. Any outfit works — but dark, barely-there, or dramatic pieces amplify the chiaroscuro effect.
+        </div></div>
       </div>
 
       <div class="tip-card">
         <div class="tip-icon">💸</div>
+        <div class="tip-content">
         <div class="tip-title" data-i18n="tip3_title">Money Boss — Outfit Role</div>
-        <div class="tip-body" data-i18n="tip3_body">The outfit feeds the <em>abundance scene</em>. It combines with the cash, neon signs and floating money. Power suits, blazers and bold colors work best here — they scream CEO energy.</div>
+        <div class="tip-body" data-i18n="tip3_body">The outfit feeds the <em>abundance scene</em>. It combines with the cash, neon signs and floating money. Power suits, blazers and bold colors work best here — they scream CEO energy.
+        </div></div>
       </div>
 
       <div class="tip-card">
         <div class="tip-icon">💅</div>
+        <div class="tip-content">
         <div class="tip-title" data-i18n="tip4_title">Beauty Editorial — Outfit Role</div>
-        <div class="tip-body" data-i18n="tip4_body">The outfit is <em>secondary</em> — the nails and hands are the stars. Choose something elegant but simple so it doesn't compete. Minimalist or satin works best.</div>
+        <div class="tip-body" data-i18n="tip4_body">The outfit is <em>secondary</em> — the nails and hands are the stars. Choose something elegant but simple so it doesn't compete. Minimalist or satin works best.
+        </div></div>
       </div>
 
       <div class="tip-card">
         <div class="tip-icon">🎀</div>
+        <div class="tip-content">
         <div class="tip-title" data-i18n="tip5_title">Chic Editorial — Outfit is the Star</div>
-        <div class="tip-body" data-i18n="tip5_body">In this style the outfit <em>IS the main subject</em>. It gets described with more detail. High Fashion, Power Woman and Modern Chic categories work best here — they're designed for editorial fashion photography.</div>
+        <div class="tip-body" data-i18n="tip5_body">In this style the outfit <em>IS the main subject</em>. It gets described with more detail. High Fashion, Power Woman and Modern Chic categories work best here — they're designed for editorial fashion photography.
+        </div></div>
       </div>
 
       <div class="tip-card">
         <div class="tip-icon">🎭</div>
+        <div class="tip-content">
         <div class="tip-title" data-i18n="tip6_title">Concept / Themed — Match the Mono</div>
-        <div class="tip-body" data-i18n="tip6_body">The outfit should <em>match the monochromatic background color</em>. If your background is dark brown, choose a brown or chocolate outfit. The whole point is a seamless color story between skin tone, outfit and background.</div>
+        <div class="tip-body" data-i18n="tip6_body">The outfit should <em>match the monochromatic background color</em>. If your background is dark brown, choose a brown or chocolate outfit. The whole point is a seamless color story between skin tone, outfit and background.
+        </div></div>
       </div>
 
       <div class="tip-card">
         <div class="tip-icon">✨</div>
+        <div class="tip-content">
         <div class="tip-title" data-i18n="tip7_title">Why These 10 Categories Go Viral</div>
-        <div class="tip-body" data-i18n="tip7_body"><em>Glam/Red Carpet</em> → luxury editorial scenes · <em>CEO/Power</em> → authority and confidence · <em>Summer/Vacation</em> → bright colors and light · <em>Minimalist</em> → Pinterest aesthetic · <em>Evening</em> → cinematic lighting · <em>Streetwear</em> → urban attitude</div>
+        <div class="tip-body" data-i18n="tip7_body"><em>Glam/Red Carpet</em> → luxury editorial scenes · <em>CEO/Power</em> → authority and confidence · <em>Summer/Vacation</em> → bright colors and light · <em>Minimalist</em> → Pinterest aesthetic · <em>Evening</em> → cinematic lighting · <em>Streetwear</em> → urban attitude
+        </div></div>
       </div>
 
       <div class="tip-card">
         <div class="tip-icon">💡</div>
+        <div class="tip-content">
         <div class="tip-title" data-i18n="tip8_title">Pro Tip: Build a Color Story</div>
-        <div class="tip-body" data-i18n="tip8_body">The most viral photos have a <em>unified color story</em>: pick an outfit, then match the Dominant Color swatch and Background to it. Example: Champagne gown + Golden gradient background + Black Gold palette = editorial magazine shot.</div>
+        <div class="tip-body" data-i18n="tip8_body">The most viral photos have a <em>unified color story</em>: pick an outfit, then match the Dominant Color swatch and Background to it. Example: Champagne gown + Golden gradient background + Black Gold palette = editorial magazine shot.
+        </div></div>
       </div>
 
     </div>
