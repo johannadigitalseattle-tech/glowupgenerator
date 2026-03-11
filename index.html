@@ -66,7 +66,7 @@ body::before {
   position: absolute;
   top: -60px; right: -60px;
   width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(240,20,60,0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255,0,168,0.15) 0%, transparent 70%);
   pointer-events: none;
 }
 .hero::after {
@@ -695,6 +695,17 @@ input:focus, textarea:focus { border-color: var(--rose); }
   border-top: 1px solid var(--border);
   background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
   padding: 60px 60px 50px;
+  position: relative;
+  overflow: hidden;
+}
+.tips-section::before {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(circle, rgba(255,0,168,0.12) 0%, transparent 70%);
+  pointer-events: none;
 }
 .tips-inner { max-width: 1200px; margin: 0 auto; }
 .tips-header { text-align: center; margin-bottom: 40px; }
@@ -762,6 +773,13 @@ input:focus, textarea:focus { border-color: var(--rose); }
 .footer-brand em { color: var(--rose); font-style: italic; }
 .footer-note { text-align: center; line-height: 1.5; font-size: 11px; color: var(--muted); }
 .footer-note em { color: var(--rose); font-style: normal; font-weight: 600; }
+.footer-link {
+  color: var(--rose);
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.footer-link:hover { opacity: 0.75; text-decoration: underline; }
 
 @media(max-width: 940px) {
   .hero { padding: 32px 24px 28px; }
@@ -1391,7 +1409,7 @@ input:focus, textarea:focus { border-color: var(--rose); }
 
 <footer class="footer">
   <div class="footer-brand">Boss<em>Glow</em> AI Generator</div>
-  <div class="footer-note" data-i18n="footer_note">Made with ♥ by <em>Johanna Digital, Seattle</em></div>
+  <div class="footer-note" data-i18n="footer_note">Made with ♥ by <a href="https://johadigitalseattle.com/home" target="_blank" class="footer-link">Johanna Digital, Seattle</a></div>
 </footer>
 
 <script>
@@ -1968,7 +1986,7 @@ const T = {
     btn_reset: '↺ Reset Everything',
     tip_gemini: '💡 <em>1 photo only</em> in Gemini · close-up frontal · if error, try again with a clearer photo',
     tip_gpt: '💡 Upload <em>2-3 photos</em> (front, 3/4, close-up) for best face match',
-    footer_note: 'Made with ♥ by <em>Johanna Digital, Seattle</em>',
+    footer_note: 'Made with ♥ by <a href="https://johadigitalseattle.com/home" target="_blank" class="footer-link">Johanna Digital, Seattle</a>',
     // Labels with opt spans
     lbl_hair: 'Hair', lbl_hair_opt: '— pick or write yours',
     lbl_makeup: 'Makeup', lbl_makeup_opt: '— pick or write yours',
@@ -2060,7 +2078,7 @@ const T = {
     btn_reset: '↺ Limpiar todo',
     tip_gemini: '💡 <em>Solo 1 foto</em> en Gemini · frontal de cerca · si da error, intenta con una foto más clara',
     tip_gpt: '💡 Sube <em>2-3 fotos</em> (frontal, 3/4, close-up) para mejor resultado facial',
-    footer_note: 'Hecho con ♥ por <em>Johanna Digital, Seattle</em>',
+    footer_note: 'Hecho con ♥ por <a href="https://johadigitalseattle.com/home" target="_blank" class="footer-link">Johanna Digital, Seattle</a>',
     lbl_hair: 'Cabello', lbl_hair_opt: '— elige o escribe el tuyo',
     lbl_makeup: 'Maquillaje', lbl_makeup_opt: '— elige o personaliza',
     lbl_skin_extras: 'Extras de piel', lbl_skin_extras_opt: '— solo Fierce Goddess',
