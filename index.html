@@ -348,6 +348,61 @@ body::before {
   color: var(--muted);
 }
 .label .opt { color: var(--muted2); font-weight: 400; text-transform: none; letter-spacing: 0; }
+.label .req { color: var(--rose); font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* Custom add row */
+.custom-add-row { display: flex; gap: 8px; align-items: center; margin-top: 8px; }
+.custom-add-row input { flex: 1; margin-top: 0 !important; }
+.add-tag-btn {
+  flex-shrink: 0;
+  background: transparent;
+  border: 1.5px solid var(--border2);
+  border-radius: 8px;
+  color: var(--text2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 9px 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.add-tag-btn:hover { border-color: var(--rose); color: var(--rose); }
+
+/* Validation */
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20%,60% { transform: translateX(-5px); }
+  40%,80% { transform: translateX(5px); }
+}
+.field-required select, .field-required input {
+  border-color: var(--rose) !important;
+  animation: shake 0.4s ease;
+}
+.validation-msg {
+  background: rgba(255,0,168,0.1);
+  border: 1px solid var(--rose);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 12px;
+  color: var(--rose);
+  text-align: center;
+  margin-bottom: 12px;
+  display: none;
+}
+.validation-msg.show { display: block; }
+
+/* Custom added tags */
+.tag.custom-tag { padding-right: 8px; }
+.tag-remove {
+  margin-left: 5px;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.6;
+  font-style: normal;
+}
+.tag-remove:hover { opacity: 1; }
 
 .sel-wrap { position: relative; }
 .sel-wrap::after {
@@ -909,7 +964,7 @@ input:focus, textarea:focus { border-color: var(--rose); }
     <div class="section-body" id="sec-look">
       <div class="row2">
         <div class="field">
-          <div class="label" data-i18n="lbl_skin">Skin tone</div>
+          <div class="label" data-i18n="lbl_skin">Skin tone <span class="req">✦ required</span></div>
           <div class="sel-wrap"><select id="skin">
             <option value="">— Select —</option>
             <option value="smooth glowing fair skin">Fair · luminous glow</option>
@@ -935,7 +990,7 @@ input:focus, textarea:focus { border-color: var(--rose); }
       </div>
 
       <div class="field">
-        <div class="label" data-lbl="lbl_hair" data-lblopt="lbl_hair_opt">Hair <span class="opt">— pick or write yours</span></div>
+        <div class="label" data-lbl="lbl_hair" data-lblopt="lbl_hair_opt">Hair <span class="req">✦ required</span> <span class="opt">— pick or write yours</span></div>
         <div class="sel-wrap"><select id="hair">
           <option value="">— Select —</option>
           <option value="long, voluminous black wavy hair cascading around her shoulders with striking blonde highlights weaving through the waves, styled with a perfect wet-look finish and meticulously sculpted baby hairs framing her fierce features" data-en="Long wavy · wet-look · baby hairs" data-es="Ondas largas · wet-look · baby hairs">Long wavy · wet-look · baby hairs</option>
@@ -1134,7 +1189,10 @@ input:focus, textarea:focus { border-color: var(--rose); }
 
         </select></div>
         <div class="or-divider">or write yours</div>
-        <input type="text" id="outfitCustom" placeholder='e.g. emerald velvet corset with high-waist wide-leg trousers'>
+        <div class="custom-add-row">
+          <input type="text" id="outfitCustom" placeholder='e.g. emerald velvet corset with high-waist wide-leg trousers'>
+          <button class="add-tag-btn" onclick="addCustomOutfit()" data-i18n="btn_add">+ Add</button>
+        </div>
       </div>
 
       <div class="field">
@@ -1147,11 +1205,13 @@ input:focus, textarea:focus { border-color: var(--rose); }
           <span class="tag" data-val="oversized designer sunglasses">🕶️ Oversized shades</span>
           <span class="tag" data-val="diamond tennis bracelet">💍 Tennis bracelet</span>
           <span class="tag" data-val="luxury watch">⌚ Luxury watch</span>
-          <span class="tag" data-val="floating money around her">🤑 Floating money</span>
           <span class="tag" data-val="bold statement rings">💫 Statement rings</span>
           <span class="tag" data-val="pearl necklace">🤍 Pearl necklace</span>
         </div>
-        <input type="text" id="accsCustom" placeholder='Custom accessory: e.g. diamond tiara, crystal arm cuff...' style="margin-top:8px">
+        <div class="custom-add-row">
+          <input type="text" id="accsCustom" placeholder='e.g. diamond tiara, crystal arm cuff...'>
+          <button class="add-tag-btn" onclick="addCustomTag('accsCustom','accs')" data-i18n="btn_add">+ Add</button>
+        </div>
       </div>
 
       <div class="field">
@@ -1815,8 +1875,64 @@ function buildConcept(d, forChatGPT) {
 // ══════════════════════════
 // GENERATE
 // ══════════════════════════
+
+// ── Validation message element ──
+function showValidationMsg(msg) {
+  let el = document.getElementById('validation-msg');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'validation-msg';
+    el.className = 'validation-msg';
+    const genBtn = document.querySelector('.gen-btn');
+    genBtn.parentNode.insertBefore(el, genBtn);
+  }
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 4000);
+}
+
+function highlightField(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const field = el.closest('.field');
+  if (field) {
+    field.classList.add('field-required');
+    setTimeout(() => field.classList.remove('field-required'), 2000);
+  }
+}
+
 function generateAll() {
   const d = getData();
+  const lang = document.documentElement.lang || 'en';
+
+  // ── REQUIRED: skin tone ──
+  if (!d.skin) {
+    const msg = lang === 'es'
+      ? '⚠️ Por favor selecciona tu tono de piel antes de generar'
+      : '⚠️ Please select your skin tone before generating';
+    showValidationMsg(msg);
+    highlightField('skin');
+    // Open section 02 if collapsed
+    const sec = document.getElementById('sec-look');
+    if (sec && !sec.classList.contains('open')) {
+      sec.closest('.section').querySelector('.section-hdr').click();
+    }
+    return;
+  }
+
+  // ── REQUIRED: hair ──
+  if (!d.hair) {
+    const msg = lang === 'es'
+      ? '⚠️ Por favor selecciona o escribe tu tipo de cabello antes de generar'
+      : '⚠️ Please select or write your hair style before generating';
+    showValidationMsg(msg);
+    highlightField('hair');
+    const sec = document.getElementById('sec-look');
+    if (sec && !sec.classList.contains('open')) {
+      sec.closest('.section').querySelector('.section-hdr').click();
+    }
+    return;
+  }
 
   let gemPrompt, gptPrompt;
   if (promptStyle === 'fierce') {
@@ -1843,7 +1959,62 @@ function generateAll() {
     document.querySelector('.output-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
-function buildChic(d, forChatGPT) {
+
+// ── ADD CUSTOM TAG to any tag group ──
+function addCustomTag(inputId, groupId) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  const val = input.value.trim();
+  if (!val) return;
+
+  const group = document.getElementById(groupId);
+  if (!group) return;
+
+  // Check not already added
+  const existing = [...group.querySelectorAll('.tag')].map(t => t.dataset.val);
+  if (existing.includes(val)) { input.value = ''; return; }
+
+  const tag = document.createElement('span');
+  tag.className = 'tag on custom-tag';
+  tag.dataset.val = val;
+  tag.innerHTML = `${val} <span class="tag-remove" onclick="this.parentNode.remove()">×</span>`;
+  group.appendChild(tag);
+  input.value = '';
+  input.focus();
+}
+
+// ── ADD CUSTOM OUTFIT (replaces dropdown selection) ──
+function addCustomOutfit() {
+  const input = document.getElementById('outfitCustom');
+  if (!input) return;
+  const val = input.value.trim();
+  if (!val) return;
+
+  // Clear the dropdown selection to avoid conflict
+  const sel = document.getElementById('outfit');
+  if (sel) sel.value = '';
+
+  // Visual feedback — briefly highlight input green
+  input.style.borderColor = 'var(--rose)';
+  input.style.color = 'var(--text)';
+  setTimeout(() => { input.style.borderColor = ''; }, 1500);
+}
+
+// ── ADD CUSTOM ACCESSORY on Enter key too ──
+document.addEventListener('DOMContentLoaded', () => {
+  const accsInput = document.getElementById('accsCustom');
+  if (accsInput) {
+    accsInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); addCustomTag('accsCustom', 'accs'); }
+    });
+  }
+  const outfitInput = document.getElementById('outfitCustom');
+  if (outfitInput) {
+    outfitInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); addCustomOutfit(); }
+    });
+  }
+});(d, forChatGPT) {
   const parts = [];
 
   // OPENING — Shay exact for this style
@@ -1908,38 +2079,6 @@ function buildChic(d, forChatGPT) {
     : `Keep my facial features exactly as they are.`);
 
   return parts.join(' ');
-}
-
-// ══════════════════════════
-// GENERATE
-// ══════════════════════════
-function generateAll() {
-  const d = getData();
-
-  let gemPrompt, gptPrompt;
-  if (promptStyle === 'fierce') {
-    gemPrompt = buildFierce(d, false);
-    gptPrompt = buildFierce(d, true);
-  } else if (promptStyle === 'money') {
-    gemPrompt = buildMoney(d, false);
-    gptPrompt = buildMoney(d, true);
-  } else if (promptStyle === 'beauty') {
-    gemPrompt = buildBeauty(d, false);
-    gptPrompt = buildBeauty(d, true);
-  } else if (promptStyle === 'chic') {
-    gemPrompt = buildChic(d, false);
-    gptPrompt = buildChic(d, true);
-  } else {
-    gemPrompt = buildConcept(d, false);
-    gptPrompt = buildConcept(d, true);
-  }
-
-  setPromptOutput('gem-out', gemPrompt);
-  setPromptOutput('gpt-out', gptPrompt);
-
-  if (window.innerWidth < 940) {
-    document.querySelector('.output-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
 }
 
 function setPromptOutput(id, text) {
@@ -2312,10 +2451,9 @@ function randomize() {
   const chosenStyle = rnd(styles);
   setStyle(chosenStyle);
 
-  // 2. Your Look
-  pickRandom('skin');
+  // 2. Your Look — ⚠️ skin & hair are NOT randomized — user must choose
+  // Eyes and makeup CAN be randomized (less personal)
   pickRandom('eyes');
-  pickRandom('hair');
   pickRandom('makeup');
 
   // Style-specific
@@ -2358,8 +2496,19 @@ function randomize() {
   // 5. Vibe
   pickRandom('vibe');
 
-  // Auto-generate after randomizing
-  setTimeout(() => generateAll(), 80);
+  // Open section 02 so user sees skin + hair are empty
+  const sec = document.getElementById('sec-look');
+  if (sec) {
+    const hdr = sec.closest('.section')?.querySelector('.section-hdr');
+    if (hdr && !sec.classList.contains('open')) hdr.click();
+  }
+
+  // Show a gentle reminder (don't auto-generate — user must fill skin + hair first)
+  const lang = document.documentElement.lang || 'en';
+  const msg = lang === 'es'
+    ? '🎲 ¡Casi listo! Elige tu tono de piel y cabello para generar tu prompt'
+    : '🎲 Almost ready! Choose your skin tone and hair to generate your prompt';
+  showValidationMsg(msg);
 }
 
 // INIT
