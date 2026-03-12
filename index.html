@@ -34,6 +34,147 @@
 
 html { scroll-behavior: smooth; }
 
+/* ── LOGIN OVERLAY ── */
+#login-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Sans', sans-serif;
+}
+#login-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,0,168,0.13) 0%, transparent 70%);
+  pointer-events: none;
+}
+.login-box {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 16px;
+  background: var(--ink2);
+  border: 1px solid rgba(255,0,168,0.18);
+  border-radius: 16px;
+  padding: 44px 36px 40px;
+  box-shadow: 0 0 60px rgba(255,0,168,0.08), 0 24px 48px rgba(0,0,0,0.5);
+}
+.login-brand {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.login-brand-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  line-height: 1;
+}
+.login-brand-title span {
+  color: var(--rose);
+  font-style: italic;
+}
+.login-brand-sub {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+.login-field {
+  margin-bottom: 16px;
+}
+.login-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.login-input {
+  width: 100%;
+  background: var(--ink3);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.login-input:focus {
+  border-color: var(--rose);
+  box-shadow: 0 0 0 3px rgba(255,0,168,0.12);
+}
+.login-input::placeholder { color: var(--muted); }
+.login-btn {
+  width: 100%;
+  margin-top: 24px;
+  background: var(--rose);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.login-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.login-btn:active { transform: translateY(0); }
+.login-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.login-error {
+  display: none;
+  margin-top: 14px;
+  background: rgba(255,0,0,0.08);
+  border: 1px solid rgba(255,60,60,0.25);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: #ff7070;
+  text-align: center;
+}
+.login-error.visible { display: block; }
+.login-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 28px 0 0;
+}
+.login-footer-note {
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 14px;
+  letter-spacing: 0.02em;
+}
+
+/* ── LOGOUT BUTTON ── */
+#logout-btn {
+  display: block;
+  margin: 32px auto 0;
+  background: transparent;
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 8px 20px;
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+#logout-btn:hover { border-color: var(--rose); color: var(--rose); }
+
 body {
   background: var(--ink);
   color: var(--text);
@@ -350,6 +491,26 @@ body::before {
 .label .opt { color: var(--muted2); font-weight: 400; text-transform: none; letter-spacing: 0; }
 .label .req { color: var(--rose); font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; }
 
+/* Skin finish hints */
+.skin-hint {
+  color: var(--rose);
+  font-size: 10px;
+  font-weight: 500;
+  font-style: italic;
+}
+.skin-finish-note {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.6;
+  padding: 8px 12px;
+  background: rgba(255,0,168,0.05);
+  border-left: 2px solid var(--rose);
+  border-radius: 0 6px 6px 0;
+}
+.skin-finish-note em { color: var(--text2); font-style: normal; font-weight: 500; }
+.skin-finish-note span { color: var(--rose); font-weight: 600; }
+
 /* Custom add row */
 .custom-add-row { display: flex; gap: 8px; align-items: center; margin-top: 8px; }
 .custom-add-row input { flex: 1; margin-top: 0 !important; }
@@ -394,6 +555,61 @@ body::before {
 
 /* Custom added tags */
 .tag.custom-tag { padding-right: 8px; }
+
+/* Confirmed custom value badge */
+.confirmed-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  background: rgba(255,0,168,0.08);
+  border: 1.5px solid var(--rose);
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 11.5px;
+  color: var(--text);
+  max-width: 100%;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:translateY(0); } }
+.confirmed-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--rose);
+  font-weight: 500;
+}
+.confirmed-remove {
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--muted);
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 0.15s;
+}
+.confirmed-remove:hover { color: var(--rose); }
+
+/* Accessories max hint */
+.accs-max-hint {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  transition: color 0.2s, font-weight 0.2s;
+}
+
+/* Color palette suggestion badge */
+.pal-suggest {
+  font-size: 9px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 3px;
+  letter-spacing: 0.03em;
+  line-height: 1.3;
+}
+.pal-item.on .pal-suggest { color: var(--rose); font-weight: 600; }
 .tag-remove {
   margin-left: 5px;
   font-size: 13px;
@@ -463,17 +679,22 @@ input:focus, textarea:focus { border-color: var(--rose); }
 }
 
 /* CHECKBOX TAGS */
-.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tags { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; }
+#accs { grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); }
 .tag {
   border: 1px solid var(--border2);
-  border-radius: 4px;
-  padding: 6px 12px;
+  border-radius: 8px;
+  padding: 8px 12px;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 11.5px;
   color: var(--muted);
   transition: all 0.15s;
   user-select: none;
   background: var(--ink2);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .tag:hover { border-color: var(--border2); color: var(--text2); }
 .tag.on { border-color: var(--rose); background: var(--rose-dim); color: var(--text); }
@@ -860,6 +1081,31 @@ input:focus, textarea:focus { border-color: var(--rose); }
 </head>
 <body>
 
+<!-- ── LOGIN OVERLAY ── -->
+<div id="login-overlay">
+  <div class="login-box">
+    <div class="login-brand">
+      <div class="login-brand-title">Boss<span>Glow</span></div>
+      <div class="login-brand-sub">Johanna Digital · Seattle</div>
+    </div>
+    <div class="login-field">
+      <label class="login-label" for="login-email">Email</label>
+      <input class="login-input" id="login-email" type="email" placeholder="tu@email.com" autocomplete="email" />
+    </div>
+    <div class="login-field">
+      <label class="login-label" for="login-pass">Contraseña</label>
+      <input class="login-input" id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password" />
+    </div>
+    <button class="login-btn" id="login-btn" onclick="doLogin()">Entrar</button>
+    <div class="login-error" id="login-error">Acceso no autorizado. Verifica tus datos.</div>
+    <div class="login-divider"></div>
+    <div class="login-footer-note">✦ Acceso exclusivo para miembros</div>
+  </div>
+</div>
+
+<!-- ── APP CONTENT (hidden until login) ── -->
+<div id="app-wrapper" style="display:none">
+
 <!-- HERO -->
 <header class="hero">
   <div class="hero-inner">
@@ -990,21 +1236,65 @@ input:focus, textarea:focus { border-color: var(--rose); }
       </div>
 
       <div class="field">
+        <div class="label" data-i18n="lbl_skin_finish">Skin finish <span class="opt">— optional</span></div>
+        <div class="sel-wrap"><select id="skinFinish">
+          <option value="" data-en="— AI decides (default) —" data-es="— La IA decide (por defecto) —">— AI decides (default) —</option>
+          <option value="with flawlessly airbrushed porcelain skin, perfectly smooth and luminous" data-en="✨ Flawless airbrushed · glass skin" data-es="✨ Piel perfecta · glass skin">✨ Flawless airbrushed · glass skin</option>
+          <option value="with radiant glowing skin, dewy and lit-from-within" data-en="💎 Radiant dewy glow" data-es="💎 Brillo radiante · dewy">💎 Radiant dewy glow</option>
+          <option value="with naturally glowing skin showing her natural beauty and real skin texture" data-en="🌿 Natural glow · real skin (mature / 40+)" data-es="🌿 Brillo natural · piel real (madura / 40+)">🌿 Natural glow · real skin (mature / 40+)</option>
+          <option value="with beautifully mature glowing skin, natural fine lines softly visible, dignified and radiant" data-en="🌸 Mature & radiant · natural age (50+)" data-es="🌸 Madura & radiante · edad natural (50+)">🌸 Mature & radiant · natural age (50+)</option>
+          <option value="with bold natural skin, real pores and texture visible, powerful and unretouched" data-en="🔥 Bold & unretouched · raw power" data-es="🔥 Sin retocar · poder real">🔥 Bold & unretouched · raw power</option>
+        </select></div>
+        <div class="skin-finish-note" data-i18n="skin_finish_note">💡 <em>Natural glow</em> and <em>Mature & radiant</em> tell the AI to <span>respect your real skin</span> instead of over-smoothing your face</div>
+      </div>
+
+      <div class="field">
         <div class="label" data-lbl="lbl_hair" data-lblopt="lbl_hair_opt">Hair <span class="req">✦ required</span> <span class="opt">— pick or write yours</span></div>
         <div class="sel-wrap"><select id="hair">
           <option value="">— Select —</option>
-          <option value="long, voluminous black wavy hair cascading around her shoulders with striking blonde highlights weaving through the waves, styled with a perfect wet-look finish and meticulously sculpted baby hairs framing her fierce features" data-en="Long wavy · wet-look · baby hairs" data-es="Ondas largas · wet-look · baby hairs">Long wavy · wet-look · baby hairs</option>
-          <option value="long flowing black hair styled in sleek waves" data-en="Long sleek waves · black" data-es="Ondas lisas largas · negro">Long sleek waves · black</option>
-          <option value="long sleek straight black hair" data-en="Long straight · sleek black" data-es="Lacio largo · negro brillante">Long straight · sleek black</option>
-          <option value="long wet-look glossy waves" data-en="Wet-look glossy waves" data-es="Ondas húmedas brillantes">Wet-look glossy waves</option>
-          <option value="voluminous big curly hair" data-en="Big voluminous curls" data-es="Rizos grandes y voluminosos">Big voluminous curls</option>
-          <option value="sleek high ponytail" data-en="Sleek high ponytail" data-es="Cola alta lisa">Sleek high ponytail</option>
-          <option value="short blunt bob" data-en="Short blunt bob" data-es="Bob corto recto">Short blunt bob</option>
-          <option value="natural afro textured hair" data-en="Natural afro · textured" data-es="Afro natural · texturizado">Natural afro · textured</option>
-          <option value="braided updo with loose tendrils" data-en="Braided updo" data-es="Recogido trenzado">Braided updo</option>
+
+          <optgroup label="💧 Wet-look / Glossy">
+            <option value="long voluminous wavy hair cascading around her shoulders, styled with a perfect wet-look glossy finish and meticulously sculpted baby hairs framing her fierce features" data-en="Long wavy · wet-look · baby hairs" data-es="Ondas largas · wet-look · baby hairs">Long wavy · wet-look · baby hairs</option>
+            <option value="long sleek straight hair with a high-gloss wet-look finish" data-en="Long straight · wet-look" data-es="Lacio largo · wet-look">Long straight · wet-look</option>
+            <option value="long flowing hair styled in sleek glossy waves" data-en="Long sleek glossy waves" data-es="Ondas lisas brillantes largas">Long sleek glossy waves</option>
+          </optgroup>
+
+          <optgroup label="〰️ Straight / Liso">
+            <option value="long sleek straight hair, perfectly smooth and shiny" data-en="Long straight · sleek" data-es="Lacio largo · liso perfecto">Long straight · sleek</option>
+            <option value="medium length straight hair with a clean blunt cut" data-en="Medium straight · blunt cut" data-es="Lacio medio · corte recto">Medium straight · blunt cut</option>
+            <option value="short sleek straight bob with sharp ends" data-en="Short sleek bob" data-es="Bob lacio corto">Short sleek bob</option>
+          </optgroup>
+
+          <optgroup label="🌊 Wavy / Ondulado">
+            <option value="long loose beach waves with natural volume and movement" data-en="Long beach waves" data-es="Ondas playa largas">Long beach waves</option>
+            <option value="medium length soft wavy hair with natural texture" data-en="Medium soft waves" data-es="Ondas suaves medianas">Medium soft waves</option>
+            <option value="long voluminous bouncy waves styled with volume at the roots" data-en="Long voluminous bouncy waves" data-es="Ondas con volumen y rebote">Long voluminous bouncy waves</option>
+          </optgroup>
+
+          <optgroup label="🌀 Curly / Rizado">
+            <option value="voluminous big curly hair with defined springy curls" data-en="Big voluminous curls" data-es="Rizos grandes y voluminosos">Big voluminous curls</option>
+            <option value="long tight spiral curls with volume and definition" data-en="Long tight spiral curls" data-es="Rizos espirales largos y definidos">Long tight spiral curls</option>
+            <option value="medium length loose romantic curls" data-en="Medium loose romantic curls" data-es="Rizos sueltos románticos medianos">Medium loose romantic curls</option>
+          </optgroup>
+
+          <optgroup label="✊ Natural / Textured">
+            <option value="natural afro hair with beautiful volume and texture" data-en="Natural afro · full volume" data-es="Afro natural · volumen pleno">Natural afro · full volume</option>
+            <option value="long loc hairstyle styled elegantly" data-en="Long locs · elegant" data-es="Locs largos · elegantes">Long locs · elegant</option>
+            <option value="natural coily hair with a defined wash-and-go texture" data-en="Natural coily · wash-and-go" data-es="Coily natural · wash-and-go">Natural coily · wash-and-go</option>
+          </optgroup>
+
+          <optgroup label="👑 Updo / Recogido">
+            <option value="sleek high ponytail, pulled back tightly and smooth" data-en="Sleek high ponytail" data-es="Cola alta lisa y elegante">Sleek high ponytail</option>
+            <option value="elegant high bun with sleek pulled-back sides" data-en="Elegant high bun" data-es="Moño alto elegante">Elegant high bun</option>
+            <option value="braided updo with loose face-framing tendrils" data-en="Braided updo · loose tendrils" data-es="Recogido trenzado · mechones sueltos">Braided updo · loose tendrils</option>
+          </optgroup>
+
         </select></div>
-        <div class="or-divider">or write yours</div>
-        <input type="text" id="hairCustom" placeholder='e.g. long auburn curls with honey highlights and sculpted baby hairs'>
+        <div class="or-divider" data-i18n="or_write">or write yours</div>
+        <div class="custom-add-row">
+          <input type="text" id="hairCustom" placeholder='e.g. long auburn curls with honey highlights and sculpted baby hairs' oninput="lockSelect(this,'hair')" onfocus="lockSelect(this,'hair')">
+          <button class="add-tag-btn" onclick="confirmCustom('hairCustom','hair')" data-i18n="btn_add">+ Add</button>
+        </div>
       </div>
 
       <div class="field">
@@ -1019,8 +1309,11 @@ input:focus, textarea:focus { border-color: var(--rose); }
           <option value="bold graphic editorial eyeliner, avant-garde makeup" data-en="Bold Editorial" data-es="Editorial bold">Bold Editorial</option>
           <option value="fresh natural glow, tinted lips, barely-there makeup" data-en="Natural Glow" data-es="Brillo natural">Natural Glow</option>
         </select></div>
-        <div class="or-divider">or write yours</div>
-        <input type="text" id="makeupCustom" placeholder='e.g. copper smoky eye, ombre berry lips, intense gold highlight'>
+        <div class="or-divider" data-i18n="or_write">or write yours</div>
+        <div class="custom-add-row">
+          <input type="text" id="makeupCustom" placeholder='e.g. copper smoky eye, ombre berry lips, intense gold highlight' oninput="lockSelect(this,'makeup')" onfocus="lockSelect(this,'makeup')">
+          <button class="add-tag-btn" onclick="confirmCustom('makeupCustom','makeup')" data-i18n="btn_add">+ Add</button>
+        </div>
       </div>
 
       <div class="field" id="skin-extras-field">
@@ -1060,8 +1353,11 @@ input:focus, textarea:focus { border-color: var(--rose); }
             <option value="in deep burgundy with velvet matte finish" data-en="Burgundy velvet matte" data-es="Borgoña terciopelo mate">Burgundy velvet matte</option>
             <option value="in hot pink glossy finish" data-en="Hot pink glossy" data-es="Rosa intenso brilloso">Hot pink glossy</option>
           </select></div>
-          <div class="or-divider">or write yours</div>
-          <input type="text" id="nailCustom" placeholder='e.g. lavender ombré with diamond tips and pearl accents'>
+          <div class="or-divider" data-i18n="or_write">or write yours</div>
+          <div class="custom-add-row">
+            <input type="text" id="nailCustom" placeholder='e.g. lavender ombré with diamond tips and pearl accents' oninput="lockSelect(this,'nailColor')" onfocus="lockSelect(this,'nailColor')">
+            <button class="add-tag-btn" onclick="confirmCustom('nailCustom','nailColor')" data-i18n="btn_add">+ Add</button>
+          </div>
         </div>
         <div class="field">
           <div class="label" data-lbl="lbl_rings" data-lblopt="lbl_rings_opt">Hand rings <span class="opt">— optional</span></div>
@@ -1090,8 +1386,11 @@ input:focus, textarea:focus { border-color: var(--rose); }
             <option value="a cup of coffee or espresso cupped in both hands" data-en="☕ Coffee cup" data-es="☕ Taza de café">☕ Coffee cup</option>
             <option value="a luxury designer bag held up in front of her" data-en="👜 Designer bag front" data-es="👜 Bolsa de diseñador">👜 Designer bag front</option>
           </select></div>
-          <div class="or-divider">or write yours</div>
-          <input type="text" id="conceptPropCustom" placeholder='e.g. a lit sparkler held near her face, a mirror reflecting her'>
+          <div class="or-divider" data-i18n="or_write">or write yours</div>
+          <div class="custom-add-row">
+            <input type="text" id="conceptPropCustom" placeholder='e.g. a lit sparkler held near her face, a mirror reflecting her' oninput="lockSelect(this,'conceptProp')" onfocus="lockSelect(this,'conceptProp')">
+            <button class="add-tag-btn" onclick="confirmCustom('conceptPropCustom','conceptProp')" data-i18n="btn_add">+ Add</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1190,23 +1489,38 @@ input:focus, textarea:focus { border-color: var(--rose); }
         </select></div>
         <div class="or-divider">or write yours</div>
         <div class="custom-add-row">
-          <input type="text" id="outfitCustom" placeholder='e.g. emerald velvet corset with high-waist wide-leg trousers'>
-          <button class="add-tag-btn" onclick="addCustomOutfit()" data-i18n="btn_add">+ Add</button>
+          <input type="text" id="outfitCustom" placeholder='e.g. emerald velvet corset with high-waist wide-leg trousers' oninput="lockSelect(this,'outfit')" onfocus="lockSelect(this,'outfit')">
+          <button class="add-tag-btn" onclick="addCustomOutfit()" data-i18n="btn_add">+ Usar</button>
         </div>
       </div>
 
       <div class="field">
-        <div class="label" data-lbl="lbl_accs" data-lblopt="lbl_accs_opt">Accessories <span class="opt">— multi-select</span></div>
+        <div class="label" data-lbl="lbl_accs" data-lblopt="lbl_accs_opt">Accessories <span class="opt">— max 3</span></div>
+        <div class="accs-max-hint" data-i18n="accs_max_hint">✦ Select up to 3 for best results</div>
         <div class="tags" id="accs">
           <span class="tag" data-val="layered diamond chains">💎 Diamond chains</span>
-          <span class="tag" data-val="gold hoop earrings">🔮 Gold hoops</span>
-          <span class="tag" data-val="stacks of cash">💵 Stacks of cash</span>
-          <span class="tag" data-val="luxury designer handbag">👜 Designer bag</span>
-          <span class="tag" data-val="oversized designer sunglasses">🕶️ Oversized shades</span>
-          <span class="tag" data-val="diamond tennis bracelet">💍 Tennis bracelet</span>
-          <span class="tag" data-val="luxury watch">⌚ Luxury watch</span>
-          <span class="tag" data-val="bold statement rings">💫 Statement rings</span>
-          <span class="tag" data-val="pearl necklace">🤍 Pearl necklace</span>
+          <span class="tag" data-val="large oversized gold hoop earrings">🔮 Big gold hoops</span>
+          <span class="tag" data-val="sparkling diamond drop earrings">💎 Diamond drop earrings</span>
+          <span class="tag" data-val="classic diamond tennis bracelet stacked">✨ Classic diamond bracelet</span>
+          <span class="tag" data-val="chandelier diamond earrings">✨ Chandelier earrings</span>
+          <span class="tag" data-val="elegant pearl necklace">🤍 Pearl necklace</span>
+          <span class="tag" data-val="luxury gold watch">⌚ Gold watch</span>
+          <span class="tag" data-val="diamond tennis bracelet">💎 Tennis bracelet</span>
+          <span class="tag" data-val="bold gold statement rings">💍 Statement rings</span>
+          <span class="tag" data-val="silk scarf draped elegantly">🧣 Silk scarf</span>
+          <span class="tag" data-val="wide brim elegant hat">👒 Wide brim hat</span>
+          <span class="tag" data-val="oversized luxury sunglasses">🕶️ Luxury shades</span>
+          <span class="tag" data-val="luxury designer handbag held elegantly">👜 Designer bag</span>
+          <span class="tag" data-val="a single red rose held delicately">🌹 Red rose</span>
+          <span class="tag" data-val="a glass of champagne held gracefully">🥂 Champagne glass</span>
+          <span class="tag" data-val="elegant gold body chain">✨ Body chain</span>
+          <span class="tag" data-val="layered gold choker necklace">🔗 Gold choker</span>
+          <span class="tag" data-val="luxury fur stole draped over shoulders">🪶 Fur stole</span>
+          <span class="tag" data-val="elbow-length elegant gloves">🫱 Elegant gloves</span>
+          <span class="tag" data-val="stacks of cash fanned out">💵 Cash fanned out</span>
+          <span class="tag" data-val="gold credit card held between fingers">💳 Gold credit card</span>
+          <span class="tag" data-val="small bouquet of white roses">🌸 White roses bouquet</span>
+          <span class="tag" data-val="a luxury perfume bottle held near face">🌺 Perfume bottle</span>
         </div>
         <div class="custom-add-row">
           <input type="text" id="accsCustom" placeholder='e.g. diamond tiara, crystal arm cuff...'>
@@ -1259,8 +1573,11 @@ input:focus, textarea:focus { border-color: var(--rose); }
               <option value="tossing her hair back dynamically, mid-movement" data-en="Tossing hair" data-es="Tirando el cabello">Tossing hair</option>
             </optgroup>
           </select></div>
-          <div class="or-divider">or write</div>
-          <input type="text" id="poseCustom" placeholder='e.g. lying on a pile of cash, looking up at camera'>
+          <div class="or-divider" data-i18n="or_write">or write</div>
+          <div class="custom-add-row">
+            <input type="text" id="poseCustom" placeholder='e.g. lying on a pile of cash, looking up at camera' oninput="lockSelect(this,'pose')" onfocus="lockSelect(this,'pose')">
+            <button class="add-tag-btn" onclick="confirmCustom('poseCustom','pose')" data-i18n="btn_add">+ Add</button>
+          </div>
         </div>
         <div class="field">
           <div class="label" data-lbl="lbl_bg" data-lblopt="lbl_bg_opt">Background <span class="opt">— pick or write</span></div>
@@ -1296,19 +1613,22 @@ input:focus, textarea:focus { border-color: var(--rose); }
               <option value="floating money and luxury handbags all around her" data-en="Floating money scene 💸" data-es="Escena dinero flotante 💸">Floating money scene 💸</option>
             </optgroup>
           </select></div>
-          <div class="or-divider">or write</div>
-          <input type="text" id="bgCustom" placeholder='e.g. golden hour rooftop pool, city skyline behind her'>
+          <div class="or-divider" data-i18n="or_write">or write</div>
+          <div class="custom-add-row">
+            <input type="text" id="bgCustom" placeholder='e.g. golden hour rooftop pool, city skyline behind her' oninput="lockSelect(this,'bg')" onfocus="lockSelect(this,'bg')">
+            <button class="add-tag-btn" onclick="confirmCustom('bgCustom','bg')" data-i18n="btn_add">+ Add</button>
+          </div>
         </div>
       </div>
 
       <div class="field">
         <div class="label" data-i18n="lbl_color">Dominant color</div>
         <div class="palette" id="colorPalette">
-          <div class="pal-item" data-val="neon green" onclick="toggleColor(this)"><div class="pal-swatch" style="background:linear-gradient(135deg,#39ff14,#00cc44)"></div><div class="pal-name">Neon Green</div></div>
-          <div class="pal-item" data-val="black and gold" onclick="toggleColor(this)"><div class="pal-swatch" style="background:linear-gradient(135deg,#1a1a1a,#c9a94b)"></div><div class="pal-name">Black Gold</div></div>
-          <div class="pal-item" data-val="hot pink and black" onclick="toggleColor(this)"><div class="pal-swatch" style="background:linear-gradient(135deg,#ff00a8,#1a1a1a)"></div><div class="pal-name">Hot Pink</div></div>
-          <div class="pal-item" data-val="all black with high contrast" onclick="toggleColor(this)"><div class="pal-swatch" style="background:linear-gradient(135deg,#111,#333)"></div><div class="pal-name">All Black</div></div>
-          <div class="pal-item" data-val="deep red and black" onclick="toggleColor(this)"><div class="pal-swatch" style="background:linear-gradient(135deg,#cc1f1f,#1a1a1a)"></div><div class="pal-name">Deep Red</div></div>
+          <div class="pal-item" data-val="neon green" onclick="toggleColor(this)"><div class="pal-swatch" style="background:linear-gradient(135deg,#39ff14,#00cc44)"></div><div class="pal-name">Neon Green</div><div class="pal-suggest" data-i18n="pal_money">💸 Money Boss</div></div>
+          <div class="pal-item" data-val="black and gold" onclick="toggleColor(this)"><div class="pal-swatch" style="background:linear-gradient(135deg,#1a1a1a,#c9a94b)"></div><div class="pal-name">Black Gold</div><div class="pal-suggest" data-i18n="pal_ceo">👑 CEO · Chic</div></div>
+          <div class="pal-item" data-val="hot pink and black" onclick="toggleColor(this)"><div class="pal-swatch" style="background:linear-gradient(135deg,#ff00a8,#1a1a1a)"></div><div class="pal-name">Hot Pink</div><div class="pal-suggest" data-i18n="pal_glam">✨ Glam · Beauty</div></div>
+          <div class="pal-item" data-val="all black with high contrast" onclick="toggleColor(this)"><div class="pal-swatch" style="background:linear-gradient(135deg,#111,#333)"></div><div class="pal-name">All Black</div><div class="pal-suggest" data-i18n="pal_fierce">🔥 Fierce · Concept</div></div>
+          <div class="pal-item" data-val="deep red and black" onclick="toggleColor(this)"><div class="pal-swatch" style="background:linear-gradient(135deg,#cc1f1f,#1a1a1a)"></div><div class="pal-name">Deep Red</div><div class="pal-suggest" data-i18n="pal_evening">🌙 Evening · Fierce</div></div>
         </div>
       </div>
 
@@ -1349,8 +1669,11 @@ input:focus, textarea:focus { border-color: var(--rose); }
           <option value="exuding the energy of a self-made millionaire who built her empire from nothing" data-en="Self-Made Millionaire" data-es="Millonaria hecha a sí misma">Self-Made Millionaire</option>
           <option value="exuding magnetic dark feminine energy, mysterious and utterly untouchable" data-en="Dark Feminine" data-es="Femenino oscuro">Dark Feminine</option>
         </select></div>
-        <div class="or-divider">or write yours</div>
-        <input type="text" id="vibeCustom" placeholder='e.g. "exuding the energy of a woman who never settles for less"'>
+        <div class="or-divider" data-i18n="or_write">or write yours</div>
+        <div class="custom-add-row">
+          <input type="text" id="vibeCustom" placeholder='e.g. "exuding the energy of a woman who never settles for less"' oninput="lockSelect(this,'vibe')" onfocus="lockSelect(this,'vibe')">
+          <button class="add-tag-btn" onclick="confirmCustom('vibeCustom','vibe')" data-i18n="btn_add">+ Add</button>
+        </div>
       </div>
     </div>
   </div>
@@ -1547,11 +1870,31 @@ function toggleColor(el) {
   else { selectedColor = val; el.classList.add('on'); }
 }
 
-// Tag toggles — event delegation for all current and future tags
+// Tag toggles — event delegation, max 3 for accessories
 document.addEventListener('click', e => {
-  if (e.target.classList.contains('tag')) {
-    e.target.classList.toggle('on');
+  const tag = e.target.closest('.tag');
+  if (!tag) return;
+  const group = tag.closest('.tags');
+  if (!group) return;
+
+  const isAccs = group.id === 'accs';
+  const isOn = tag.classList.contains('on');
+
+  if (isAccs && !isOn) {
+    // Count currently selected (excluding custom tags being added)
+    const selected = group.querySelectorAll('.tag.on').length;
+    if (selected >= 3) {
+      // Flash the hint
+      const hint = group.closest('.field').querySelector('.accs-max-hint');
+      if (hint) {
+        hint.style.color = 'var(--rose)';
+        hint.style.fontWeight = '700';
+        setTimeout(() => { hint.style.color = ''; hint.style.fontWeight = ''; }, 1500);
+      }
+      return; // Block selection
+    }
   }
+  tag.classList.toggle('on');
 });
 
 function g(id) { return (document.getElementById(id)?.value || '').trim(); }
@@ -1563,6 +1906,7 @@ function getData() {
   const nailCustom = g('nailCustom');
   return {
     skin: g('skin'),
+    skinFinish: g('skinFinish'),
     eyes: g('eyes'),
     hair: pick('hair', 'hairCustom'),
     makeup: pick('makeup', 'makeupCustom'),
@@ -1607,8 +1951,8 @@ function buildFierce(d, forChatGPT) {
 
   // PHYSICAL PRESENCE
   let presence = [];
-  if (d.skin) presence.push(`a woman with flawless ${d.skin}`);
-  else presence.push(`a woman with flawless glowing skin`);
+  const skinDesc = d.skinFinish ? `a woman ${d.skin ? 'with ' + d.skin : ''} ${d.skinFinish}` : (d.skin ? `a woman with flawless ${d.skin}` : `a woman with flawless glowing skin`);
+  presence.push(skinDesc);
   presence.push(`and an intensely commanding presence`);
   parts.push(cap(presence.join(' ')) + '.');
 
@@ -1702,8 +2046,8 @@ function buildMoney(d, forChatGPT) {
 
   // PHYSICAL — Shay's money prompt is one sentence for looks
   let phys = [];
-  if (d.skin) phys.push(`a glamorous woman with ${d.skin}`);
-  else phys.push(`a glamorous woman`);
+  const moneySkin = d.skin ? `a glamorous woman with ${d.skin}${d.skinFinish ? ' ' + d.skinFinish : ''}` : `a glamorous woman`;
+  phys.push(moneySkin);
   if (d.eyes) phys.push(d.eyes);
   if (d.hair) phys.push(`and ${d.hair}`);
   if (d.makeup) phys.push(`with ${d.makeup}`);
@@ -1756,7 +2100,7 @@ function buildBeauty(d, forChatGPT) {
 
   // TYPE — Shay names the genre first
   let intro = `a luxury beauty editorial portrait of a glamorous woman`;
-  if (d.skin) intro += ` with ${d.skin}`;
+  if (d.skin) intro += ` with ${d.skin}${d.skinFinish ? ' ' + d.skinFinish : ''}`;
   if (d.makeup && !d.makeup.includes('smoky')) intro += `, soft matte-glow complexion, and sculpted makeup`;
   else intro += ` and sculpted makeup`;
   parts.push(intro + '.');
@@ -1832,7 +2176,7 @@ function buildConcept(d, forChatGPT) {
 
   // PHYSICAL — concise, one sentence
   let phys = `a`;
-  if (d.skin) phys += ` ${d.skin}`;
+  if (d.skin) phys += ` ${d.skin}${d.skinFinish ? ' ' + d.skinFinish : ''}`;
   phys += ` woman`;
   if (d.hair) phys += ` with ${d.hair}`;
 
@@ -1960,44 +2304,223 @@ function generateAll() {
   }
 }
 
-// ── ADD CUSTOM TAG to any tag group ──
+// ── LOCK SELECT when custom input is typed ──
+// If user types in custom → gray out & disable dropdown
+// If user clears custom → re-enable dropdown
+function lockSelect(input, selectId) {
+  const sel = document.getElementById(selectId);
+  if (!sel) return;
+  const hasText = input.value.trim().length > 0;
+  sel.disabled = hasText;
+  sel.style.opacity = hasText ? '0.35' : '';
+  sel.style.pointerEvents = hasText ? 'none' : '';
+  if (hasText) sel.value = ''; // clear dropdown selection
+}
+
+// Also: if user picks from dropdown → clear the custom input
+document.addEventListener('change', e => {
+  const pairs = {
+    'hair': 'hairCustom',
+    'makeup': 'makeupCustom',
+    'outfit': 'outfitCustom',
+    'pose': 'poseCustom',
+    'bg': 'bgCustom',
+    'vibe': 'vibeCustom',
+  };
+  const customId = pairs[e.target.id];
+  if (customId && e.target.value) {
+    const customInput = document.getElementById(customId);
+    if (customInput) {
+      customInput.value = '';
+      // Re-enable if it was locked
+      e.target.disabled = false;
+      e.target.style.opacity = '';
+      e.target.style.pointerEvents = '';
+    }
+  }
+});
+
+
+// ── CONFIRM CUSTOM for single-value fields (hair, makeup, pose, bg, vibe, nail) ──
+// ── AUTO-TRANSLATE: local dictionary for common Spanish beauty/fashion words ──
+const esEnDict = {
+  // Hair styles
+  'cola': 'ponytail', 'coleta': 'ponytail', 'alta': 'high', 'baja': 'low',
+  'cabello': 'hair', 'pelo': 'hair', 'rizado': 'curly', 'rizos': 'curls', 'rizo': 'curl',
+  'lacio': 'straight', 'liso': 'sleek', 'ondas': 'waves', 'onda': 'wave', 'ondulado': 'wavy',
+  'largo': 'long', 'corto': 'short', 'mediano': 'medium length',
+  'rubio': 'blonde', 'negro': 'black', 'castaño': 'brown', 'rojo': 'red', 'cobrizo': 'copper',
+  'dorado': 'golden', 'plateado': 'silver', 'oscuro': 'dark', 'claro': 'light',
+  'reflejos': 'highlights', 'mechas': 'highlights', 'balayage': 'balayage',
+  'recogido': 'updo', 'moño': 'bun', 'trenza': 'braid', 'trenzas': 'braids',
+  'voluminoso': 'voluminous', 'brillante': 'shiny', 'sedoso': 'silky',
+  'húmedo': 'wet-look', 'mojado': 'wet-look', 'baby': 'baby', 'hairs': 'hairs',
+  'suelto': 'loose', 'sueltos': 'loose', 'suelta': 'loose',
+  'flequillo': 'bangs', 'fleco': 'bangs', 'capas': 'layers', 'capa': 'layer',
+  'volumen': 'volume', 'raíces': 'roots', 'puntas': 'ends',
+  // Makeup
+  'maquillaje': 'makeup', 'labios': 'lips', 'labio': 'lip', 'ojos': 'eyes', 'ojo': 'eye',
+  'sombra': 'eyeshadow', 'delineador': 'eyeliner', 'pestañas': 'lashes', 'pestaña': 'lash',
+  'cejas': 'brows', 'ceja': 'brow', 'base': 'foundation', 'rubor': 'blush',
+  'bronceador': 'bronzer', 'iluminador': 'highlighter', 'contorno': 'contour',
+  'ahumado': 'smoky', 'dramático': 'dramatic', 'brilloso': 'glossy', 'mate': 'matte',
+  'metálico': 'metallic', 'natural': 'natural', 'glam': 'glam',
+  'brillo': 'gloss', 'sombras': 'eyeshadow', 'nude': 'nude',
+  // Colors
+  'rosa': 'pink', 'rosa': 'pink', 'coral': 'coral', 'beige': 'beige', 'blanco': 'white',
+  'champán': 'champagne', 'dorado': 'gold', 'plateado': 'silver', 'vino': 'wine',
+  'borgoña': 'burgundy', 'verde': 'green', 'azul': 'blue', 'morado': 'purple',
+  'lila': 'lilac', 'naranja': 'orange', 'crema': 'cream', 'gris': 'gray',
+  // Outfit
+  'vestido': 'dress', 'falda': 'skirt', 'pantalón': 'pants', 'pantalones': 'pants',
+  'blusa': 'blouse', 'camisa': 'shirt', 'blazer': 'blazer', 'traje': 'suit',
+  'abrigo': 'coat', 'chaqueta': 'jacket', 'top': 'top', 'corsé': 'corset',
+  'satén': 'satin', 'terciopelo': 'velvet', 'encaje': 'lace', 'seda': 'silk',
+  'cuero': 'leather', 'elegante': 'elegant', 'ceñido': 'fitted', 'holgado': 'oversized',
+  'mini': 'mini', 'midi': 'midi', 'maxi': 'maxi', 'escotado': 'low-cut',
+  // Accessories
+  'aretes': 'earrings', 'arete': 'earring', 'collar': 'necklace', 'pulsera': 'bracelet',
+  'anillo': 'ring', 'anillos': 'rings', 'reloj': 'watch', 'bolso': 'bag',
+  'gafas': 'sunglasses', 'lentes': 'glasses', 'sombrero': 'hat', 'bufanda': 'scarf',
+  'guantes': 'gloves', 'cadena': 'chain', 'cadenas': 'chains',
+  'diamante': 'diamond', 'diamantes': 'diamonds', 'oro': 'gold', 'plata': 'silver',
+  'perlas': 'pearls', 'perla': 'pearl', 'rosas': 'roses', 'rosa': 'rose',
+  'champán': 'champagne', 'tiara': 'tiara', 'corona': 'crown',
+  // Scene
+  'fondo': 'background', 'escena': 'scene', 'neón': 'neon', 'ciudad': 'city',
+  'estudio': 'studio', 'playa': 'beach', 'piscina': 'pool', 'azotea': 'rooftop',
+  'jardín': 'garden', 'humo': 'smoke', 'niebla': 'fog', 'luz': 'light',
+  'dinero': 'money', 'billetes': 'cash', 'espejo': 'mirror', 'flores': 'flowers',
+  // Vibe / pose
+  'posando': 'posing', 'sentada': 'sitting', 'parada': 'standing',
+  'mirando': 'looking', 'cámara': 'camera', 'poderosa': 'powerful',
+  'segura': 'confident', 'sensual': 'sensual', 'feroz': 'fierce', 'coqueta': 'flirty',
+  'recostada': 'lying down', 'caminando': 'walking',
+  // Common connectors
+  'con': 'with', 'de': 'of', 'en': 'in', 'y': 'and', 'una': 'a', 'un': 'a',
+  'su': 'her', 'sus': 'her', 'muy': 'very', 'más': 'more', 'sin': 'without',
+  'sobre': 'over', 'bajo': 'under', 'al': 'at the', 'el': '', 'la': '', 'los': '', 'las': '',
+  'que': '', 'del': 'of the', 'por': 'with', 'para': 'for', 'hacia': 'toward',
+  'estilo': 'style', 'tipo': 'style', 'look': 'look', 'efecto': 'effect',
+};
+
+function ensureEnglish(text) {
+  if (!text) return text;
+  // ONLY translate if user interface is in Spanish
+  if (currentLang !== 'es') return text;
+
+  // Detect if it actually has Spanish content
+  const spanishPattern = /[áéíóúüñ]|(\b(con|una|unos|de|el|la|los|las|su|en|que|del|al|por|para|más|como|rizado|largo|cabello|maquillaje|vestido|aretes|labios|ojos|cola|ondas|rizos|oscuro|claro|suelto)\b)/i;
+  if (!spanishPattern.test(text)) return text; // already English
+
+  // Word-by-word translation
+  const translated = text
+    .toLowerCase()
+    .split(/\s+/)
+    .map(word => {
+      const clean = word.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-zA-Z]/g, '');
+      const mapped = esEnDict[clean] || esEnDict[word.toLowerCase()];
+      return mapped !== undefined ? mapped : word;
+    })
+    .filter(w => w.length > 0)
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  return translated.charAt(0).toUpperCase() + translated.slice(1);
+}
+
+
+// ── CONFIRM CUSTOM for single-value fields (hair, makeup, pose, bg, vibe, nail) ──
+function confirmCustom(inputId, selectId) {
+  const input = document.getElementById(inputId);
+  if (!input || !input.value.trim()) return;
+
+  const raw = input.value.trim();
+  const translated = ensureEnglish(raw);
+  input.value = translated;
+
+  // Remove any existing badge for this field
+  const existingBadge = document.getElementById('badge-' + inputId);
+  if (existingBadge) existingBadge.remove();
+
+  // Create badge and insert right after the input element
+  const badge = document.createElement('div');
+  badge.className = 'confirmed-tag';
+  badge.id = 'badge-' + inputId;
+  const label = (raw !== translated) ? `${raw} → ${translated}` : translated;
+  badge.innerHTML = `<span class="confirmed-label">✦ ${label}</span><span class="confirmed-remove" onclick="removeConfirmedTag('${inputId}','${selectId}',this)">×</span>`;
+  input.insertAdjacentElement('afterend', badge);
+
+  lockSelect(input, selectId);
+}
+
+function removeConfirmedTag(inputId, selectId, btn) {
+  btn.closest('.confirmed-tag').remove();
+  const input = document.getElementById(inputId);
+  if (input) input.value = '';
+  const sel = document.getElementById(selectId);
+  if (sel) { sel.disabled = false; sel.style.opacity = ''; sel.style.pointerEvents = ''; }
+}
+
 function addCustomTag(inputId, groupId) {
   const input = document.getElementById(inputId);
   if (!input) return;
-  const val = input.value.trim();
-  if (!val) return;
+  const raw = input.value.trim();
+  if (!raw) return;
 
   const group = document.getElementById(groupId);
   if (!group) return;
 
-  // Check not already added
+  // Max 3 check for accs
+  if (groupId === 'accs') {
+    const selected = group.querySelectorAll('.tag.on').length;
+    if (selected >= 3) {
+      const hint = group.closest('.field').querySelector('.accs-max-hint');
+      if (hint) { hint.style.color = 'var(--rose)'; hint.style.fontWeight = '700'; setTimeout(() => { hint.style.color = ''; hint.style.fontWeight = ''; }, 1500); }
+      return;
+    }
+  }
+
+  const val = ensureEnglish(raw);
+
   const existing = [...group.querySelectorAll('.tag')].map(t => t.dataset.val);
   if (existing.includes(val)) { input.value = ''; return; }
 
   const tag = document.createElement('span');
   tag.className = 'tag on custom-tag';
   tag.dataset.val = val;
-  tag.innerHTML = `${val} <span class="tag-remove" onclick="this.parentNode.remove()">×</span>`;
+  // Show original label, store English value
+  tag.innerHTML = `${raw} <span class="tag-remove" onclick="this.parentNode.remove()">×</span>`;
   group.appendChild(tag);
   input.value = '';
   input.focus();
 }
 
-// ── ADD CUSTOM OUTFIT (replaces dropdown selection) ──
+// ── ADD CUSTOM OUTFIT ──
 function addCustomOutfit() {
   const input = document.getElementById('outfitCustom');
   if (!input) return;
-  const val = input.value.trim();
-  if (!val) return;
+  const raw = input.value.trim();
+  if (!raw) return;
 
-  // Clear the dropdown selection to avoid conflict
+  const translated = ensureEnglish(raw);
+  input.value = translated;
+
+  // Show badge
+  const row = input.closest('.custom-add-row');
+  if (row) {
+    row.parentElement.querySelectorAll('.confirmed-tag').forEach(el => el.remove());
+    const badge = document.createElement('div');
+    badge.className = 'confirmed-tag';
+    const label = (raw !== translated) ? `${raw} → ${translated}` : translated;
+    badge.innerHTML = `<span class="confirmed-label">✦ ${label}</span><span class="confirmed-remove" onclick="this.closest('.confirmed-tag').remove(); document.getElementById('outfitCustom').value='';">×</span>`;
+    row.after(badge);
+  }
+
   const sel = document.getElementById('outfit');
   if (sel) sel.value = '';
-
-  // Visual feedback — briefly highlight input green
-  input.style.borderColor = 'var(--rose)';
-  input.style.color = 'var(--text)';
-  setTimeout(() => { input.style.borderColor = ''; }, 1500);
+  lockSelect(input, 'outfit');
 }
 
 // ── ADD CUSTOM ACCESSORY on Enter key too ──
@@ -2014,7 +2537,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'Enter') { e.preventDefault(); addCustomOutfit(); }
     });
   }
-});(d, forChatGPT) {
+});
+
+function buildChic(d, forChatGPT) {
   const parts = [];
 
   // OPENING — Shay exact for this style
@@ -2030,7 +2555,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // PHYSICAL
   let phys = [];
-  if (d.skin) phys.push(`She has ${d.skin}`);
+  if (d.skin) phys.push(`She has ${d.skin}${d.skinFinish ? ' ' + d.skinFinish : ''}`);
   if (d.hair) phys.push(`and ${d.hair} that frames her face beautifully`);
   if (phys.length) parts.push(phys.join(' ') + '.');
 
@@ -2103,7 +2628,8 @@ function resetAll() {
 
   document.querySelectorAll('.tag').forEach(t => t.classList.remove('on'));
   document.querySelectorAll('.pal-item').forEach(p => p.classList.remove('on'));
-  document.querySelectorAll('select').forEach(s => s.value = '');
+  document.querySelectorAll('.confirmed-tag').forEach(el => el.remove());
+  document.querySelectorAll('select').forEach(s => { s.value = ''; s.disabled = false; s.style.opacity = ''; s.style.pointerEvents = ''; });
   document.querySelectorAll('input[type="text"]').forEach(i => i.value = '');
 
   setStyle('fierce');
@@ -2166,6 +2692,19 @@ const T = {
     lbl_scene_extras: 'Scene extras', lbl_scene_extras_opt: '— multi-select',
     lbl_vibe: 'Vibe', lbl_vibe_opt: '— pick or write yours',
     or_write: 'or write yours',
+    accs_max_hint: '✦ Select up to 3 for best results',
+    tag_chains: '💎 Diamond chains', tag_bighoops: '🔮 Big gold hoops', tag_dropearrings: '💎 Diamond drop earrings', tag_classicbracelet: '✨ Classic diamond bracelet', tag_chandelier: '✨ Chandelier earrings',
+    tag_pearl: '🤍 Pearl necklace', tag_watch: '⌚ Gold watch',
+    tag_bracelet: '💎 Tennis bracelet', tag_rings: '💍 Statement rings',
+    tag_scarf: '🧣 Silk scarf', tag_hat: '👒 Wide brim hat',
+    tag_shades: '🕶️ Luxury shades', tag_bag: '👜 Designer bag',
+    tag_rose: '🌹 Red rose', tag_champagne: '🥂 Champagne glass',
+    tag_bodychain: '✨ Body chain', tag_choker: '🔗 Gold choker',
+    tag_fur: '🪶 Fur stole', tag_gloves: '🫱 Elegant gloves',
+    tag_cash: '💵 Cash fanned out', tag_creditcard: '💳 Gold credit card',
+    tag_bouquet: '🌸 White roses', tag_perfume: '🌺 Perfume bottle',
+    lbl_accs_opt: '— max 3',
+    pal_money: '💸 Money Boss', pal_ceo: '👑 CEO · Chic', pal_glam: '✨ Glam · Beauty', pal_fierce: '🔥 Fierce · Concept', pal_evening: '🌙 Evening · Fierce',
     ph_hair: 'e.g. long auburn curls with honey highlights and sculpted baby hairs',
     ph_makeup: 'e.g. copper smoky eye, ombre berry lips, intense gold highlight',
     ph_nail: 'e.g. lavender ombré with diamond tips and pearl accents',
@@ -2200,6 +2739,23 @@ const T = {
     // Output labels
     out_gemini: 'Gemini AI', out_chatgpt: 'ChatGPT',
     copy_btn: 'Copy', copied_btn: '✓ Copied',
+    or_write: 'or write yours',
+    accs_max_hint: '✦ Select up to 3 for best results',
+    tag_chains: '💎 Diamond chains', tag_bighoops: '🔮 Big gold hoops', tag_dropearrings: '💎 Diamond drop earrings', tag_classicbracelet: '✨ Classic diamond bracelet', tag_chandelier: '✨ Chandelier earrings',
+    tag_pearl: '🤍 Pearl necklace', tag_watch: '⌚ Gold watch',
+    tag_bracelet: '💎 Tennis bracelet', tag_rings: '💍 Statement rings',
+    tag_scarf: '🧣 Silk scarf', tag_hat: '👒 Wide brim hat',
+    tag_shades: '🕶️ Luxury shades', tag_bag: '👜 Designer bag',
+    tag_rose: '🌹 Red rose', tag_champagne: '🥂 Champagne glass',
+    tag_bodychain: '✨ Body chain', tag_choker: '🔗 Gold choker',
+    tag_fur: '🪶 Fur stole', tag_gloves: '🫱 Elegant gloves',
+    tag_cash: '💵 Cash fanned out', tag_creditcard: '💳 Gold credit card',
+    tag_bouquet: '🌸 White roses', tag_perfume: '🌺 Perfume bottle',
+    lbl_accs_opt: '— max 3',
+    pal_money: '💸 Money Boss', pal_ceo: '👑 CEO · Chic', pal_glam: '✨ Glam · Beauty', pal_fierce: '🔥 Fierce · Concept', pal_evening: '🌙 Evening · Fierce',
+    btn_add: '+ Add',
+    lbl_skin_finish: 'Skin finish',
+    skin_finish_note: '💡 <em>Natural glow</em> and <em>Mature & radiant</em> tell the AI to <span>respect your real skin</span> instead of over-smoothing your face',
     tips_title: '✦ How to Get Viral AI Photos',
     tips_sub: 'Understanding how your choices affect the final image',
     tip1_title: 'What the Outfit Does in the Prompt',
@@ -2257,6 +2813,19 @@ const T = {
     lbl_scene_extras: 'Extras de escena', lbl_scene_extras_opt: '— selección múltiple',
     lbl_vibe: 'Vibe', lbl_vibe_opt: '— elige o escribe el tuyo',
     or_write: 'o escribe el tuyo',
+    accs_max_hint: '✦ Selecciona máximo 3 para mejores resultados',
+    tag_chains: '💎 Cadenas de diamantes', tag_bighoops: '🔮 Aretes argolla grandes', tag_dropearrings: '💎 Aretes colgantes de diamantes', tag_classicbracelet: '✨ Pulsera clásica de diamantes', tag_chandelier: '✨ Aretes de araña',
+    tag_pearl: '🤍 Collar de perlas', tag_watch: '⌚ Reloj dorado',
+    tag_bracelet: '💎 Pulsera tennis', tag_rings: '💍 Anillos statement',
+    tag_scarf: '🧣 Pañuelo de seda', tag_hat: '👒 Sombrero ala ancha',
+    tag_shades: '🕶️ Gafas de lujo', tag_bag: '👜 Bolso de diseñador',
+    tag_rose: '🌹 Rosa roja', tag_champagne: '🥂 Copa de champán',
+    tag_bodychain: '✨ Body chain dorado', tag_choker: '🔗 Choker dorado',
+    tag_fur: '🪶 Estola de piel', tag_gloves: '🫱 Guantes elegantes',
+    tag_cash: '💵 Billetes abanicados', tag_creditcard: '💳 Tarjeta de crédito dorada',
+    tag_bouquet: '🌸 Ramo de rosas', tag_perfume: '🌺 Frasco de perfume',
+    lbl_accs_opt: '— máx 3',
+    pal_money: '💸 Money Boss', pal_ceo: '👑 CEO · Chic', pal_glam: '✨ Glam · Beauty', pal_fierce: '🔥 Fierce · Concept', pal_evening: '🌙 Noche · Fierce',
     ph_hair: 'Ej: rizos largos cobrizos con reflejos dorados y baby hairs',
     ph_makeup: 'Ej: ahumado cobre, labios ombré berry, iluminador dorado intenso',
     ph_nail: 'Ej: ombré lavanda con puntas de diamante y detalles de perla',
@@ -2283,6 +2852,23 @@ const T = {
     ring_thin: '〰️ Bandas delgadas doradas', ring_cocktail: '💍 Anillo cocktail',
     out_gemini: 'Gemini AI', out_chatgpt: 'ChatGPT',
     copy_btn: 'Copiar', copied_btn: '✓ Copiado',
+    or_write: 'o escribe el tuyo',
+    accs_max_hint: '✦ Selecciona máximo 3 para mejores resultados',
+    tag_chains: '💎 Cadenas de diamantes', tag_bighoops: '🔮 Aretes argolla grandes', tag_dropearrings: '💎 Aretes colgantes de diamantes', tag_classicbracelet: '✨ Pulsera clásica de diamantes', tag_chandelier: '✨ Aretes de araña',
+    tag_pearl: '🤍 Collar de perlas', tag_watch: '⌚ Reloj dorado',
+    tag_bracelet: '💎 Pulsera tennis', tag_rings: '💍 Anillos statement',
+    tag_scarf: '🧣 Pañuelo de seda', tag_hat: '👒 Sombrero ala ancha',
+    tag_shades: '🕶️ Gafas de lujo', tag_bag: '👜 Bolso de diseñador',
+    tag_rose: '🌹 Rosa roja', tag_champagne: '🥂 Copa de champán',
+    tag_bodychain: '✨ Body chain dorado', tag_choker: '🔗 Choker dorado',
+    tag_fur: '🪶 Estola de piel', tag_gloves: '🫱 Guantes elegantes',
+    tag_cash: '💵 Billetes abanicados', tag_creditcard: '💳 Tarjeta de crédito dorada',
+    tag_bouquet: '🌸 Ramo de rosas', tag_perfume: '🌺 Frasco de perfume',
+    lbl_accs_opt: '— máx 3',
+    pal_money: '💸 Money Boss', pal_ceo: '👑 CEO · Chic', pal_glam: '✨ Glam · Beauty', pal_fierce: '🔥 Fierce · Concept', pal_evening: '🌙 Noche · Fierce',
+    btn_add: '+ Agregar',
+    lbl_skin_finish: 'Acabado de piel',
+    skin_finish_note: '💡 <em>Brillo natural</em> y <em>Madura & radiante</em> le dicen a la IA que <span>respete tu piel real</span> en vez de suavizarla en exceso',
     tips_title: '✦ Cómo Obtener Fotos IA Virales',
     tips_sub: 'Entiende cómo tus elecciones afectan la imagen final',
     tip1_title: 'Qué hace el Outfit en el Prompt',
@@ -2381,16 +2967,30 @@ function setLang(lang) {
 
   // Update tags
   const tagMap = {
+    // New accessories
     'layered diamond chains': t.tag_chains,
-    'gold hoop earrings': t.tag_hoops,
-    'stacks of cash': t.tag_cash,
-    'luxury designer handbag': t.tag_bag,
-    'oversized designer sunglasses': t.tag_shades,
+    'large oversized gold hoop earrings': t.tag_bighoops,
+    'sparkling diamond drop earrings': t.tag_dropearrings,
+    'classic diamond tennis bracelet stacked': t.tag_classicbracelet,
+    'chandelier diamond earrings': t.tag_chandelier,
+    'elegant pearl necklace': t.tag_pearl,
+    'luxury gold watch': t.tag_watch,
     'diamond tennis bracelet': t.tag_bracelet,
-    'luxury watch': t.tag_watch,
-    'floating money around her': t.tag_money,
-    'bold statement rings': t.tag_rings,
-    'pearl necklace': t.tag_pearl,
+    'bold gold statement rings': t.tag_rings,
+    'silk scarf draped elegantly': t.tag_scarf,
+    'wide brim elegant hat': t.tag_hat,
+    'oversized luxury sunglasses': t.tag_shades,
+    'luxury designer handbag held elegantly': t.tag_bag,
+    'a single red rose held delicately': t.tag_rose,
+    'a glass of champagne held gracefully': t.tag_champagne,
+    'elegant gold body chain': t.tag_bodychain,
+    'layered gold choker necklace': t.tag_choker,
+    'luxury fur stole draped over shoulders': t.tag_fur,
+    'elbow-length elegant gloves': t.tag_gloves,
+    'stacks of cash fanned out': t.tag_cash,
+    'gold credit card held between fingers': t.tag_creditcard,
+    'small bouquet of white roses': t.tag_bouquet,
+    'a luxury perfume bottle held near face': t.tag_perfume,
     'with water droplets glistening on her luminous skin': t.se_drops,
     'metallic shimmer radiating from her cheekbones': t.se_shimmer,
     'skin looks luminous and airbrushed': t.se_glow,
@@ -2423,8 +3023,17 @@ function setLang(lang) {
 // RANDOMIZE
 // ══════════════════════════
 function randomize() {
-  // Reset first
+  // Partial reset — clear everything EXCEPT skin and hair (those are required and personal)
+  const savedSkin = document.getElementById('skin')?.value || '';
+  const savedHair = document.getElementById('hair')?.value || '';
+  const savedHairCustom = document.getElementById('hairCustom')?.value || '';
+
   resetAll();
+
+  // Restore skin and hair after reset
+  if (savedSkin) document.getElementById('skin').value = savedSkin;
+  if (savedHair) document.getElementById('hair').value = savedHair;
+  if (savedHairCustom) document.getElementById('hairCustom').value = savedHairCustom;
 
   function rnd(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
@@ -2496,23 +3105,103 @@ function randomize() {
   // 5. Vibe
   pickRandom('vibe');
 
-  // Open section 02 so user sees skin + hair are empty
+  // Open section 02 so user sees skin + hair
   const sec = document.getElementById('sec-look');
   if (sec) {
     const hdr = sec.closest('.section')?.querySelector('.section-hdr');
     if (hdr && !sec.classList.contains('open')) hdr.click();
   }
 
-  // Show a gentle reminder (don't auto-generate — user must fill skin + hair first)
-  const lang = document.documentElement.lang || 'en';
-  const msg = lang === 'es'
-    ? '🎲 ¡Casi listo! Elige tu tono de piel y cabello para generar tu prompt'
-    : '🎲 Almost ready! Choose your skin tone and hair to generate your prompt';
-  showValidationMsg(msg);
+  // If skin + hair already filled → generate immediately
+  const currentSkin = document.getElementById('skin')?.value || '';
+  const currentHair = document.getElementById('hair')?.value || document.getElementById('hairCustom')?.value || '';
+
+  if (currentSkin && currentHair) {
+    setTimeout(() => generateAll(), 80);
+  } else {
+    // Show gentle reminder
+    const lang = currentLang || 'en';
+    const msg = lang === 'es'
+      ? '🎲 ¡Casi listo! Elige tu tono de piel y cabello para generar tu prompt'
+      : '🎲 Almost ready! Choose your skin tone and hair to generate your prompt';
+    showValidationMsg(msg);
+  }
 }
 
 // INIT
 setStyle('fierce');
+
+// ── AUTH SYSTEM ──
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbzaUnWYcjoSjs1tIGXEBbEmycYdLp187aYE_dvl8RmxRr1zFL5TOnqNPvNvl-ixOA7V/exec';
+
+function showApp() {
+  document.getElementById('login-overlay').style.display = 'none';
+  document.getElementById('app-wrapper').style.display = '';
+}
+
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-pass').value.trim();
+  const btn   = document.getElementById('login-btn');
+  const err   = document.getElementById('login-error');
+
+  if (!email || !pass) {
+    err.textContent = 'Por favor ingresa email y contraseña.';
+    err.classList.add('visible');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '...';
+  err.classList.remove('visible');
+
+  try {
+    const url = `${GAS_URL}?email=${encodeURIComponent(email)}&password=${encodeURIComponent(pass)}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+
+    if (data.acceso === true) {
+      sessionStorage.setItem('bg_auth', '1');
+      showApp();
+    } else {
+      err.textContent = 'Acceso no autorizado. Verifica tus datos.';
+      err.classList.add('visible');
+    }
+  } catch (e) {
+    err.textContent = 'Error de conexión. Intenta de nuevo.';
+    err.classList.add('visible');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Entrar';
+  }
+}
+
+function doLogout() {
+  sessionStorage.removeItem('bg_auth');
+  document.getElementById('app-wrapper').style.display = 'none';
+  document.getElementById('login-overlay').style.display = 'flex';
+  document.getElementById('login-email').value = '';
+  document.getElementById('login-pass').value = '';
+  document.getElementById('login-error').classList.remove('visible');
+}
+
+// Allow Enter key in login inputs
+document.addEventListener('DOMContentLoaded', () => {
+  ['login-email','login-pass'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+  });
+
+  // Check existing session
+  if (sessionStorage.getItem('bg_auth') === '1') {
+    showApp();
+  }
+});
 </script>
+
+<!-- ── LOGOUT ── -->
+<button id="logout-btn" onclick="doLogout()">✦ Cerrar sesión</button>
+
+</div><!-- /app-wrapper -->
 </body>
 </html>
