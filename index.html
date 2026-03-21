@@ -454,6 +454,18 @@ body::before {
 .style-card.on.concept::before { opacity: 1; }
 .sc-pill.concept { background: rgba(212,131,42,0.15); color: var(--amber); }
 
+/* CEO Lifestyle — sage green */
+.style-card.lifestyle::before { background: radial-gradient(circle at top right, rgba(100,160,120,0.1), transparent); }
+.style-card.on.lifestyle { border-color: #64a078; background: rgba(100,160,120,0.08); }
+.style-card.on.lifestyle::before { opacity: 1; }
+.sc-pill.lifestyle { background: rgba(100,160,120,0.15); color: #64a078; }
+
+/* CEO Studio — soft blue */
+.style-card.ceostudio::before { background: radial-gradient(circle at top right, rgba(122,156,184,0.12), transparent); }
+.style-card.on.ceostudio { border-color: #8ab4cc; background: rgba(122,156,184,0.08); }
+.style-card.on.ceostudio::before { opacity: 1; }
+.sc-pill.ceostudio { background: rgba(122,156,184,0.15); color: #8ab4cc; }
+
 .sc-icon { font-size: 28px; margin-bottom: 10px; display: block; }
 .sc-name {
   font-family: 'Cormorant Garamond', serif;
@@ -1158,7 +1170,7 @@ input:focus, textarea:focus { border-color: var(--rose); }
       <div class="sec-num">01</div>
       <div class="sec-info">
         <div class="sec-title" data-i18n="s1_title">Choose Your Prompt Style</div>
-        <div class="sec-desc" data-i18n="s1_desc">5 formulas — each opens and closes differently</div>
+        <div class="sec-desc" data-i18n="s1_desc">7 formulas — each opens and closes differently</div>
       </div>
       <div class="sec-arrow">▾</div>
     </div>
@@ -1193,6 +1205,18 @@ input:focus, textarea:focus { border-color: var(--rose); }
           <div class="sc-name" data-i18n="concept_name">Concept / Themed</div>
           <div class="sc-desc" data-i18n="concept_desc">Short & direct. One central prop (food, object, element) defines the whole image. Monochromatic effect. No poetry — just a clean, specific scene.</div>
           <span class="sc-pill concept" data-i18n="concept_pill">Short · Prop · Mono</span>
+        </div>
+        <div class="style-card lifestyle" id="sc-lifestyle" onclick="setStyle('lifestyle')">
+          <span class="sc-icon">🌿</span>
+          <div class="sc-name" data-i18n="lifestyle_name">CEO Lifestyle</div>
+          <div class="sc-desc" data-i18n="lifestyle_desc">Natural & editorial. Sofá, café, home office. Soft window light, neutral palette. Working woman — authentic, not posing.</div>
+          <span class="sc-pill lifestyle" data-i18n="lifestyle_pill">Natural · Editorial · Real</span>
+        </div>
+        <div class="style-card ceostudio" id="sc-ceostudio" onclick="setStyle('ceostudio')">
+          <span class="sc-icon">📸</span>
+          <div class="sc-name" data-i18n="ceostudio_name">CEO Studio</div>
+          <div class="sc-desc" data-i18n="ceostudio_desc">Neutral studio backdrop. Controlled light, soft shadow. Looking at camera with attitude — laptop or phone in hand. Power headshot.</div>
+          <span class="sc-pill ceostudio" data-i18n="ceostudio_pill">Studio · Power · Clean</span>
         </div>
       </div>
     </div>
@@ -1390,6 +1414,156 @@ input:focus, textarea:focus { border-color: var(--rose); }
           <div class="custom-add-row">
             <input type="text" id="conceptPropCustom" placeholder='e.g. a lit sparkler held near her face, a mirror reflecting her' oninput="lockSelect(this,'conceptProp')" onfocus="lockSelect(this,'conceptProp')">
             <button class="add-tag-btn" onclick="confirmCustom('conceptPropCustom','conceptProp')" data-i18n="btn_add">+ Add</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CEO LIFESTYLE FIELDS (style 6) -->
+      <div id="lifestyle-fields" style="display:none; flex-direction:column; gap:16px;">
+        <div class="row2">
+          <div class="field">
+            <div class="label" data-i18n="lbl_ls_location">📍 Location</div>
+            <div class="sel-wrap"><select id="lsLocation">
+              <option value="">— Select —</option>
+              <option value="seated on a light gray sofa in a bright modern living room with sheer curtains" data-en="Home sofa · modern" data-es="Sofá en casa · moderno">Home sofa · modern</option>
+              <option value="seated at a table in an aesthetic coffee shop with warm ambient lighting" data-en="☕ Aesthetic café" data-es="☕ Café aesthetic">☕ Aesthetic café</option>
+              <option value="seated in a luxury hotel lobby with marble floors and elegant decor" data-en="🏨 Hotel lobby" data-es="🏨 Lobby de hotel">🏨 Hotel lobby</option>
+              <option value="at a minimalist home office desk with a large window behind her" data-en="🖥️ Home office desk" data-es="🖥️ Escritorio home office">🖥️ Home office desk</option>
+              <option value="in a modern open-plan office space with clean lines and soft lighting" data-en="🏢 Modern office" data-es="🏢 Oficina moderna">🏢 Modern office</option>
+              <option value="on a sunlit terrace or balcony with city views in the background" data-en="🌇 Terrace / balcony" data-es="🌇 Terraza / balcón">🌇 Terrace / balcony</option>
+            </select></div>
+          </div>
+          <div class="field">
+            <div class="label" data-i18n="lbl_ls_prop">💻 Prop</div>
+            <div class="sel-wrap"><select id="lsProp">
+              <option value="">— Select —</option>
+              <option value="a MacBook laptop open beside her" data-en="💻 MacBook (beside)" data-es="💻 MacBook (al lado)">💻 MacBook (beside)</option>
+              <option value="holding a MacBook laptop open in her hands" data-en="💻 MacBook (in hands)" data-es="💻 MacBook (en manos)">💻 MacBook (in hands)</option>
+              <option value="looking at her smartphone with a focused expression" data-en="📱 Smartphone" data-es="📱 Smartphone">📱 Smartphone</option>
+              <option value="a laptop open beside her and a coffee cup in her hand" data-en="💻 + ☕ Laptop & coffee" data-es="💻 + ☕ Laptop y café">💻 + ☕ Laptop & coffee</option>
+              <option value="writing in a leather-bound planner or notebook" data-en="📓 Planner / notebook" data-es="📓 Planificador / libreta">📓 Planner / notebook</option>
+              <option value="holding a coffee cup in both hands, laptop open on the table" data-en="☕ Coffee + laptop on table" data-es="☕ Café + laptop en mesa">☕ Coffee + laptop on table</option>
+            </select></div>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <div class="label" data-i18n="lbl_ls_action">🎬 Action / Expression</div>
+            <div class="sel-wrap"><select id="lsAction">
+              <option value="">— Select —</option>
+              <option value="looking at the screen with a focused, confident expression" data-en="Focused on screen" data-es="Enfocada en pantalla">Focused on screen</option>
+              <option value="typing on her laptop with a calm, productive expression" data-en="Typing · productive" data-es="Escribiendo · productiva">Typing · productive</option>
+              <option value="on a phone call, looking poised and professional" data-en="On a phone call" data-es="En llamada telefónica">On a phone call</option>
+              <option value="smiling softly at her phone, natural and radiant" data-en="Smiling at phone" data-es="Sonriendo al teléfono">Smiling at phone</option>
+              <option value="looking away from the camera thoughtfully, a slight confident smile" data-en="Thoughtful look · smile" data-es="Mirada pensativa · sonrisa">Thoughtful look · smile</option>
+              <option value="looking directly into the camera with a calm, confident expression" data-en="Looking at camera · confident" data-es="Mirando a cámara · segura">Looking at camera · confident</option>
+            </select></div>
+          </div>
+          <div class="field">
+            <div class="label" data-i18n="lbl_ls_light">🌤️ Light Mood</div>
+            <div class="sel-wrap"><select id="lsLight">
+              <option value="">— Select —</option>
+              <option value="soft natural window light coming from the left side, diffused through sheer curtains, creating soft shadows and a clean editorial look" data-en="Morning · soft window" data-es="Mañana · ventana suave">Morning · soft window</option>
+              <option value="warm golden afternoon light filtering through large windows, creating a cozy editorial atmosphere" data-en="Golden afternoon light" data-es="Luz dorada de tarde">Golden afternoon light</option>
+              <option value="soft overcast daylight, even and flattering with minimal shadows" data-en="Overcast · even light" data-es="Nublado · luz pareja">Overcast · even light</option>
+              <option value="warm interior ambient lighting, soft and elegant, no harsh shadows" data-en="Warm interior ambient" data-es="Interior cálido y suave">Warm interior ambient</option>
+            </select></div>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <div class="label" data-i18n="lbl_ls_shot">📐 Shot & Composition</div>
+            <div class="sel-wrap"><select id="lsShot">
+              <option value="">— Select —</option>
+              <option value="medium shot, eye-level angle, slight diagonal body position, rule of thirds composition, vertical framing" data-en="Medium · eye-level · diagonal" data-es="Medio · nivel ojos · diagonal">Medium · eye-level · diagonal</option>
+              <option value="full body shot, eye-level angle, natural standing or seated pose, vertical framing" data-en="Full body · eye-level" data-es="Cuerpo completo · nivel ojos">Full body · eye-level</option>
+              <option value="lifestyle close-up, hands and face visible with prop, intimate framing" data-en="Close-up lifestyle · hands + face" data-es="Close-up lifestyle · manos + cara">Close-up lifestyle · hands + face</option>
+              <option value="wide environmental shot showing the full scene and setting, subject slightly right of center" data-en="Wide · full scene" data-es="Amplio · escena completa">Wide · full scene</option>
+              <option value="slightly above eye-level angle, flattering and editorial, medium shot" data-en="Slightly above · flattering" data-es="Ligeramente arriba · favorecedora">Slightly above · flattering</option>
+            </select></div>
+          </div>
+          <div class="field">
+            <div class="label" data-i18n="lbl_ls_lens">🎥 Camera Feel</div>
+            <div class="sel-wrap"><select id="lsLens">
+              <option value="">— Select —</option>
+              <option value="50mm lens, f/2.8, shallow depth of field, background softly blurred, photorealistic" data-en="50mm · f/2.8 · most natural" data-es="50mm · f/2.8 · más natural">50mm · f/2.8 · most natural</option>
+              <option value="35mm lens, f/3.5, natural perspective, more scene context visible, photorealistic" data-en="35mm · f/3.5 · more scene" data-es="35mm · f/3.5 · más escena">35mm · f/3.5 · more scene</option>
+              <option value="85mm lens, f/2.0, compressed background, subject very sharp, creamy bokeh, photorealistic" data-en="85mm · f/2.0 · blurry bg" data-es="85mm · f/2.0 · fondo borroso">85mm · f/2.0 · blurry bg</option>
+            </select></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CEO STUDIO FIELDS (style 7) -->
+      <div id="ceostudio-fields" style="display:none; flex-direction:column; gap:16px;">
+        <div class="row2">
+          <div class="field">
+            <div class="label" data-i18n="lbl_cs_bg">🎨 Studio Background</div>
+            <div class="sel-wrap"><select id="csBackground">
+              <option value="">— Select —</option>
+              <option value="clean light gray studio backdrop, minimal and professional" data-en="Light gray · classic" data-es="Gris claro · clásico">Light gray · classic</option>
+              <option value="pure white seamless studio backdrop, clean and bright" data-en="Pure white · clean" data-es="Blanco puro · limpio">Pure white · clean</option>
+              <option value="warm beige studio backdrop, soft and elegant" data-en="Warm beige · soft" data-es="Beige cálido · suave">Warm beige · soft</option>
+              <option value="deep charcoal gray studio backdrop, moody and powerful" data-en="Charcoal · moody power" data-es="Carbón · poder dramático">Charcoal · moody power</option>
+              <option value="soft sage green studio backdrop, fresh and modern" data-en="Sage green · modern" data-es="Verde salvia · moderno">Sage green · modern</option>
+              <option value="neutral greige (gray-beige) studio backdrop, timeless and editorial" data-en="Greige · timeless" data-es="Greige · atemporal">Greige · timeless</option>
+            </select></div>
+          </div>
+          <div class="field">
+            <div class="label" data-i18n="lbl_cs_prop">💻 Prop</div>
+            <div class="sel-wrap"><select id="csProp">
+              <option value="">— Select —</option>
+              <option value="holding an open laptop in her hands at a slight angle" data-en="💻 Laptop in hands" data-es="💻 Laptop en manos">💻 Laptop in hands</option>
+              <option value="holding a smartphone confidently in one hand" data-en="📱 Smartphone in hand" data-es="📱 Smartphone en mano">📱 Smartphone in hand</option>
+              <option value="laptop resting on her knees while she looks at the camera" data-en="💻 Laptop on knees" data-es="💻 Laptop sobre rodillas">💻 Laptop on knees</option>
+              <option value="holding a coffee cup elegantly in one hand" data-en="☕ Coffee cup" data-es="☕ Taza de café">☕ Coffee cup</option>
+              <option value="no prop, clean power pose" data-en="No prop · pure power" data-es="Sin prop · poder puro">No prop · pure power</option>
+            </select></div>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <div class="label" data-i18n="lbl_cs_pose">🎬 Pose Attitude</div>
+            <div class="sel-wrap"><select id="csPose">
+              <option value="">— Select —</option>
+              <option value="seated on a stool, body at a diagonal angle, looking directly into the camera with a confident, composed expression" data-en="Seated diagonal · camera stare" data-es="Sentada diagonal · mirada a cámara">Seated diagonal · camera stare</option>
+              <option value="standing, body slightly turned, looking over her shoulder at the camera with authority" data-en="Standing · over shoulder" data-es="De pie · sobre el hombro">Standing · over shoulder</option>
+              <option value="seated, legs crossed, posture upright, commanding presence, direct eye contact with camera" data-en="Seated · legs crossed · CEO" data-es="Sentada · piernas cruzadas · CEO">Seated · legs crossed · CEO</option>
+              <option value="standing straight, arms relaxed at sides or one hand on hip, powerful and grounded" data-en="Standing · grounded power" data-es="De pie · poder firme">Standing · grounded power</option>
+              <option value="leaning slightly forward toward the camera, forearms resting on a surface, intense gaze" data-en="Leaning forward · intense" data-es="Inclinada hacia adelante · intensa">Leaning forward · intense</option>
+            </select></div>
+          </div>
+          <div class="field">
+            <div class="label" data-i18n="lbl_cs_light">💡 Studio Lighting</div>
+            <div class="sel-wrap"><select id="csLight">
+              <option value="">— Select —</option>
+              <option value="professional studio lighting, soft box from the left, soft shadow behind her on the backdrop, clean and flattering" data-en="Soft box left · clean shadow" data-es="Soft box izquierda · sombra limpia">Soft box left · clean shadow</option>
+              <option value="rembrandt studio lighting, dramatic triangle of light on one cheek, elegant and moody" data-en="Rembrandt · dramatic triangle" data-es="Rembrandt · triángulo dramático">Rembrandt · dramatic triangle</option>
+              <option value="flat front studio lighting, even and bright, no harsh shadows, fresh and polished" data-en="Flat front · even · polished" data-es="Frontal plana · pareja · pulida">Flat front · even · polished</option>
+              <option value="split lighting, half her face lit, half in soft shadow, powerful contrast" data-en="Split light · half shadow" data-es="Luz dividida · media sombra">Split light · half shadow</option>
+              <option value="butterfly lighting, light directly above and in front, glamorous catchlights in eyes" data-en="Butterfly · glamour lights" data-es="Butterfly · luces glamour">Butterfly · glamour lights</option>
+            </select></div>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <div class="label" data-i18n="lbl_cs_shot">📐 Shot & Composition</div>
+            <div class="sel-wrap"><select id="csShot">
+              <option value="">— Select —</option>
+              <option value="medium shot, eye-level, slight diagonal body angle, rule of thirds, vertical framing" data-en="Medium · eye-level · diagonal" data-es="Medio · nivel ojos · diagonal">Medium · eye-level · diagonal</option>
+              <option value="three-quarter body shot, eye-level, slightly turned, vertical framing" data-en="3/4 body · turned" data-es="3/4 cuerpo · girada">3/4 body · turned</option>
+              <option value="full body shot, eye-level, clean studio composition, vertical framing" data-en="Full body · clean studio" data-es="Cuerpo completo · estudio limpio">Full body · clean studio</option>
+              <option value="close-up portrait, chest up, commanding presence, direct gaze" data-en="Close-up portrait · chest up" data-es="Retrato close-up · desde el pecho">Close-up portrait · chest up</option>
+            </select></div>
+          </div>
+          <div class="field">
+            <div class="label" data-i18n="lbl_cs_lens">🎥 Camera Feel</div>
+            <div class="sel-wrap"><select id="csLens">
+              <option value="">— Select —</option>
+              <option value="85mm lens, f/2.0, sharp subject, creamy bokeh background, photorealistic, 8k" data-en="85mm · f/2.0 · sharp + bokeh" data-es="85mm · f/2.0 · nítida + bokeh">85mm · f/2.0 · sharp + bokeh</option>
+              <option value="50mm lens, f/2.8, natural perspective, shallow depth of field, photorealistic, 8k" data-en="50mm · f/2.8 · natural" data-es="50mm · f/2.8 · natural">50mm · f/2.8 · natural</option>
+              <option value="70mm lens, f/4, full body in focus, professional editorial look, photorealistic, 8k" data-en="70mm · f/4 · full focus" data-es="70mm · f/4 · enfoque total">70mm · f/4 · full focus</option>
+            </select></div>
           </div>
         </div>
       </div>
@@ -1849,7 +2023,7 @@ document.querySelectorAll('.section-body.open').forEach(b => b.style.display = '
 
 function setStyle(s) {
   promptStyle = s;
-  ['fierce','money','beauty','chic','concept'].forEach(id => {
+  ['fierce','money','beauty','chic','concept','lifestyle','ceostudio'].forEach(id => {
     const el = document.getElementById('sc-' + id);
     if (el) el.classList.toggle('on', s === id);
   });
@@ -1861,6 +2035,18 @@ function setStyle(s) {
   if (chicFields) chicFields.style.display = s === 'chic' ? 'flex' : 'none';
   const conceptFields = document.getElementById('concept-fields');
   if (conceptFields) conceptFields.style.display = s === 'concept' ? 'flex' : 'none';
+  const lifestyleFields = document.getElementById('lifestyle-fields');
+  if (lifestyleFields) lifestyleFields.style.display = s === 'lifestyle' ? 'flex' : 'none';
+  const ceostudioFields = document.getElementById('ceostudio-fields');
+  if (ceostudioFields) ceostudioFields.style.display = s === 'ceostudio' ? 'flex' : 'none';
+
+  // For lifestyle/ceostudio, dim scene/pose/color sections (they have their own)
+  const sec4 = document.getElementById('sec-scene');
+  const sec5 = document.getElementById('sec-vibe');
+  if (sec4) sec4.style.opacity = (s === 'lifestyle' || s === 'ceostudio') ? '0.4' : '1';
+  if (sec4) sec4.style.pointerEvents = (s === 'lifestyle' || s === 'ceostudio') ? 'none' : '';
+  if (sec5) sec5.style.opacity = (s === 'lifestyle' || s === 'ceostudio') ? '0.4' : '1';
+  if (sec5) sec5.style.pointerEvents = (s === 'lifestyle' || s === 'ceostudio') ? 'none' : '';
 }
 
 function toggleColor(el) {
@@ -1931,6 +2117,20 @@ function getData() {
     conceptProp: g('conceptPropCustom') || g('conceptProp'),
     conceptBg: pick('bg','bgCustom'),
     conceptLight: g('conceptLight'),
+    // lifestyle (style 6)
+    lsLocation: g('lsLocation'),
+    lsProp: g('lsProp'),
+    lsAction: g('lsAction'),
+    lsLight: g('lsLight'),
+    lsShot: g('lsShot'),
+    lsLens: g('lsLens'),
+    // ceostudio (style 7)
+    csBackground: g('csBackground'),
+    csProp: g('csProp'),
+    csPose: g('csPose'),
+    csLight: g('csLight'),
+    csShot: g('csShot'),
+    csLens: g('csLens'),
   };
 }
 
@@ -2245,6 +2445,143 @@ function highlightField(id) {
   }
 }
 
+// ══════════════════════════════════════
+// STYLE 6 — CEO LIFESTYLE
+// ══════════════════════════════════════
+function buildLifestyle(d, forChatGPT) {
+  const parts = [];
+
+  if (forChatGPT) {
+    parts.push(`Using the uploaded photos as face reference, create this lifestyle photo:`);
+  } else {
+    parts.push(`Using the uploaded image, create this lifestyle photo:`);
+  }
+
+  // Subject
+  const skinDesc = d.skinFinish
+    ? `an elegant modern woman with ${d.skin || 'smooth natural skin'} ${d.skinFinish}`
+    : `an elegant modern woman with ${d.skin || 'smooth natural skin'}`;
+  parts.push(`${cap(skinDesc)}.`);
+
+  // Hair
+  if (d.hair) parts.push(`Her ${d.hair}.`);
+
+  // Makeup — natural/light for lifestyle
+  if (d.makeup) {
+    parts.push(`${cap(d.makeup)}.`);
+  } else {
+    parts.push(`Natural, polished makeup — clean skin, soft brows, a hint of gloss.`);
+  }
+
+  // Outfit
+  if (d.outfit) parts.push(`She wears ${d.outfit}.`);
+
+  // Accessories
+  if (d.accs && d.accs.length > 0) {
+    parts.push(`Accessories: ${d.accs.join(', ')}.`);
+  }
+
+  // Action + prop
+  const action = d.lsAction || 'looking at her phone with a focused, confident expression';
+  const prop = d.lsProp || 'a MacBook laptop open beside her';
+  parts.push(`She is ${action}. ${cap(prop)}.`);
+
+  // Location
+  if (d.lsLocation) {
+    parts.push(`Setting: ${d.lsLocation}.`);
+  }
+
+  // Lighting
+  const light = d.lsLight || 'soft natural window light coming from the left side, diffused through sheer curtains, creating soft shadows and a clean editorial look';
+  parts.push(`Lighting: ${light}.`);
+
+  // Color palette
+  parts.push(`Color palette: neutral and minimalist — beige, warm white, light gray, and the tones of her outfit. Calm, professional, elegant atmosphere.`);
+
+  // Composition + camera
+  const shot = d.lsShot || 'medium shot, eye-level angle, slight diagonal body position, rule of thirds composition, vertical framing';
+  const lens = d.lsLens || '50mm lens, f/2.8, shallow depth of field, background softly blurred, photorealistic';
+  parts.push(`Composition: ${shot}.`);
+  parts.push(`Camera: ${lens}, cinematic lighting, editorial photography style, high detail, 8k resolution, no cartoon, no illustration, no distortion.`);
+
+  // Closing
+  if (forChatGPT) {
+    parts.push(`Do not change my face. Match my facial features exactly from the reference photos.`);
+  } else {
+    parts.push(`Keep my facial features exactly as they are. Do not alter my face.`);
+  }
+
+  return parts.join('\n\n');
+}
+
+// ══════════════════════════════════════
+// STYLE 7 — CEO STUDIO
+// ══════════════════════════════════════
+function buildCeoStudio(d, forChatGPT) {
+  const parts = [];
+
+  if (forChatGPT) {
+    parts.push(`Using the uploaded photos as face reference, create this professional studio portrait:`);
+  } else {
+    parts.push(`Using the uploaded image, create this professional studio portrait:`);
+  }
+
+  // Subject
+  const skinDesc = d.skinFinish
+    ? `a powerful, polished woman with ${d.skin || 'smooth natural skin'} ${d.skinFinish}`
+    : `a powerful, polished woman with ${d.skin || 'smooth natural skin'}`;
+  parts.push(`${cap(skinDesc)}.`);
+
+  // Hair
+  if (d.hair) parts.push(`Her ${d.hair}.`);
+
+  // Makeup
+  if (d.makeup) {
+    parts.push(`${cap(d.makeup)}.`);
+  } else {
+    parts.push(`Polished professional makeup — defined brows, clean base, confident lip color.`);
+  }
+
+  // Outfit
+  if (d.outfit) parts.push(`She wears ${d.outfit}.`);
+
+  // Accessories
+  if (d.accs && d.accs.length > 0) {
+    parts.push(`Accessories: ${d.accs.join(', ')}.`);
+  }
+
+  // Pose
+  const pose = d.csPose || 'seated on a stool, body at a diagonal angle, looking directly into the camera with a confident, composed expression';
+  parts.push(`Pose: ${pose}.`);
+
+  // Prop
+  const prop = d.csProp;
+  if (prop && prop !== 'no prop, clean power pose') parts.push(`She is ${prop}.`);
+
+  // Studio background
+  const bg = d.csBackground || 'clean light gray studio backdrop, minimal and professional';
+  parts.push(`Background: ${bg}.`);
+
+  // Studio lighting
+  const light = d.csLight || 'professional studio lighting, soft box from the left, soft shadow behind her on the backdrop, clean and flattering';
+  parts.push(`Lighting: ${light}.`);
+
+  // Shot + lens
+  const shot = d.csShot || 'medium shot, eye-level, slight diagonal body angle, rule of thirds, vertical framing';
+  const lens = d.csLens || '85mm lens, f/2.0, sharp subject, creamy bokeh background, photorealistic, 8k';
+  parts.push(`Composition: ${shot}.`);
+  parts.push(`Camera: ${lens}, high detail, editorial photography, no cartoon, no illustration, no distortion.`);
+
+  // Closing
+  if (forChatGPT) {
+    parts.push(`Do not change my face. Match my facial features exactly from the reference photos.`);
+  } else {
+    parts.push(`Keep my facial features exactly as they are. Do not alter my face.`);
+  }
+
+  return parts.join('\n\n');
+}
+
 function generateAll() {
   const d = getData();
   const lang = document.documentElement.lang || 'en';
@@ -2291,6 +2628,12 @@ function generateAll() {
   } else if (promptStyle === 'chic') {
     gemPrompt = buildChic(d, false);
     gptPrompt = buildChic(d, true);
+  } else if (promptStyle === 'lifestyle') {
+    gemPrompt = buildLifestyle(d, false);
+    gptPrompt = buildLifestyle(d, true);
+  } else if (promptStyle === 'ceostudio') {
+    gemPrompt = buildCeoStudio(d, false);
+    gptPrompt = buildCeoStudio(d, true);
   } else {
     gemPrompt = buildConcept(d, false);
     gptPrompt = buildConcept(d, true);
@@ -2655,17 +2998,23 @@ let currentLang = 'en';
 const T = {
   en: {
     eyebrow: 'AI Headshot Prompt Generator',
-    tag_styles: '5 Prompt Styles', tag_copy: 'Copy & Paste Ready',
+    tag_styles: '7 Prompt Styles', tag_copy: 'Copy & Paste Ready',
     step1_title: 'Fill the form', step1_desc: 'Choose your style, vibe & look',
     step2_title: 'Generate', step2_desc: 'Get 2 prompts instantly',
     step3_title: 'Copy & paste', step3_desc: 'Into Gemini or ChatGPT',
     tip_title: 'Pro tip', tip_desc: 'Use a close-up frontal photo for best results',
-    s1_title: 'Choose Your Prompt Style', s1_desc: '5 formulas — each opens and closes differently',
+    s1_title: 'Choose Your Prompt Style', s1_desc: '7 formulas — each opens and closes differently',
     fierce_name: 'Fierce Goddess', fierce_desc: 'Poetic & cinematic. Wet-look hair, water droplets, chiaroscuro lighting.', fierce_pill: 'Detailed · Editorial',
     money_name: 'Money Boss', money_desc: 'Direct & fun. Cash, neon signs, floating money. Abundance energy.', money_pill: 'Fun · Abundance',
     beauty_name: 'Beauty Editorial', beauty_desc: 'Luxury beauty portrait. Nails, hands framing face, warm backdrop.', beauty_pill: 'Beauty · Nails · Warm',
     chic_name: 'Chic Editorial', chic_desc: 'Fashion editorial. Outfit-forward, seated pose, soft studio light.', chic_pill: 'Fashion · Elegant · Clean',
     concept_name: 'Concept / Themed', concept_desc: 'Short & direct. One central prop (food, object, element) defines the whole image. Monochromatic effect.', concept_pill: 'Short · Prop · Mono',
+    lifestyle_name: 'CEO Lifestyle', lifestyle_desc: 'Natural & editorial. Sofa, café, home office. Soft window light, neutral palette. Working woman — authentic, not posing.', lifestyle_pill: 'Natural · Editorial · Real',
+    ceostudio_name: 'CEO Studio', ceostudio_desc: 'Neutral studio backdrop. Controlled light, soft shadow. Looking at camera with attitude — laptop or phone in hand.', ceostudio_pill: 'Studio · Power · Clean',
+    lbl_ls_location: '📍 Location', lbl_ls_prop: '💻 Prop', lbl_ls_action: '🎬 Action / Expression',
+    lbl_ls_light: '🌤️ Light Mood', lbl_ls_shot: '📐 Shot & Composition', lbl_ls_lens: '🎥 Camera Feel',
+    lbl_cs_bg: '🎨 Studio Background', lbl_cs_prop: '💻 Prop', lbl_cs_pose: '🎬 Pose Attitude',
+    lbl_cs_light: '💡 Studio Lighting', lbl_cs_shot: '📐 Shot & Composition', lbl_cs_lens: '🎥 Camera Feel',
     s2_title: 'Your Look', s2_desc: 'Skin, eyes, hair, makeup — this anchors your identity in the image',
     lbl_skin: 'Skin tone', lbl_eyes: 'Eyes', lbl_color: 'Dominant color', lbl_sign: 'Chain / sign text',
     s3_title: 'Outfit & Accessories', s3_desc: 'Clothing, chains, props — the luxury details',
@@ -2777,17 +3126,23 @@ const T = {
   },
   es: {
     eyebrow: 'Generador de Prompts para Fotos IA',
-    tag_styles: '5 Estilos de Prompt', tag_copy: 'Listo para Copiar y Pegar',
+    tag_styles: '7 Estilos de Prompt', tag_copy: 'Listo para Copiar y Pegar',
     step1_title: 'Llena el formulario', step1_desc: 'Elige tu estilo, vibe y look',
     step2_title: 'Genera', step2_desc: 'Obtén 2 prompts al instante',
     step3_title: 'Copia y pega', step3_desc: 'En Gemini o ChatGPT',
     tip_title: 'Tip pro', tip_desc: 'Usa una foto frontal de cerca para mejor resultado',
-    s1_title: 'Elige tu Estilo de Prompt', s1_desc: '5 fórmulas — cada una abre y cierra diferente',
+    s1_title: 'Elige tu Estilo de Prompt', s1_desc: '7 fórmulas — cada una abre y cierra diferente',
     fierce_name: 'Fierce Goddess', fierce_desc: 'Poético y cinematográfico. Cabello wet-look, gotas de agua, iluminación chiaroscuro.', fierce_pill: 'Detallado · Editorial',
     money_name: 'Money Boss', money_desc: 'Directo y fun. Cash, letreros neón, dinero flotante. Energía de abundancia.', money_pill: 'Fun · Abundancia',
     beauty_name: 'Beauty Editorial', beauty_desc: 'Retrato de belleza de lujo. Uñas, manos enmarcando la cara, fondo cálido.', beauty_pill: 'Belleza · Uñas · Cálido',
     chic_name: 'Chic Editorial', chic_desc: 'Editorial de moda. Outfit protagonista, pose sentada, luz suave de estudio.', chic_pill: 'Moda · Elegante · Clean',
     concept_name: 'Concepto / Temático', concept_desc: 'Corto y directo. Un prop central (comida, objeto) define toda la imagen. Efecto monocromático.', concept_pill: 'Corto · Prop · Mono',
+    lifestyle_name: 'CEO Lifestyle', lifestyle_desc: 'Natural y editorial. Sofá, café, home office. Luz suave de ventana, paleta neutra. Mujer trabajando — auténtica, no posando.', lifestyle_pill: 'Natural · Editorial · Real',
+    ceostudio_name: 'CEO Studio', ceostudio_desc: 'Fondo neutro de estudio. Luz controlada, sombra suave. Mirando a cámara con actitud — laptop o teléfono en mano.', ceostudio_pill: 'Estudio · Poder · Clean',
+    lbl_ls_location: '📍 Lugar', lbl_ls_prop: '💻 Prop', lbl_ls_action: '🎬 Acción / Expresión',
+    lbl_ls_light: '🌤️ Luz y Ambiente', lbl_ls_shot: '📐 Encuadre y Composición', lbl_ls_lens: '🎥 Lente / Cámara',
+    lbl_cs_bg: '🎨 Fondo de Estudio', lbl_cs_prop: '💻 Prop', lbl_cs_pose: '🎬 Pose y Actitud',
+    lbl_cs_light: '💡 Iluminación de Estudio', lbl_cs_shot: '📐 Encuadre y Composición', lbl_cs_lens: '🎥 Lente / Cámara',
     s2_title: 'Tu Apariencia', s2_desc: 'Piel, ojos, cabello, maquillaje — esto ancla tu identidad en la imagen',
     lbl_skin: 'Tono de piel', lbl_eyes: 'Ojos', lbl_color: 'Color dominante', lbl_sign: 'Texto en cadena o letrero',
     s3_title: 'Outfit & Accesorios', s3_desc: 'Ropa, cadenas, props — los detalles de lujo',
