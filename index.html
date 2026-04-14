@@ -466,6 +466,12 @@ body::before {
 .style-card.on.ceostudio::before { opacity: 1; }
 .sc-pill.ceostudio { background: rgba(122,156,184,0.15); color: #8ab4cc; }
 
+/* Podcast Studio — warm amber */
+.style-card.podcast::before { background: radial-gradient(circle at top right, rgba(255,160,50,0.12), transparent); }
+.style-card.on.podcast { border-color: #ff9f1c; background: rgba(255,160,50,0.08); }
+.style-card.on.podcast::before { opacity: 1; }
+.sc-pill.podcast { background: rgba(255,160,50,0.15); color: #ff9f1c; }
+
 .sc-icon { font-size: 28px; margin-bottom: 10px; display: block; }
 .sc-name {
   font-family: 'Cormorant Garamond', serif;
@@ -1170,7 +1176,7 @@ input:focus, textarea:focus { border-color: var(--rose); }
       <div class="sec-num">01</div>
       <div class="sec-info">
         <div class="sec-title" data-i18n="s1_title">Choose Your Prompt Style</div>
-        <div class="sec-desc" data-i18n="s1_desc">7 formulas — each opens and closes differently</div>
+        <div class="sec-desc" data-i18n="s1_desc">8 formulas — each opens and closes differently</div>
       </div>
       <div class="sec-arrow">▾</div>
     </div>
@@ -1217,6 +1223,12 @@ input:focus, textarea:focus { border-color: var(--rose); }
           <div class="sc-name" data-i18n="ceostudio_name">CEO Studio</div>
           <div class="sc-desc" data-i18n="ceostudio_desc">Neutral studio backdrop. Controlled light, soft shadow. Looking at camera with attitude — laptop or phone in hand. Power headshot.</div>
           <span class="sc-pill ceostudio" data-i18n="ceostudio_pill">Studio · Power · Clean</span>
+        </div>
+        <div class="style-card podcast" id="sc-podcast" onclick="setStyle('podcast')" style="grid-column:1/-1">
+          <span class="sc-icon">🎙️</span>
+          <div class="sc-name" data-i18n="podcast_name">Podcast Studio</div>
+          <div class="sc-desc" data-i18n="podcast_desc">Professional podcast setup. Microphone, neon sign with your brand name, dark moody wall. Your voice, your brand, your stage.</div>
+          <span class="sc-pill podcast" data-i18n="podcast_pill">Podcast · Neon · Brand</span>
         </div>
       </div>
     </div>
@@ -1317,6 +1329,7 @@ input:focus, textarea:focus { border-color: var(--rose); }
           <optgroup label="🌿 CEO Lifestyle / Natural">
             <option value="long straight dark hair worn loose and natural, flowing freely with a clean center part" data-en="Long straight · loose natural" data-es="Lacio largo · suelto natural">Long straight · loose natural</option>
             <option value="long voluminous dark waves worn loose with a natural side part, full of body and movement" data-en="Long voluminous waves · side part" data-es="Ondas voluminosas · raya lateral">Long voluminous waves · side part</option>
+            <option value="long voluminous loose curls with caramel honey highlights, glamorous and natural, full of body and bounce" data-en="Voluminous loose curls · caramel highlights" data-es="Rizos sueltos voluminosos · mechas caramelo">Voluminous loose curls · caramel highlights</option>
           </optgroup>
 
         </select></div>
@@ -1456,6 +1469,11 @@ input:focus, textarea:focus { border-color: var(--rose); }
             <option value="a white oversized blazer over a black fitted turtleneck with white wide-leg trousers and nude strappy heeled sandals" data-en="White blazer + black turtleneck + white wide-leg" data-es="Blazer blanco + cuello alto negro + wide-leg blanco">White blazer + black turtleneck + white wide-leg</option>
             <option value="a black feather-trim blazer with charcoal dark gray wide-leg trousers — dark luxury monochromatic" data-en="Black feather blazer + charcoal wide-leg" data-es="Blazer plumas negro + wide-leg carbón">Black feather blazer + charcoal wide-leg</option>
             <option value="a navy deep-V fitted blazer with a gold logo belt cinched at the waist and black tailored trousers — no blouse, powerful neckline" data-en="Navy deep-V blazer + gold belt + black trousers" data-es="Blazer navy escote V + cinturón dorado + pantalón">Navy deep-V blazer + gold belt + black trousers</option>
+            <option value="a black structured oversized blazer over a white fitted top with light wash straight-leg jeans and camel nude mule heels" data-en="Black blazer + white top + light wash jeans + mules" data-es="Blazer negro + top blanco + jeans claros + mules">Black blazer + white top + light wash jeans + mules</option>
+            <option value="a cream oversized chunky knit sweater with white wide-leg trousers — cozy luxury work from home look" data-en="Cream chunky knit sweater + white wide-leg" data-es="Suéter tejido crema + wide-leg blanco">Cream chunky knit sweater + white wide-leg</option>
+            <option value="a cream ribbed fitted turtleneck top with matching cream ribbed wide-leg trousers — total monochrome cream, barefoot cozy editorial" data-en="Cream ribbed turtleneck + matching wide-leg · monochrome" data-es="Cuello alto acanalado crema + wide-leg · monocromático">Cream ribbed turtleneck + matching wide-leg · monochrome</option>
+            <option value="a camel tan oversized blazer worn as a dress over a white basic tee, with knee-high taupe leather boots" data-en="Camel blazer dress + white tee + knee-high boots" data-es="Blazer camel como vestido + tee blanco + botas altas">Camel blazer dress + white tee + knee-high boots</option>
+            <option value="a cream oversized blazer over a champagne satin camisole top with layered silver necklaces — feminine and powerful" data-en="Cream blazer + champagne satin cami + silver necklaces" data-es="Blazer crema + cami satinado champán + collares plateados">Cream blazer + champagne satin cami + silver necklaces</option>
           </optgroup>
 
           <optgroup label="📸 CEO Studio — Recommended" id="og-ceostudio" data-en="📸 CEO Studio — Recommended" data-es="📸 CEO Studio — Recomendado" style="display:none">
@@ -1589,6 +1607,10 @@ input:focus, textarea:focus { border-color: var(--rose); }
           <span class="tag" data-val="gold credit card held between fingers">💳 Gold credit card</span>
           <span class="tag" data-val="small bouquet of white roses">🌸 White roses bouquet</span>
           <span class="tag" data-val="a luxury perfume bottle held near face">🌺 Perfume bottle</span>
+          <span class="tag" data-val="clear transparent frame fashion glasses">👓 Clear frame glasses</span>
+          <span class="tag" data-val="an olive green baseball cap with a subtle logo">🧢 Olive baseball cap</span>
+          <span class="tag" data-val="a camel quilted shoulder bag worn crossbody">👜 Quilted camel bag</span>
+          <span class="tag" data-val="knee-high taupe leather boots">👢 Knee-high taupe boots</span>
         </div>
         <div class="custom-add-row">
           <input type="text" id="accsCustom" placeholder='e.g. diamond tiara, crystal arm cuff...'>
@@ -1635,6 +1657,9 @@ input:focus, textarea:focus { border-color: var(--rose); }
               <option value="on a sunlit outdoor terrace with a small round white table, panoramic mountain and city views, golden hour sunset sky, and surrounding plants" data-en="🌅 Outdoor terrace · panoramic · golden hour" data-es="🌅 Terraza exterior · panorámica · atardecer">🌅 Outdoor terrace · panoramic · golden hour</option>
               <option value="in the back seat of a luxury Rolls Royce with white leather interior, looking out the window at greenery outside" data-en="🚗 Rolls Royce · white leather interior" data-es="🚗 Rolls Royce · interior blanco">🚗 Rolls Royce · white leather interior</option>
               <option value="in the back seat of a luxury black SUV with dark leather interior, city lights visible through tinted windows at night" data-en="🚙 Luxury SUV · dark interior · night" data-es="🚙 SUV de lujo · interior oscuro · noche">🚙 Luxury SUV · dark interior · night</option>
+              <option value="in a modern aesthetic showroom or boutique space with a round oval wood table, cream bouclé chairs, clothing rack in the background, and a brick wall visible through black-frame windows" data-en="🏪 Aesthetic showroom · oval table · brick window" data-es="🏪 Showroom aesthetic · mesa ovalada · ventana ladrillo">🏪 Aesthetic showroom · oval table · brick window</option>
+              <option value="in a minimalist Scandinavian-style space with a gray modular sofa, light gray walls, and dramatic window light projections casting geometric shadow patterns on the wall" data-en="🪟 Scandinavian minimal · shadow projections on wall" data-es="🪟 Escandinavo minimal · sombras en pared">🪟 Scandinavian minimal · shadow projections on wall</option>
+              <option value="seated on wide outdoor concrete steps of a modern city plaza, urban editorial setting, gray concrete floor, open sky above" data-en="🏙️ Outdoor city steps · urban editorial" data-es="🏙️ Escalones exteriores · editorial urbano">🏙️ Outdoor city steps · urban editorial</option>
             </select></div>
           </div>
           <div class="field">
@@ -1652,6 +1677,7 @@ input:focus, textarea:focus { border-color: var(--rose); }
               <option value="MacBook open on the bed beside her, holding a wine glass raised casually" data-en="💻 MacBook + 🍷 wine glass raised" data-es="💻 MacBook + 🍷 copa de vino">💻 MacBook + 🍷 wine glass raised</option>
               <option value="MacBook open on conference table with scattered documents, a notebook, and a water bottle" data-en="💻 MacBook + documents · boardroom setup" data-es="💻 MacBook + documentos · sala reuniones">💻 MacBook + documents · boardroom setup</option>
               <option value="MacBook open on a small round outdoor table with an iPad, a ceramic coffee mug, and premium glass water bottles" data-en="💻 Full outdoor work setup" data-es="💻 Setup completo exterior">💻 Full outdoor work setup</option>
+              <option value="a white desk with a laptop, an iPad, and two smartphones laid out — full digital entrepreneur setup" data-en="💻 Full digital desk · laptop + iPad + 2 phones" data-es="💻 Setup digital completo · laptop + iPad + 2 teléfonos">💻 Full digital desk · laptop + iPad + 2 phones</option>
             </select></div>
           </div>
         </div>
@@ -1678,6 +1704,7 @@ input:focus, textarea:focus { border-color: var(--rose); }
               <option value="warm interior ambient lighting, soft and elegant, no harsh shadows" data-en="Warm interior ambient" data-es="Interior cálido y suave">Warm interior ambient</option>
               <option value="golden hour outdoor light, warm orange and amber tones, magic hour glow, sun setting behind the horizon" data-en="🌅 Golden hour outdoor · magic hour" data-es="🌅 Golden hour exterior · hora mágica">🌅 Golden hour outdoor · magic hour</option>
               <option value="dark cinematic interior lighting, warm glow from inside contrasting with dark exterior, city lights bokeh visible through windows at night" data-en="🌙 Night · city lights bokeh · cinematic" data-es="🌙 Noche · bokeh luces ciudad · cinemático">🌙 Night · city lights bokeh · cinematic</option>
+              <option value="hard natural side light casting dramatic geometric shadow patterns from window frames onto a light gray or white wall — Scandinavian editorial mood" data-en="🪟 Window shadow projections · Scandinavian editorial" data-es="🪟 Sombras de ventana en pared · editorial escandinavo">🪟 Window shadow projections · Scandinavian editorial</option>
             </select></div>
           </div>
         </div>
@@ -1722,6 +1749,7 @@ input:focus, textarea:focus { border-color: var(--rose); }
               <option value="office or studio space at night, large floor-to-ceiling window behind her showing a blurred city skyline with bokeh lights, warm interior lighting from the front" data-en="🌙 Night office · city bokeh window" data-es="🌙 Oficina nocturna · ventana bokeh ciudad">🌙 Night office · city bokeh window</option>
               <option value="soft sage green studio backdrop, fresh and modern" data-en="Sage green · modern" data-es="Verde salvia · moderno">Verde salvia · moderno</option>
               <option value="neutral greige studio backdrop, timeless and editorial" data-en="Greige · timeless" data-es="Greige · atemporal">Greige · atemporal</option>
+              <option value="warm taupe brown studio backdrop with pampas grass decorative plants on both sides — boho chic editorial" data-en="🌾 Warm taupe · pampas grass · boho editorial" data-es="🌾 Taupe cálido · pampas grass · boho editorial">🌾 Warm taupe · pampas grass · boho editorial</option>
             </select></div>
           </div>
           <div class="field">
@@ -1732,6 +1760,7 @@ input:focus, textarea:focus { border-color: var(--rose); }
               <option value="holding a smartphone confidently in one hand" data-en="📱 Smartphone in hand" data-es="📱 Smartphone en mano">📱 Smartphone en mano</option>
               <option value="laptop resting on her knees while she looks at the camera" data-en="💻 Laptop on knees" data-es="💻 Laptop sobre rodillas">💻 Laptop sobre rodillas</option>
               <option value="holding a coffee cup elegantly in one hand" data-en="☕ Coffee cup" data-es="☕ Taza de café">☕ Taza de café</option>
+              <option value="holding a smartphone with the screen facing toward the camera, pointing at it with one finger and smiling — CTA pose" data-en="📱 Phone toward camera · CTA pose" data-es="📱 Teléfono hacia cámara · pose CTA">📱 Phone toward camera · CTA pose</option>
               <option value="no prop, clean power pose" data-en="No prop · pure power" data-es="Sin prop · poder puro">Sin prop · poder puro</option>
             </select></div>
           </div>
@@ -1787,7 +1816,70 @@ input:focus, textarea:focus { border-color: var(--rose); }
         </div>
       </div>
 
-      <!-- NORMAL SCENE FIELDS — hidden when lifestyle or ceostudio active -->
+      </div>
+
+      <!-- PODCAST STUDIO FIELDS (style 8) -->
+      <div id="podcast-scene" style="display:none; flex-direction:column; gap:16px;">
+        <div class="field">
+          <div class="label" data-i18n="lbl_pod_neon">✨ Neon Sign Text — your brand name</div>
+          <input type="text" id="podNeonText" placeholder='e.g. JOHANNA DIGITAL SEATTLE · MY BRAND · CEO LIFE' style="width:100%; background:var(--ink3); border:1px solid var(--border2); border-radius:8px; padding:12px 14px; color:var(--text); font-family:inherit; font-size:13px; outline:none;">
+        </div>
+        <div class="row2">
+          <div class="field">
+            <div class="label" data-i18n="lbl_pod_bg">🎨 Background Wall</div>
+            <div class="sel-wrap"><select id="podBackground">
+              <option value="">— Select —</option>
+              <option value="dark charcoal wall" data-en="Dark charcoal · classic" data-es="Carbón oscuro · clásico">Dark charcoal · classic</option>
+              <option value="deep dark navy wall" data-en="Deep navy · moody" data-es="Azul marino oscuro · dramático">Deep navy · moody</option>
+              <option value="dark espresso brown wall" data-en="Espresso brown · warm" data-es="Café espresso · cálido">Espresso brown · warm</option>
+            </select></div>
+          </div>
+          <div class="field">
+            <div class="label" data-i18n="lbl_pod_mic">🎙️ Microphone</div>
+            <div class="sel-wrap"><select id="podMic">
+              <option value="">— Select —</option>
+              <option value="a sleek black professional podcast microphone on a boom arm, positioned in the right foreground" data-en="Black podcast mic · right side" data-es="Mic negro podcast · lado derecho">Black podcast mic · right side</option>
+              <option value="a sleek black professional podcast microphone on a boom arm, positioned in the left foreground" data-en="Black podcast mic · left side" data-es="Mic negro podcast · lado izquierdo">Black podcast mic · left side</option>
+              <option value="a silver vintage-style condenser microphone on a desk stand" data-en="Silver vintage mic · desk stand" data-es="Mic plateado vintage · base de escritorio">Silver vintage mic · desk stand</option>
+            </select></div>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <div class="label" data-i18n="lbl_pod_shot">📐 Shot & Pose</div>
+            <div class="sel-wrap"><select id="podShot">
+              <option value="">— Select —</option>
+              <option value="close-up portrait, eye-level, looking directly at camera with calm confident expression, microphone visible in foreground, neon sign readable above" data-en="Close-up · direct gaze · neon above" data-es="Close-up · mirada directa · neon arriba">Close-up · direct gaze · neon above</option>
+              <option value="medium shot, body at slight 3/4 angle toward microphone, natural mid-conversation expression, neon sign visible in background" data-en="Medium · 3/4 angle · mid-conversation" data-es="Medio · ángulo 3/4 · conversación natural">Medium · 3/4 angle · mid-conversation</option>
+              <option value="medium shot, leaning slightly forward toward microphone, both hands relaxed on desk, intense gaze directly at camera" data-en="Leaning in · hands on desk · power" data-es="Inclinada · manos en mesa · poder">Leaning in · hands on desk · power</option>
+            </select></div>
+          </div>
+          <div class="field">
+            <div class="label" data-i18n="lbl_pod_light">💡 Lighting</div>
+            <div class="sel-wrap"><select id="podLight">
+              <option value="">— Select —</option>
+              <option value="warm amber neon glow from the sign behind her casting subtle light on the wall, soft neutral front fill light on her face, moody cinematic atmosphere" data-en="Neon glow · soft front fill · moody" data-es="Glow neón · luz frontal suave · cinemático">Neon glow · soft front fill · moody</option>
+              <option value="warm amber neon glow as main light source, very dark background, dramatic and intimate atmosphere" data-en="Neon only · very dark · dramatic" data-es="Solo neón · muy oscuro · dramático">Neon only · very dark · dramatic</option>
+              <option value="balanced studio lighting with neon sign visible as accent, professional and clean" data-en="Balanced studio · neon accent" data-es="Estudio balanceado · neón de acento">Balanced studio · neon accent</option>
+            </select></div>
+          </div>
+        </div>
+
+        <!-- Podcast outfits -->
+        <div class="field">
+          <div class="label" data-i18n="lbl_pod_outfit">👗 Outfit — Podcast Recommended</div>
+          <div class="sel-wrap"><select id="podOutfit">
+            <option value="">— Select —</option>
+            <option value="a camel structured blazer over a black fitted top" data-en="Camel blazer + black top" data-es="Blazer camel + top negro">Camel blazer + black top</option>
+            <option value="a cream oversized blazer over a champagne satin camisole top" data-en="Cream blazer + champagne satin cami" data-es="Blazer crema + cami satinado champán">Cream blazer + champagne satin cami</option>
+            <option value="a sharp black blazer over a crisp fitted white top" data-en="Black blazer + white top" data-es="Blazer negro + top blanco">Black blazer + white top</option>
+            <option value="a deep burgundy blazer with a fitted silhouette" data-en="Burgundy blazer · bold" data-es="Blazer borgoña · poderosa">Burgundy blazer · bold</option>
+            <option value="a sleek all-black fitted blazer, no top underneath, powerful and minimal" data-en="All black blazer · minimal power" data-es="Blazer negro total · poder mínimal">All black blazer · minimal power</option>
+          </select></div>
+        </div>
+      </div>
+
+      <!-- NORMAL SCENE FIELDS — hidden when lifestyle or ceostudio or podcast active -->
       <div id="normal-scene">
       <div class="row2">
         <div class="field">
@@ -2090,7 +2182,7 @@ document.querySelectorAll('.section-body.open').forEach(b => b.style.display = '
 
 function setStyle(s) {
   promptStyle = s;
-  ['fierce','money','beauty','chic','concept','lifestyle','ceostudio'].forEach(id => {
+  ['fierce','money','beauty','chic','concept','lifestyle','ceostudio','podcast'].forEach(id => {
     const el = document.getElementById('sc-' + id);
     if (el) el.classList.toggle('on', s === id);
   });
@@ -2108,27 +2200,30 @@ function setStyle(s) {
   if (conceptFields) conceptFields.style.display = s === 'concept' ? 'flex' : 'none';
 
   // Section 04 — show correct scene panel
+  const isCEOorPod = (s === 'lifestyle' || s === 'ceostudio' || s === 'podcast');
   const normalScene = document.getElementById('normal-scene');
   const lifestyleScene = document.getElementById('lifestyle-scene');
   const ceostudioScene = document.getElementById('ceostudio-scene');
-  if (normalScene) normalScene.style.display = (s === 'lifestyle' || s === 'ceostudio') ? 'none' : '';
+  const podcastScene = document.getElementById('podcast-scene');
+  if (normalScene) normalScene.style.display = isCEOorPod ? 'none' : '';
   if (lifestyleScene) lifestyleScene.style.display = s === 'lifestyle' ? 'flex' : 'none';
   if (ceostudioScene) ceostudioScene.style.display = s === 'ceostudio' ? 'flex' : 'none';
+  if (podcastScene) podcastScene.style.display = s === 'podcast' ? 'flex' : 'none';
 
-  // Section 05 vibe — dim for lifestyle/ceostudio (they don't use it)
+  // Section 05 vibe — dim for lifestyle/ceostudio/podcast
   const sec5 = document.getElementById('sec-vibe');
   if (sec5) {
-    sec5.style.opacity = (s === 'lifestyle' || s === 'ceostudio') ? '0.35' : '1';
-    sec5.style.pointerEvents = (s === 'lifestyle' || s === 'ceostudio') ? 'none' : '';
+    sec5.style.opacity = isCEOorPod ? '0.35' : '1';
+    sec5.style.pointerEvents = isCEOorPod ? 'none' : '';
   }
 
-  // Show CEO outfit optgroups when relevant
+  // CEO outfit optgroups
   const ogLifestyle = document.getElementById('og-lifestyle');
   const ogCeostudio = document.getElementById('og-ceostudio');
   if (ogLifestyle) ogLifestyle.style.display = s === 'lifestyle' ? '' : 'none';
   if (ogCeostudio) ogCeostudio.style.display = s === 'ceostudio' ? '' : 'none';
 
-  // Accessories filter for CEO styles — show only elegant minimal ones, max 2
+  // Accessories filter
   updateAccsForStyle(s);
 }
 
@@ -2148,6 +2243,7 @@ const CEO_ACCS = [
   'delicate gold cross necklace',
   'narrow dark fashion sunglasses, small and stylish',
   'black cat-eye retro sunglasses',
+  'clear transparent frame fashion glasses',
   'a luxury Birkin-style structured bag placed beside her',
   'a gold logo belt cinched at the waist',
 ];
@@ -2155,7 +2251,7 @@ const CEO_ACCS = [
 function updateAccsForStyle(s) {
   const group = document.getElementById('accs');
   if (!group) return;
-  const isCEO = (s === 'lifestyle' || s === 'ceostudio');
+  const isCEO = (s === 'lifestyle' || s === 'ceostudio' || s === 'podcast');
   const tags = group.querySelectorAll('.tag:not(.custom-tag)');
   tags.forEach(tag => {
     const val = tag.dataset.val;
@@ -2199,7 +2295,7 @@ document.addEventListener('click', e => {
   const isOn = tag.classList.contains('on');
 
   if (isAccs && !isOn) {
-    const isCEO = (promptStyle === 'lifestyle' || promptStyle === 'ceostudio');
+    const isCEO = (promptStyle === 'lifestyle' || promptStyle === 'ceostudio' || promptStyle === 'podcast');
     const maxAccs = isCEO ? 2 : 3;
     const selected = group.querySelectorAll('.tag.on').length;
     if (selected >= maxAccs) {
@@ -2264,6 +2360,13 @@ function getData() {
     csLight: g('csLight'),
     csShot: g('csShot'),
     csLens: g('csLens'),
+    // podcast (style 8)
+    podNeonText: g('podNeonText'),
+    podBackground: g('podBackground'),
+    podMic: g('podMic'),
+    podShot: g('podShot'),
+    podLight: g('podLight'),
+    podOutfit: g('podOutfit'),
   };
 }
 
@@ -2715,6 +2818,71 @@ function buildCeoStudio(d, forChatGPT) {
   return parts.join('\n\n');
 }
 
+// ══════════════════════════════════════
+// STYLE 8 — PODCAST STUDIO
+// ══════════════════════════════════════
+function buildPodcast(d, forChatGPT) {
+  const parts = [];
+
+  const neon = d.podNeonText || 'MY BRAND';
+  const bg = d.podBackground || 'dark charcoal wall';
+  const mic = d.podMic || 'a sleek black professional podcast microphone on a boom arm, positioned in the right foreground';
+  const shot = d.podShot || 'close-up portrait, eye-level, looking directly at camera with calm confident expression, microphone visible in foreground, neon sign readable above';
+  const light = d.podLight || 'warm amber neon glow from the sign behind her casting subtle light on the wall, soft neutral front fill light on her face, moody cinematic atmosphere';
+  const outfit = d.podOutfit || d.outfit || 'a camel structured blazer over a black fitted top';
+
+  if (forChatGPT) {
+    parts.push(`Using the uploaded photos as face reference, create this scene:`);
+  } else {
+    parts.push(`Using the uploaded image, create this scene:`);
+  }
+
+  // Subject
+  const skinDesc = d.skinFinish
+    ? `a confident professional woman with ${d.skin || 'smooth natural skin'} ${d.skinFinish}`
+    : `a confident professional woman with ${d.skin || 'smooth natural skin'}`;
+  parts.push(`${cap(skinDesc)}.`);
+
+  // Hair
+  if (d.hair) parts.push(`Her ${d.hair}.`);
+
+  // Makeup
+  if (d.makeup) {
+    parts.push(`${cap(d.makeup)}.`);
+  } else {
+    parts.push(`Natural glam makeup — glowing skin, defined brows, soft nude-pink lip.`);
+  }
+
+  // Outfit
+  parts.push(`She wears ${outfit}.`);
+
+  // Accessories
+  if (d.accs && d.accs.length > 0) {
+    parts.push(`Accessories: ${d.accs.join(', ')}.`);
+  }
+
+  // Podcast setup
+  parts.push(`Setting: a professional podcast studio. Background: ${bg}. A warm glowing amber neon sign reading "${neon}" is mounted on the wall behind her, casting a warm amber/orange glow. ${cap(mic)}, slightly out of focus.`);
+
+  // Lighting
+  parts.push(`Lighting: ${light}.`);
+
+  // Shot
+  parts.push(`Composition: ${shot}. Vertical framing.`);
+
+  // Camera
+  parts.push(`Camera: 85mm lens, f/2.0, shallow depth of field, sharp face, neon sign readable in background, photorealistic, 8k, editorial photography, no over-lighting, no flat black walls.`);
+
+  // Closing
+  if (forChatGPT) {
+    parts.push(`Do not change my face. Match my facial features exactly from the reference photos.`);
+  } else {
+    parts.push(`Keep my facial features exactly as they are. Do not alter my face.`);
+  }
+
+  return parts.join('\n\n');
+}
+
 function generateAll() {
   const d = getData();
   const lang = document.documentElement.lang || 'en';
@@ -2767,6 +2935,9 @@ function generateAll() {
   } else if (promptStyle === 'ceostudio') {
     gemPrompt = buildCeoStudio(d, false);
     gptPrompt = buildCeoStudio(d, true);
+  } else if (promptStyle === 'podcast') {
+    gemPrompt = buildPodcast(d, false);
+    gptPrompt = buildPodcast(d, true);
   } else {
     gemPrompt = buildConcept(d, false);
     gptPrompt = buildConcept(d, true);
@@ -2950,7 +3121,7 @@ function addCustomTag(inputId, groupId) {
 
   // Max check for accs
   if (groupId === 'accs') {
-    const isCEO = (promptStyle === 'lifestyle' || promptStyle === 'ceostudio');
+    const isCEO = (promptStyle === 'lifestyle' || promptStyle === 'ceostudio' || promptStyle === 'podcast');
     const maxAccs = isCEO ? 2 : 3;
     const selected = group.querySelectorAll('.tag.on').length;
     if (selected >= maxAccs) {
@@ -3133,12 +3304,12 @@ let currentLang = 'en';
 const T = {
   en: {
     eyebrow: 'AI Headshot Prompt Generator',
-    tag_styles: '7 Prompt Styles', tag_copy: 'Copy & Paste Ready',
+    tag_styles: '8 Prompt Styles', tag_copy: 'Copy & Paste Ready',
     step1_title: 'Fill the form', step1_desc: 'Choose your style, vibe & look',
     step2_title: 'Generate', step2_desc: 'Get 2 prompts instantly',
     step3_title: 'Copy & paste', step3_desc: 'Into Gemini or ChatGPT',
     tip_title: 'Pro tip', tip_desc: 'Use a close-up frontal photo for best results',
-    s1_title: 'Choose Your Prompt Style', s1_desc: '7 formulas — each opens and closes differently',
+    s1_title: 'Choose Your Prompt Style', s1_desc: '8 formulas — each opens and closes differently',
     fierce_name: 'Fierce Goddess', fierce_desc: 'Poetic & cinematic. Wet-look hair, water droplets, chiaroscuro lighting.', fierce_pill: 'Detailed · Editorial',
     money_name: 'Money Boss', money_desc: 'Direct & fun. Cash, neon signs, floating money. Abundance energy.', money_pill: 'Fun · Abundance',
     beauty_name: 'Beauty Editorial', beauty_desc: 'Luxury beauty portrait. Nails, hands framing face, warm backdrop.', beauty_pill: 'Beauty · Nails · Warm',
@@ -3146,6 +3317,9 @@ const T = {
     concept_name: 'Concept / Themed', concept_desc: 'Short & direct. One central prop (food, object, element) defines the whole image. Monochromatic effect.', concept_pill: 'Short · Prop · Mono',
     lifestyle_name: 'CEO Lifestyle', lifestyle_desc: 'Natural & editorial. Sofa, café, home office. Soft window light, neutral palette. Working woman — authentic, not posing.', lifestyle_pill: 'Natural · Editorial · Real',
     ceostudio_name: 'CEO Studio', ceostudio_desc: 'Neutral studio backdrop. Controlled light, soft shadow. Looking at camera with attitude — laptop or phone in hand.', ceostudio_pill: 'Studio · Power · Clean',
+    podcast_name: 'Podcast Studio', podcast_desc: 'Professional podcast setup. Microphone, neon sign with your brand name, dark moody wall. Your voice, your brand, your stage.', podcast_pill: 'Podcast · Neon · Brand',
+    lbl_pod_neon: '✨ Neon Sign Text — your brand name', lbl_pod_bg: '🎨 Background Wall', lbl_pod_mic: '🎙️ Microphone',
+    lbl_pod_shot: '📐 Shot & Pose', lbl_pod_light: '💡 Lighting', lbl_pod_outfit: '👗 Outfit — Podcast Recommended',
     lbl_ls_location: '📍 Location', lbl_ls_prop: '💻 Prop', lbl_ls_action: '🎬 Action / Expression',
     lbl_ls_light: '🌤️ Light Mood', lbl_ls_shot: '📐 Shot & Composition', lbl_ls_lens: '🎥 Camera Feel',
     lbl_cs_bg: '🎨 Studio Background', lbl_cs_prop: '💻 Prop', lbl_cs_pose: '🎬 Pose Attitude',
@@ -3261,12 +3435,12 @@ const T = {
   },
   es: {
     eyebrow: 'Generador de Prompts para Fotos IA',
-    tag_styles: '7 Estilos de Prompt', tag_copy: 'Listo para Copiar y Pegar',
+    tag_styles: '8 Estilos de Prompt', tag_copy: 'Listo para Copiar y Pegar',
     step1_title: 'Llena el formulario', step1_desc: 'Elige tu estilo, vibe y look',
     step2_title: 'Genera', step2_desc: 'Obtén 2 prompts al instante',
     step3_title: 'Copia y pega', step3_desc: 'En Gemini o ChatGPT',
     tip_title: 'Tip pro', tip_desc: 'Usa una foto frontal de cerca para mejor resultado',
-    s1_title: 'Elige tu Estilo de Prompt', s1_desc: '7 fórmulas — cada una abre y cierra diferente',
+    s1_title: 'Elige tu Estilo de Prompt', s1_desc: '8 fórmulas — cada una abre y cierra diferente',
     fierce_name: 'Fierce Goddess', fierce_desc: 'Poético y cinematográfico. Cabello wet-look, gotas de agua, iluminación chiaroscuro.', fierce_pill: 'Detallado · Editorial',
     money_name: 'Money Boss', money_desc: 'Directo y fun. Cash, letreros neón, dinero flotante. Energía de abundancia.', money_pill: 'Fun · Abundancia',
     beauty_name: 'Beauty Editorial', beauty_desc: 'Retrato de belleza de lujo. Uñas, manos enmarcando la cara, fondo cálido.', beauty_pill: 'Belleza · Uñas · Cálido',
@@ -3274,6 +3448,9 @@ const T = {
     concept_name: 'Concepto / Temático', concept_desc: 'Corto y directo. Un prop central (comida, objeto) define toda la imagen. Efecto monocromático.', concept_pill: 'Corto · Prop · Mono',
     lifestyle_name: 'CEO Lifestyle', lifestyle_desc: 'Natural y editorial. Sofá, café, home office. Luz suave de ventana, paleta neutra. Mujer trabajando — auténtica, no posando.', lifestyle_pill: 'Natural · Editorial · Real',
     ceostudio_name: 'CEO Studio', ceostudio_desc: 'Fondo neutro de estudio. Luz controlada, sombra suave. Mirando a cámara con actitud — laptop o teléfono en mano.', ceostudio_pill: 'Estudio · Poder · Clean',
+    podcast_name: 'Podcast Studio', podcast_desc: 'Setup profesional de podcast. Micrófono, letrero neón con tu nombre de marca, pared oscura y cinematográfica. Tu voz, tu marca, tu escenario.', podcast_pill: 'Podcast · Neón · Marca',
+    lbl_pod_neon: '✨ Texto del Letrero Neón — tu nombre de marca', lbl_pod_bg: '🎨 Pared de Fondo', lbl_pod_mic: '🎙️ Micrófono',
+    lbl_pod_shot: '📐 Encuadre y Pose', lbl_pod_light: '💡 Iluminación', lbl_pod_outfit: '👗 Outfit — Podcast Recomendado',
     lbl_ls_location: '📍 Lugar', lbl_ls_prop: '💻 Prop', lbl_ls_action: '🎬 Acción / Expresión',
     lbl_ls_light: '🌤️ Luz y Ambiente', lbl_ls_shot: '📐 Encuadre y Composición', lbl_ls_lens: '🎥 Lente / Cámara',
     lbl_cs_bg: '🎨 Fondo de Estudio', lbl_cs_prop: '💻 Prop', lbl_cs_pose: '🎬 Pose y Actitud',
