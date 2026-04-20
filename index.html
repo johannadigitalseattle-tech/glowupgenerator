@@ -2024,7 +2024,7 @@ input:focus, textarea:focus { border-color: var(--rose); }
     <span data-i18n="btn_generate">✦ Generate My Prompts</span>
   </button>
 
-  <!-- GEMINI -->
+  <!-- GEMINI AI STUDIO -->
   <div class="prompt-block">
     <div class="pb-header">
       <div class="pb-tool">
@@ -2382,7 +2382,7 @@ function buildFierce(d, forChatGPT) {
   if (forChatGPT) {
     parts.push(`Using the uploaded photos as face reference, please create this scene:`);
   } else {
-    parts.push(`Using the uploaded image, please create this scene:`);
+    parts.push(`Crea una imagen hiperrealista de una mujer con las mismas facciones, color de piel, ojos y cabello de la referencia, sin alterar el rostro ni sus características originales.`);
   }
 
   // PHYSICAL PRESENCE
@@ -2464,7 +2464,7 @@ function buildFierce(d, forChatGPT) {
   // CLOSING — soft phrasing avoids Gemini filter
   parts.push(forChatGPT
     ? `Do not change my face at all. Match the face from the reference photos exactly.`
-    : `Keep my facial features exactly as they are.`);
+    : `Fotografía hiperrealista 8K, texturas realistas de piel, tela y luz, estilo editorial de moda contemporánea. Atmósfera: sofisticada, moderna y cinematográfica.`);
 
   return parts.join(' ');
 }
@@ -2477,7 +2477,7 @@ function buildMoney(d, forChatGPT) {
   if (forChatGPT) {
     parts.push(`Using the uploaded photos as face reference, please create this photo --`);
   } else {
-    parts.push(`Using the uploaded image, please create this photo --`);
+    parts.push(`Crea una imagen hiperrealista de una mujer con las mismas facciones, color de piel, ojos y cabello de la referencia, sin alterar el rostro ni sus características originales.`);
   }
 
   // PHYSICAL — Shay's money prompt is one sentence for looks
@@ -2518,7 +2518,7 @@ function buildMoney(d, forChatGPT) {
   // CLOSING — Shay exact
   parts.push(forChatGPT
     ? `Keep my facial features the same. Match the face from the reference photos exactly.`
-    : `Keep my facial features the same.`);
+    : `Fotografía hiperrealista 8K, texturas realistas de piel, tela y luz, estilo editorial de moda contemporánea. Atmósfera: sofisticada, moderna y cinematográfica.`);
 
   return parts.join(' ');
 }
@@ -2594,7 +2594,7 @@ function buildBeauty(d, forChatGPT) {
   // CLOSING — Shay uses ALL CAPS for beauty
   parts.push(forChatGPT
     ? `DO NOT CHANGE MY FACE AT ALL. Match the face from the reference photos exactly.`
-    : `Keep my facial features exactly as shown in the photo.`);
+    : `Fotografía hiperrealista 8K, texturas realistas de piel, tela y luz, estilo editorial de moda contemporánea. Atmósfera: sofisticada, moderna y cinematográfica.`);
 
   return parts.join(' ');
 }
@@ -2607,7 +2607,7 @@ function buildConcept(d, forChatGPT) {
   if (forChatGPT) {
     parts.push(`Using the uploaded photos as face reference, create`);
   } else {
-    parts.push(`Using the uploaded image, create`);
+    parts.push(`Crea una imagen hiperrealista de una mujer con las mismas facciones, color de piel, ojos y cabello de la referencia, sin alterar el rostro ni sus características originales.`);
   }
 
   // PHYSICAL — concise, one sentence
@@ -2647,7 +2647,7 @@ function buildConcept(d, forChatGPT) {
   // CLOSING — Shay exact, NO period at the end, matches original exactly
   parts.push(forChatGPT
     ? `Do not change the facial features. Match the face from reference photos exactly`
-    : `Keep my facial features the same`);
+    : `Fotografía hiperrealista 8K, texturas realistas de piel, tela y luz, estilo editorial de moda contemporánea. Atmósfera: sofisticada, moderna y cinematográfica.`);
 
   return parts.join(' ');
 }
@@ -2690,7 +2690,7 @@ function buildLifestyle(d, forChatGPT) {
   if (forChatGPT) {
     parts.push(`Using the uploaded photos as face reference, create this lifestyle photo:`);
   } else {
-    parts.push(`Using the uploaded image, create this lifestyle photo:`);
+    parts.push(`Crea una imagen hiperrealista de una mujer con las mismas facciones, color de piel, ojos y cabello de la referencia, sin alterar el rostro ni sus características originales.`);
   }
 
   // Subject
@@ -2744,7 +2744,7 @@ function buildLifestyle(d, forChatGPT) {
   if (forChatGPT) {
     parts.push(`Do not change my face. Match my facial features exactly from the reference photos.`);
   } else {
-    parts.push(`Keep my facial features exactly as they are. Do not alter my face.`);
+    parts.push(`Fotografía hiperrealista 8K, texturas realistas de piel, tela y luz, estilo editorial de moda contemporánea. Atmósfera: sofisticada, moderna y cinematográfica.`);
   }
 
   return parts.join('\n\n');
@@ -2759,7 +2759,7 @@ function buildCeoStudio(d, forChatGPT) {
   if (forChatGPT) {
     parts.push(`Using the uploaded photos as face reference, create this professional studio portrait:`);
   } else {
-    parts.push(`Using the uploaded image, create this professional studio portrait:`);
+    parts.push(`Crea una imagen hiperrealista de una mujer con las mismas facciones, color de piel, ojos y cabello de la referencia, sin alterar el rostro ni sus características originales.`);
   }
 
   // Subject
@@ -2812,7 +2812,7 @@ function buildCeoStudio(d, forChatGPT) {
   if (forChatGPT) {
     parts.push(`Do not change my face. Match my facial features exactly from the reference photos.`);
   } else {
-    parts.push(`Keep my facial features exactly as they are. Do not alter my face.`);
+    parts.push(`Fotografía hiperrealista 8K, texturas realistas de piel, tela y luz, estilo editorial de moda contemporánea. Atmósfera: sofisticada, moderna y cinematográfica.`);
   }
 
   return parts.join('\n\n');
@@ -2834,7 +2834,7 @@ function buildPodcast(d, forChatGPT) {
   if (forChatGPT) {
     parts.push(`Using the uploaded photos as face reference, create this scene:`);
   } else {
-    parts.push(`Using the uploaded image, create this scene:`);
+    parts.push(`Crea una imagen hiperrealista de una mujer con las mismas facciones, color de piel, ojos y cabello de la referencia, sin alterar el rostro ni sus características originales.`);
   }
 
   // Subject
@@ -2877,7 +2877,7 @@ function buildPodcast(d, forChatGPT) {
   if (forChatGPT) {
     parts.push(`Do not change my face. Match my facial features exactly from the reference photos.`);
   } else {
-    parts.push(`Keep my facial features exactly as they are. Do not alter my face.`);
+    parts.push(`Fotografía hiperrealista 8K, texturas realistas de piel, tela y luz, estilo editorial de moda contemporánea. Atmósfera: sofisticada, moderna y cinematográfica.`);
   }
 
   return parts.join('\n\n');
@@ -3195,7 +3195,7 @@ function buildChic(d, forChatGPT) {
   if (forChatGPT) {
     parts.push(`Using the uploaded photos as face reference, create a photo with this scene —`);
   } else {
-    parts.push(`Using the uploaded image, create a photo with this scene —`);
+    parts.push(`Crea una imagen hiperrealista de una mujer con las mismas facciones, color de piel, ojos y cabello de la referencia, sin alterar el rostro ni sus características originales.`);
   }
 
   // TYPE + VIBE INTRO — Shay names the energy upfront in this style
@@ -3250,7 +3250,7 @@ function buildChic(d, forChatGPT) {
   // CLOSING — Shay exact (no "at all" in this style)
   parts.push(forChatGPT
     ? `DO NOT CHANGE MY FACE. Match the face from the reference photos exactly.`
-    : `Keep my facial features exactly as they are.`);
+    : `Fotografía hiperrealista 8K, texturas realistas de piel, tela y luz, estilo editorial de moda contemporánea. Atmósfera: sofisticada, moderna y cinematográfica.`);
 
   return parts.join(' ');
 }
