@@ -34,6 +34,38 @@
 
 html { scroll-behavior: smooth; }
 
+/* ── VARIANT SELECTOR ── */
+.variant-selector {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  background: rgba(255,0,168,0.04);
+  border: 1px solid rgba(255,0,168,0.15);
+  border-radius: 10px;
+}
+.variant-btn {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border2);
+  background: var(--ink3);
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+}
+.variant-btn:hover { border-color: var(--rose); color: var(--text); }
+.variant-btn.active {
+  border-color: var(--rose);
+  background: rgba(255,0,168,0.1);
+  color: var(--rose);
+  font-weight: 600;
+}
+
 /* ── LOGIN OVERLAY ── */
 #login-overlay {
   position: fixed;
@@ -1736,6 +1768,10 @@ input:focus, textarea:focus { border-color: var(--rose); }
 
       <!-- CEO STUDIO scene fields — shown when style=ceostudio -->
       <div id="ceostudio-scene" style="display:none; flex-direction:column; gap:16px;">
+        <div class="variant-selector">
+          <button class="variant-btn active" id="vbtn-ceostudio" onclick="setVariant('ceostudio','classic')">📸 CEO Studio</button>
+          <button class="variant-btn" id="vbtn-newspaper" onclick="setVariant('ceostudio','newspaper')">📰 CEO Periódico</button>
+        </div>
         <div class="row2">
           <div class="field">
             <div class="label" data-i18n="lbl_cs_bg">🎨 Studio Background</div>
@@ -1879,8 +1915,87 @@ input:focus, textarea:focus { border-color: var(--rose); }
         </div>
       </div>
 
+      <!-- CALM IN THE CHAOS — variant of Fierce Goddess -->
+      <div id="calm-scene" style="display:none; flex-direction:column; gap:16px;">
+        <div class="variant-selector">
+          <button class="variant-btn active" id="vbtn-fierce" onclick="setVariant('fierce','classic')">🔥 Fierce Goddess</button>
+          <button class="variant-btn" id="vbtn-calm" onclick="setVariant('fierce','calm')">💥 Calm in the Chaos</button>
+        </div>
+        <div class="field">
+          <div class="label" data-i18n="lbl_calm_obj">💼 Objeto en mano</div>
+          <div class="sel-wrap"><select id="calmObject">
+            <option value="">— Select —</option>
+            <option value="holding an open laptop with both hands, glancing at it casually" data-en="💻 Laptop" data-es="💻 Laptop abierta">💻 Laptop abierta</option>
+            <option value="holding a smartphone and looking at the screen with a calm smirk" data-en="📱 Smartphone" data-es="📱 Teléfono">📱 Teléfono</option>
+            <option value="holding a coffee cup elegantly, taking a slow sip" data-en="☕ Coffee cup" data-es="☕ Taza de café">☕ Taza de café</option>
+            <option value="holding a tablet with one hand, scrolling calmly" data-en="📱 Tablet" data-es="📱 Tablet">📱 Tablet</option>
+            <option value="holding a leather folder of documents, relaxed" data-en="📁 Document folder" data-es="📁 Carpeta de documentos">📁 Carpeta de documentos</option>
+            <option value="holding a champagne glass elegantly, mid-toast" data-en="🥂 Champagne glass" data-es="🥂 Copa de champagne">🥂 Copa de champagne</option>
+            <option value="arms crossed confidently, hands empty" data-en="🤝 Arms crossed · no prop" data-es="🤝 Brazos cruzados · sin objeto">🤝 Brazos cruzados</option>
+          </select></div>
+        </div>
+        <div class="field">
+          <div class="label" data-i18n="lbl_calm_chaos">🔥 Tipo de caos</div>
+          <div class="sel-wrap"><select id="calmChaos">
+            <option value="">— Select —</option>
+            <option value="a corporate office completely on fire — desks overturned, papers flying through the air, old computers burning, ceiling collapsing" data-en="🏢 Corporate office in flames" data-es="🏢 Oficina corporativa en llamas">🏢 Oficina corporativa en llamas</option>
+            <option value="a boardroom collapsing — conference table on fire, chairs flying, windows shattering, documents raining from above" data-en="💼 Boardroom collapsing" data-es="💼 Sala de reuniones colapsando">💼 Sala de reuniones colapsando</option>
+            <option value="a tech server room exploding — servers on fire, sparks flying, cables dangling, blue and orange flames" data-en="💻 Tech server room exploding" data-es="💻 Sala de servidores explotando">💻 Sala de servidores explotando</option>
+            <option value="a Wall Street trading floor in chaos — monitors exploding, traders fleeing, ticker tape raining down, fire everywhere" data-en="📈 Wall Street in chaos" data-es="📈 Wall Street en caos">📈 Wall Street en caos</option>
+            <option value="a creative studio destroyed — canvases burning, paint splattered on walls, shelves collapsing, colorful chaos everywhere" data-en="🎨 Creative studio destroyed" data-es="🎨 Estudio creativo destruido">🎨 Estudio creativo destruido</option>
+            <option value="a burning city skyline through floor-to-ceiling windows — explosions outside, smoke filling the air, dramatic orange sky" data-en="🌆 Burning city skyline" data-es="🌆 Ciudad ardiendo al fondo">🌆 Ciudad ardiendo al fondo</option>
+          </select></div>
+        </div>
+      </div>
+
+      <!-- CEO NEWSPAPER — variant of CEO Studio -->
+      <div id="newspaper-scene" style="display:none; flex-direction:column; gap:16px;">
+        <div class="variant-selector">
+          <button class="variant-btn active" id="vbtn-ceostudio" onclick="setVariant('ceostudio','classic')">📸 CEO Studio</button>
+          <button class="variant-btn" id="vbtn-newspaper" onclick="setVariant('ceostudio','newspaper')">📰 CEO Periódico</button>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <div class="label" data-i18n="lbl_news_masthead">📰 Nombre del periódico</div>
+            <input type="text" id="newsMasthead" placeholder="ej: JOHANNA NEWS" style="width:100%; background:var(--ink3); border:1px solid var(--border2); border-radius:8px; padding:11px 14px; color:var(--text); font-family:inherit; font-size:13px; outline:none;">
+          </div>
+          <div class="field">
+            <div class="label" data-i18n="lbl_news_edition">📅 Edición</div>
+            <input type="text" id="newsEdition" placeholder="ej: Junio 2026" style="width:100%; background:var(--ink3); border:1px solid var(--border2); border-radius:8px; padding:11px 14px; color:var(--text); font-family:inherit; font-size:13px; outline:none;">
+          </div>
+        </div>
+        <div class="field">
+          <div class="label" data-i18n="lbl_news_headline">📢 Titular principal (página izquierda)</div>
+          <input type="text" id="newsHeadline" placeholder="ej: CERRÉ MI PRIMER $10K MES" style="width:100%; background:var(--ink3); border:1px solid var(--border2); border-radius:8px; padding:11px 14px; color:var(--text); font-family:inherit; font-size:13px; outline:none;">
+        </div>
+        <div class="field">
+          <div class="label" data-i18n="lbl_news_sub">📝 Subtítulo</div>
+          <input type="text" id="newsSubtitle" placeholder="ej: La estrategia que nadie te cuenta" style="width:100%; background:var(--ink3); border:1px solid var(--border2); border-radius:8px; padding:11px 14px; color:var(--text); font-family:inherit; font-size:13px; outline:none;">
+        </div>
+        <div class="field">
+          <div class="label" data-i18n="lbl_news_body">📄 Cuerpo del texto (2-3 líneas)</div>
+          <textarea id="newsBody" placeholder="ej: Empecé sin seguidores, sin inversión y desde casa..." rows="3" style="width:100%; background:var(--ink3); border:1px solid var(--border2); border-radius:8px; padding:11px 14px; color:var(--text); font-family:inherit; font-size:13px; outline:none; resize:vertical;"></textarea>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <div class="label" data-i18n="lbl_news_right">📰 Titular página derecha</div>
+            <input type="text" id="newsRightHeadline" placeholder="ej: EL FUTURO ES DIGITAL" style="width:100%; background:var(--ink3); border:1px solid var(--border2); border-radius:8px; padding:11px 14px; color:var(--text); font-family:inherit; font-size:13px; outline:none;">
+          </div>
+          <div class="field">
+            <div class="label" data-i18n="lbl_news_url">🔗 URL bottom strip</div>
+            <input type="text" id="newsUrl" placeholder="ej: JOHADIGITALSEATTLE.COM" style="width:100%; background:var(--ink3); border:1px solid var(--border2); border-radius:8px; padding:11px 14px; color:var(--text); font-family:inherit; font-size:13px; outline:none;">
+          </div>
+        </div>
+      </div>
+
       <!-- NORMAL SCENE FIELDS — hidden when lifestyle or ceostudio or podcast active -->
       <div id="normal-scene">
+      <div id="fierce-variant-bar" style="display:none;">
+        <div class="variant-selector">
+          <button class="variant-btn active" id="vbtn-fierce" onclick="setVariant('fierce','classic')">🔥 Fierce Goddess</button>
+          <button class="variant-btn" id="vbtn-calm" onclick="setVariant('fierce','calm')">💥 Calm in the Chaos</button>
+        </div>
+      </div>
       <div class="row2">
         <div class="field">
           <div class="label" data-lbl="lbl_pose" data-lblopt="lbl_pose_opt">Pose / Action <span class="opt">— pick or write</span></div>
@@ -2199,16 +2314,46 @@ function setStyle(s) {
   const conceptFields = document.getElementById('concept-fields');
   if (conceptFields) conceptFields.style.display = s === 'concept' ? 'flex' : 'none';
 
+  // Reset variants when switching styles
+  if (s !== 'fierce') { fierceVariant = 'classic'; }
+  if (s !== 'ceostudio') { ceostudioVariant = 'classic'; }
+
   // Section 04 — show correct scene panel
   const isCEOorPod = (s === 'lifestyle' || s === 'ceostudio' || s === 'podcast');
   const normalScene = document.getElementById('normal-scene');
   const lifestyleScene = document.getElementById('lifestyle-scene');
   const ceostudioScene = document.getElementById('ceostudio-scene');
   const podcastScene = document.getElementById('podcast-scene');
+  const calmScene = document.getElementById('calm-scene');
+  const newspaperScene = document.getElementById('newspaper-scene');
+
+  // Hide all first
   if (normalScene) normalScene.style.display = isCEOorPod ? 'none' : '';
   if (lifestyleScene) lifestyleScene.style.display = s === 'lifestyle' ? 'flex' : 'none';
-  if (ceostudioScene) ceostudioScene.style.display = s === 'ceostudio' ? 'flex' : 'none';
+  if (ceostudioScene) ceostudioScene.style.display = (s === 'ceostudio' && ceostudioVariant === 'classic') ? 'flex' : 'none';
   if (podcastScene) podcastScene.style.display = s === 'podcast' ? 'flex' : 'none';
+  if (calmScene) calmScene.style.display = 'none';
+  if (newspaperScene) newspaperScene.style.display = 'none';
+
+  // Show variant selector for fierce
+  if (s === 'fierce') {
+    if (calmScene) calmScene.style.display = fierceVariant === 'calm' ? 'flex' : 'none';
+    if (normalScene) normalScene.style.display = fierceVariant === 'calm' ? 'none' : '';
+  }
+
+  // Show variant selector for ceostudio
+  if (s === 'ceostudio') {
+    if (newspaperScene) newspaperScene.style.display = ceostudioVariant === 'newspaper' ? 'flex' : 'none';
+    if (ceostudioScene) ceostudioScene.style.display = ceostudioVariant === 'classic' ? 'flex' : 'none';
+  }
+
+  // Outfit section — dim for CEO/podcast variants
+  const sec3 = document.getElementById('sec-outfit');
+  const dimOutfit = (isCEOorPod || (s === 'fierce' && fierceVariant === 'calm') || (s === 'ceostudio' && ceostudioVariant === 'newspaper'));
+  if (sec3) {
+    sec3.style.opacity = dimOutfit ? '0.35' : '1';
+    sec3.style.pointerEvents = dimOutfit ? 'none' : '';
+  }
 
   // Section 05 vibe — dim for lifestyle/ceostudio/podcast
   const sec5 = document.getElementById('sec-vibe');
@@ -2217,7 +2362,9 @@ function setStyle(s) {
     sec5.style.pointerEvents = isCEOorPod ? 'none' : '';
   }
 
-  // CEO outfit optgroups
+  // Show variant bars
+  const fierceBar = document.getElementById('fierce-variant-bar');
+  if (fierceBar) fierceBar.style.display = s === 'fierce' ? 'block' : 'none';
   const ogLifestyle = document.getElementById('og-lifestyle');
   const ogCeostudio = document.getElementById('og-ceostudio');
   if (ogLifestyle) ogLifestyle.style.display = s === 'lifestyle' ? '' : 'none';
@@ -2367,6 +2514,17 @@ function getData() {
     podShot: g('podShot'),
     podLight: g('podLight'),
     podOutfit: g('podOutfit'),
+    // calm in the chaos (fierce variant)
+    calmObject: g('calmObject'),
+    calmChaos: g('calmChaos'),
+    // newspaper (ceostudio variant)
+    newsMasthead: g('newsMasthead'),
+    newsEdition: g('newsEdition'),
+    newsHeadline: g('newsHeadline'),
+    newsSubtitle: g('newsSubtitle'),
+    newsBody: g('newsBody'),
+    newsRightHeadline: g('newsRightHeadline'),
+    newsUrl: g('newsUrl'),
   };
 }
 
@@ -2821,6 +2979,94 @@ function buildCeoStudio(d, forChatGPT) {
 // ══════════════════════════════════════
 // STYLE 8 — PODCAST STUDIO
 // ══════════════════════════════════════
+// ══════════════════════════════════════
+// FIERCE VARIANT — CALM IN THE CHAOS
+// ══════════════════════════════════════
+function buildCalmChaos(d, forChatGPT) {
+  const obj = d.calmObject || 'holding an open laptop with both hands, glancing at it casually';
+  const chaos = d.calmChaos || 'a corporate office completely on fire — desks overturned, papers flying through the air, old computers burning, ceiling collapsing';
+  const skin = d.skin || 'smooth glowing skin';
+  const hair = d.hair || 'long straight dark hair';
+  const makeup = d.makeup || 'bold smoky eyes, sharp brows, glossy nude-brown lips, metallic shimmer highlighting on cheekbones';
+  const skinFinish = d.skinFinish || '';
+
+  const parts = [];
+
+  if (forChatGPT) {
+    parts.push(`Using the uploaded photos as face reference, create this cinematic editorial photo:`);
+  } else {
+    parts.push(`Crea una imagen hiperrealista de una mujer con las mismas facciones, color de piel, ojos y cabello de la referencia, sin alterar el rostro ni sus características originales.`);
+  }
+
+  parts.push(`A young elegant woman ${skin}${skinFinish ? ', ' + skinFinish : ''}. ${hair}. ${makeup}.`);
+
+  parts.push(`She sits completely calm and composed in a leather office chair, legs elegantly crossed, ${obj}. Her expression is confident and slightly sarcastic — completely unbothered, as if she owns the chaos around her.`);
+
+  parts.push(`She wears a modern executive outfit: dark oversized blazer, white fitted shirt, black tie, short executive skirt, elegant cat-eye glasses.`);
+
+  parts.push(`Background: ${chaos}. Total cinematic destruction surrounding her — yet she remains the still, powerful center of it all.`);
+
+  parts.push(`Lighting: dramatic orange and amber light from the fires illuminating her face and body, deep cinematic shadows, high contrast chiaroscuro effect. The fire light makes her skin glow with warmth.`);
+
+  parts.push(`Style: high fashion editorial photography, Vogue magazine cover aesthetic, "calm in the middle of chaos" energy. Centered vertical composition, depth of field, hyperrealistic skin texture, ultra-detailed fabric and fire textures.`);
+
+  if (forChatGPT) {
+    parts.push(`Do not change my face. Match my facial features exactly from the reference photos.`);
+  } else {
+    parts.push(`Fotografía hiperrealista 8K, texturas realistas de piel, tela y fuego, estilo editorial de moda contemporánea. Atmósfera: cinematográfica, dramática y poderosa.`);
+  }
+
+  return parts.join('\n\n');
+}
+
+// ══════════════════════════════════════
+// CEO STUDIO VARIANT — CEO NEWSPAPER
+// ══════════════════════════════════════
+function buildNewspaper(d, forChatGPT) {
+  const masthead = d.newsMasthead || 'JOHANNA NEWS';
+  const edition = d.newsEdition || 'Edición Especial';
+  const headline = d.newsHeadline || 'CEO LIFE';
+  const subtitle = d.newsSubtitle || 'La estrategia que nadie te cuenta';
+  const body = d.newsBody || 'Empecé desde cero y lo cambié todo.';
+  const rightHeadline = d.newsRightHeadline || 'EL FUTURO ES DIGITAL';
+  const url = d.newsUrl || 'JOHADIGITALSEATTLE.COM';
+  const skin = d.skin || 'smooth glowing brown skin';
+  const hair = d.hair || 'long straight dark hair';
+  const makeup = d.makeup || 'natural glam — glowing skin, defined brows, soft nude-pink lip';
+  const skinFinish = d.skinFinish || '';
+
+  const parts = [];
+
+  if (forChatGPT) {
+    parts.push(`Using the uploaded photos as face reference, create this hyperrealistic editorial photo:`);
+  } else {
+    parts.push(`Crea una imagen hiperrealista de una mujer con las mismas facciones, color de piel, ojos y cabello de la referencia, sin alterar el rostro ni sus características originales.`);
+  }
+
+  parts.push(`A young elegant Latina woman with ${skin}${skinFinish ? ', ' + skinFinish : ''}. ${hair}. ${makeup}.`);
+
+  parts.push(`She wears black cat-eye sunglasses, gold drop earrings, a delicate gold necklace, a black oversized blazer, and black fitted trousers. She stands confidently holding open a burning newspaper with BOTH hands — elegant manicured hands with pink nails and a gold watch visible on her wrist. The top edge of the newspaper is on fire with real orange flames. She looks slightly down at the camera over her sunglasses with a calm, confident, slightly sarcastic smirk.`);
+
+  parts.push(`The newspaper is open and fully readable. Exact layout:
+MASTHEAD (top center, large bold serif font): ${masthead}
+SUBTITLE (small italic below masthead): Edición Especial · ${edition}
+LEFT PAGE HEADLINE (massive bold black serif, all caps): ${headline}
+LEFT PAGE SUBHEADING: ${subtitle}
+LEFT PAGE BODY TEXT: ${body}
+RIGHT PAGE HEADLINE: ${rightHeadline}
+BOTTOM STRIP (full width): ${url}`);
+
+  parts.push(`White clean seamless studio background. Soft editorial lighting from front, natural skin texture, centered vertical portrait composition.`);
+
+  if (forChatGPT) {
+    parts.push(`Do not change my face. Match my facial features exactly from the reference photos. Make the newspaper text clearly legible and realistic.`);
+  } else {
+    parts.push(`Fotografía hiperrealista 8K, texturas realistas de piel, tela, papel y fuego. El texto del periódico debe ser claramente legible. Estilo editorial Vogue contemporáneo. Atmósfera: sofisticada, moderna y cinematográfica.`);
+  }
+
+  return parts.join('\n\n');
+}
+
 function buildPodcast(d, forChatGPT) {
   const parts = [];
 
@@ -2918,8 +3164,13 @@ function generateAll() {
 
   let gemPrompt, gptPrompt;
   if (promptStyle === 'fierce') {
-    gemPrompt = buildFierce(d, false);
-    gptPrompt = buildFierce(d, true);
+    if (fierceVariant === 'calm') {
+      gemPrompt = buildCalmChaos(d, false);
+      gptPrompt = buildCalmChaos(d, true);
+    } else {
+      gemPrompt = buildFierce(d, false);
+      gptPrompt = buildFierce(d, true);
+    }
   } else if (promptStyle === 'money') {
     gemPrompt = buildMoney(d, false);
     gptPrompt = buildMoney(d, true);
@@ -2933,8 +3184,13 @@ function generateAll() {
     gemPrompt = buildLifestyle(d, false);
     gptPrompt = buildLifestyle(d, true);
   } else if (promptStyle === 'ceostudio') {
-    gemPrompt = buildCeoStudio(d, false);
-    gptPrompt = buildCeoStudio(d, true);
+    if (ceostudioVariant === 'newspaper') {
+      gemPrompt = buildNewspaper(d, false);
+      gptPrompt = buildNewspaper(d, true);
+    } else {
+      gemPrompt = buildCeoStudio(d, false);
+      gptPrompt = buildCeoStudio(d, true);
+    }
   } else if (promptStyle === 'podcast') {
     gemPrompt = buildPodcast(d, false);
     gptPrompt = buildPodcast(d, true);
@@ -2989,6 +3245,47 @@ document.addEventListener('change', e => {
 
 
 // ── CONFIRM CUSTOM for single-value fields (hair, makeup, pose, bg, vibe, nail) ──
+// ── VARIANT SYSTEM ──
+let fierceVariant = 'classic'; // 'classic' or 'calm'
+let ceostudioVariant = 'classic'; // 'classic' or 'newspaper'
+
+function setVariant(style, variant) {
+  if (style === 'fierce') {
+    fierceVariant = variant;
+    document.getElementById('vbtn-fierce').classList.toggle('active', variant === 'classic');
+    document.getElementById('vbtn-calm').classList.toggle('active', variant === 'calm');
+    // Show/hide fields
+    const calmScene = document.getElementById('calm-scene');
+    const normalScene = document.getElementById('normal-scene');
+    const sec3 = document.getElementById('sec-outfit');
+    if (variant === 'calm') {
+      if (calmScene) calmScene.style.display = 'flex';
+      if (normalScene) normalScene.style.display = 'none';
+      if (sec3) { sec3.style.opacity = '0.35'; sec3.style.pointerEvents = 'none'; }
+    } else {
+      if (calmScene) calmScene.style.display = 'none';
+      if (normalScene) normalScene.style.display = '';
+      if (sec3) { sec3.style.opacity = '1'; sec3.style.pointerEvents = ''; }
+    }
+  } else if (style === 'ceostudio') {
+    ceostudioVariant = variant;
+    document.getElementById('vbtn-ceostudio').classList.toggle('active', variant === 'classic');
+    document.getElementById('vbtn-newspaper').classList.toggle('active', variant === 'newspaper');
+    const newspaperScene = document.getElementById('newspaper-scene');
+    const ceostudioScene = document.getElementById('ceostudio-scene');
+    const sec3 = document.getElementById('sec-outfit');
+    if (variant === 'newspaper') {
+      if (newspaperScene) newspaperScene.style.display = 'flex';
+      if (ceostudioScene) ceostudioScene.style.display = 'none';
+      if (sec3) { sec3.style.opacity = '0.35'; sec3.style.pointerEvents = 'none'; }
+    } else {
+      if (newspaperScene) newspaperScene.style.display = 'none';
+      if (ceostudioScene) ceostudioScene.style.display = 'flex';
+      if (sec3) { sec3.style.opacity = '1'; sec3.style.pointerEvents = ''; }
+    }
+  }
+}
+
 // ── AUTO-TRANSLATE: local dictionary for common Spanish beauty/fashion words ──
 const esEnDict = {
   // Hair styles
